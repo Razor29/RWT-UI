@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="main-content">
+    <h2>Databases</h2>
+    <div class="file-explorer-container">
+        <ul id="file-explorer" class="file-explorer">
+        </ul>
+        <textarea id="text-editor" class="text-editor"></textarea>
+    </div>
+    <button onclick="saveFileContent()">Save</button>
+</div>
+{% endblock %}

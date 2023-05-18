@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="overlay"></div>
+<div class="main-content">
+    <h2>Configurations</h2>
+    <button id="add-new-config">Add New</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Loaded</th>
+                <th>Filename</th>
+                <th>URL</th>
+                <th>Blocking Page Regex</th>
+                <th>Threads</th>
+                <th>User-Agent</th>
+                <th>Host</th>
+                <th colspan="2">XFF</th>
+                <th></th> <!-- Empty cell in the top right corner -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for config in configs %}
+                <tr data-filename="{{ config.filename }}" data-loaded="{{ config.loaded }}">
+                    <td>
+                        <input type="radio" name="loaded" {% if config.loaded %}checked{% endif %}>
+                    </td>
+                    <td>{{ config.filename }}</td>
+                    {% for key, value in config.data.items() %}
+                        {% if key == "xff" %}
+                            {% for k, v in value.items() %}
+                                <td>{{ k }}</td>
+                                <td>{{ v }}</td>
+                            {% endfor %}
+                        {% else %}
+                            <td>{{ value }}</td>
+                        {% endif %}
+                    {% endfor %}
+                    <td>
+                        <button class="edit-config">Edit</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Edit form -->
+    <div class="edit-form">
+        <h3>Edit Configuration</h3>
+        <label for="edit-filename">Filename</label>
+        <input type="text" id="edit-filename" placeholder="Filename">
+        <label for="edit-url">URL</label>
+        <input type="text" id="edit-url" class="edit-data" placeholder="URL">
+        <label for="edit-blocking-page-regex">Blocking Page Regex</label>
+        <input type="text" id="edit-blocking-page-regex" class="edit-data" placeholder="Blocking Page Regex">
+        <label for="edit-threads">Threads</label>
+        <input type="text" id="edit-threads" class="edit-data" placeholder="Threads">
+        <label for="edit-user-agent">User-Agent</label>
+        <input type="text" id="edit-user-agent" class="edit-data" placeholder="User-Agent">
+        <label for="edit-host">Host</label>
+        <input type="text" id="edit-host" class="edit-data" placeholder="Host">
+        <label for="edit-xff-name">XFF Name</label>
+        <input type="text" id="edit-xff-name" class="edit-data" placeholder="XFF Name">
+        <label for="edit-xff-value">XFF Value</label>
+        <input type="text" id="edit-xff-value" class="edit-data" placeholder="XFF Value">
+        <button id="save-edit">Save</button>
+    </div>
+</div>
+{% endblock %}

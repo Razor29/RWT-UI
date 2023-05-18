@@ -1,0 +1,274 @@
+{
+    "Command Injections":{
+        "test-1": {
+            "skip": false,
+            "headers": {
+                "Accept": "application/json"
+            },
+            "body type": "json",
+            "payload_location": {
+                "url": true,
+                "body": {
+                    "method": "POST",
+                    "parameter": "username"
+                },
+                "headers": [
+                    "User-Agent",
+                    "Referer"
+                ],
+                "cookies": {},
+                "parameters": [
+                    "search"
+                ]
+            },
+            "payloads_files": [
+                {
+                    "file": "Command Injections/Command Injections.txt",
+                    "expected": "block"
+                }
+            ]
+        }
+    },
+    "CRLF Injections":{
+        "test-1": {
+            "skip": true,
+            "headers": {
+                "Accept": "test/html"
+            },
+            "body type": "text",
+            "payload_location": {
+                "url": true,
+                "body": {
+                    "method": "POST",
+                    "parameter": "username"
+                },
+                "headers": [],
+                "cookies": {},
+                "parameters": []
+            },
+            "payloads_files": [
+                {
+                    "file": "CRLF Injections/CRLF Injections.txt",
+                    "expected": "block"
+                }
+            ]
+        }
+    },
+    "Directory Traversal":{
+        "test-1": {
+            "skip": true,
+            "headers": {
+                "Accept": "test/html"
+            },
+            "body type": "text",
+            "payload_location": {
+                "url": false,
+                "body": {
+                    "method": "POST",
+                    "parameter": "username"
+                },
+                "headers": [],
+                "cookies": {},
+                "parameters": [
+                    "search"
+                ]
+            },
+            "payloads_files": [
+                {
+                    "file": "Directory Traversal/Directory Traversal.txt",
+                    "expected": "block"
+                }
+            ]
+        }
+    },
+    "Insecure Redirect":{
+        "test-1": {
+            "skip": true,
+            "headers": {
+                "Accept": "test/html"
+            },
+            "body type": "text",
+            "payload_location": {
+                "url": true,
+                "body": {
+                    "method": "POST",
+                    "parameter": "username"
+                },
+                "headers": [],
+                "cookies": {},
+                "parameters": [
+                    "url",
+                    "redirect"
+                ]
+            },
+            "payloads_files": [
+                {
+                    "file": "Insecure Redirect/Insecure Redirect.txt",
+                    "expected": "block"
+                }
+            ]
+        }
+    },
+    "LFI":{
+        "test-1": {
+            "skip": true,
+            "headers": {
+                "Accept": "test/html"
+            },
+            "body type": "text",
+            "payload_location": {
+                "url": true,
+                "body": {
+                    "method": "POST",
+                    "parameter": "username"
+                },
+                "headers": [],
+                "cookies": {},
+                "parameters": []
+            },
+            "payloads_files": [
+                {
+                    "file": "LFI/LFI.txt",
+                    "expected": "block"
+                }
+            ]
+        }
+    },
+    "NoSQL":{
+        "test-1": {
+            "skip": true,
+            "headers": {
+                "Accept": "test/html"
+            },
+            "body type": "text",
+            "payload_location": {
+                "url": true,
+                "body": {
+                    "method": "POST",
+                    "parameter": "username"
+                },
+                "headers": [],
+                "cookies": {},
+                "parameters": []
+            },
+            "payloads_files": [
+                {
+                    "file": "NoSQL/NoSQL.txt",
+                    "expected": "block"
+                }
+            ]
+        }
+    },
+    "SQL Injections":{
+        "test-1": {
+            "skip": true,
+            "headers": {
+                "Accept": "test/html"
+            },
+            "body type": "text",
+            "payload_location": {
+                "url": false,
+                "body": {
+                    "method": "POST",
+                    "parameter": "username"
+                },
+                "headers": [],
+                "cookies": {},
+                "parameters": [
+                    "search"
+                ]
+            },
+            "payloads_files": [
+                {
+                    "file": "SQL Injections/SQL Injections Clean.txt",
+                    "expected": "pass"
+                }
+            ]
+        }
+    },
+    "SSTI":{
+        "test-1": {
+            "skip": true,
+            "headers": {
+                "Accept": "test/html"
+            },
+            "body type": "text",
+            "payload_location": {
+                "url": true,
+                "body": {
+                    "method": "POST",
+                    "parameter": "username"
+                },
+                "headers": [],
+                "cookies": {},
+                "parameters": []
+            },
+            "payloads_files": [
+                {
+                    "file": "SSTI/SSTI.txt",
+                    "expected": "block"
+                }
+            ]
+        }
+    },
+    "XSS Injections": {
+        "test-1": {
+            "skip": true,
+            "headers": {
+                "Accept": "application/x-www-form-urlencoded"
+            },
+            "body type": "text/html",
+            "payload_location": {
+                "url": true,
+                "body": {
+                    "method": "POST",
+                    "parameter": "username"
+                },
+                "headers": [
+                    "User-Agent",
+                    "X-Forwarded-Server",
+                    "Referer"
+                ],
+                "cookies": {},
+                "parameters": [
+                    "search"
+                ]
+            },
+            "payloads_files": [
+                {
+                    "file": "XSS Injections/XSS Injections.txt",
+                    "expected": "block"
+                }
+            ]
+        }
+    },
+    "XML Attacks":{
+        "test-1": {
+            "skip": true,
+            "headers": {
+                "Accept": "application/xml"
+            },
+            "body type": "xml",
+            "payload_location": {
+                "url": false,
+                "body": {
+                    "method": "POST",
+                    "parameter": "username"
+                },
+                "headers": {},
+                "cookies": {},
+                "parameters": {}
+            },
+            "payloads_files": [
+                {
+                    "file": "XML Attacks/XML Attacks.txt",
+                    "expected": "block"
+                },
+                {
+                    "file": "XML Attacks/XML Attacks Clean.txt",
+                    "expected": "pass"
+                }
+            ]
+        }
+    }
+}

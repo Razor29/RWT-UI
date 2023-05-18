@@ -1,0 +1,3 @@
+<?xml version="1.0"?><methodCall><methodName>demo.sayHello</methodName><params></params></methodCall>
+<?xml version="1.0"?><change-log><text>Hello World</text></change-log>
+<?xml version="1.0"?><change-log><text>&quot;Hello World&quot;</text></change-log>

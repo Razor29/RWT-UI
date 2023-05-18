@@ -1,0 +1,229 @@
+/* General styles */
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Top bar styles */
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 48px;
+    width: calc(100% - 48px);
+    background-color: #f3f3f3;
+    padding: 0 20px;
+    box-sizing: border-box;
+    z-index: 100;
+    height: 48px;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    border: 1px solid rgba(208, 208, 208, 0.5);
+}
+
+.top-bar .title {
+    font-size: 24px;
+}
+
+/* Left-side navigation bar styles */
+.left-nav {
+    position: fixed;
+    top: 0;
+    min-width: 48px;
+    max-width: 48px;
+    min-height: 100%;
+    background: linear-gradient(0.63deg, rgb(49, 76, 101) 6.84%, rgb(30, 47, 63) 83.07%);
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    flex-direction: column;
+    z-index: 99;
+    box-shadow: rgba(51, 68, 81, 0.44) 1px 3px 4px;
+}
+
+.radware-logo {
+    width: 24px;
+    height: 30px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    top: 0;
+    margin-bottom: 50px;
+    margin-top: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li a {
+    display: block;
+}
+
+nav ul li a img {
+    width: 30px; /* 20% smaller */
+    height: 30px; /* 20% smaller */
+    margin-top: 15px
+}
+
+/* Main content styles (Common to all pages) */
+.main-content {
+    margin-left: 48px;
+    margin-top: 50px;
+    padding: 20px;
+}
+
+/* Table styles (Used in Configurations page) */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px 0;
+    text-align: left;
+    overflow: hidden;
+    word-wrap: break-word;
+    table-layout: fixed;
+}
+
+th, td {
+    border: 1px solid #999;
+    padding: 0.5rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* Add this for the empty cell in the top right corner */
+th:last-child::before {
+    content: "";
+}
+
+/* Add this for the edit form */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+/* Modify this for the edit form */
+.edit-form {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #999;
+    z-index: 1000;
+    width: 50%; /* Make the form wider */
+}
+
+.edit-form input {
+    display: block;
+    margin-bottom: 10px;
+    width: 100%; /* Make the input fields fit the width of the form */
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+}
+
+.edit-form button {
+    margin-top: 10px;
+}
+
+/* Database Page Styles */
+
+
+.file-explorer-container {
+    display: flex;
+    border: 1px solid #999;
+    height: 80vh;
+    margin-bottom: 1rem;
+}
+
+.file-explorer {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 30%;
+    height: 100%;
+    overflow: auto;
+    border-right: 1px solid #999;
+}
+
+.file-explorer li {
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.file-explorer li:hover {
+    background-color: #f2f2f2;
+}
+
+.file-explorer li.directory::before {
+    content: '';
+}
+
+.file-explorer li.file::before {
+    content: '';
+}
+
+.arrow {
+    margin-right: 5px;
+    user-select: none;
+}
+
+.text-editor {
+    flex-grow: 1;
+    padding: 0.5rem;
+    border: none;
+    outline: none;
+    resize: none;
+    font-family: monospace;
+    font-size: 1
+	padding: 0.5rem;
+}
+
+.text-editor:focus {
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+.context-menu {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  z-index: 100;
+  padding: 0;
+  margin: 0;
+}
+
+.context-menu li {
+  list-style-type: none;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.context-menu li:hover {
+  background-color: #f1f1f1;
+}
+

