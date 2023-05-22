@@ -4,6 +4,7 @@ import shutil
 from flask import Flask, render_template, url_for, request, jsonify
 from pathlib import Path
 from os import path
+from TestReport import TestReport
 
 app = Flask(__name__)
 __folder__ = path.abspath(path.dirname(__file__))
@@ -14,6 +15,13 @@ class Config:
         self.filename = filename
         self.loaded = loaded
         self.data = data
+
+@app.route('/api/reports-files', methods=['GET'])
+def get_reports_files():
+    reports_folder = os.path.join(__folder__, 'reports')
+    report_files = [f for f in os.listdir(reports_folder) if os.path.isfile(os.path.join(reports_folder, f))]
+    return jsonify(report_files)
+
 
 def load_configs(config_folder):
     configs = []
@@ -33,17 +41,41 @@ def configurations():
     configs = load_configs(config_folder)
     return render_template('configurations.html', configs=configs)
 
-@app.route('/payloadDB')
+@app.route('/tests')
 def tests():
-    return render_template('payloadDB.html')
+    return render_template('tests.html')
 
 @app.route('/database')
 def database():
     return render_template('database.html')
 
+@app.route('/runtest')
+def runtest():
+    return render_template('runtest.html')
+
 @app.route('/results')
 def results():
     return render_template('results.html')
+
+@app.route('/api/tests-files', methods=['GET'])
+def get_tests_files():
+    tests_files_dir = path.join(__folder__, "testfiles")
+    tests_files = [f for f in os.listdir(tests_files_dir) if os.path.isfile(os.path.join(tests_files_dir, f))]
+    return jsonify(tests_files)
+
+
+@app.route('/api/configurations-files', methods=['GET'])
+def get_configurations_files():
+    configurations_files_dir = path.join(__folder__, "configurations")
+    configurations_files = [f for f in os.listdir(configurations_files_dir) if os.path.isfile(os.path.join(configurations_files_dir, f))]
+    return jsonify(configurations_files)
+
+
+@app.route('/api/payload-dbs', methods=['GET'])
+def get_payload_dbs():
+    payload_db_dir = path.join(__folder__, "payloadDB")
+    payload_dbs = [d for d in os.listdir(payload_db_dir) if os.path.isdir(os.path.join(payload_db_dir, d))]
+    return jsonify(payload_dbs)
 
 @app.route('/api/save-config', methods=['POST'])
 def save_config():
@@ -221,6 +253,78 @@ def new_file():
     return jsonify(error='Missing parameters'), 400
 
 
+@app.route('/api/tests', methods=['GET'])
+def get_tests():
+    json_files_dir = path.join(__folder__, "testfiles")
+    tests = []
+    stats = []
+
+    # Iterate over each JSON file in the directory
+    for filename in os.listdir(json_files_dir):
+        if filename.endswith('.json'):
+            with open(os.path.join(json_files_dir, filename), 'r') as file:
+                data = json.load(file)
+
+                # Initialize variables for statistics
+                categories_count = 0
+                tests_count = 0
+
+                for category, category_data in data.items():
+                    test_data = []
+                    for test_name, test_info in category_data.items():
+                        test_data.append({
+                            'name': test_name,
+                            'skip': test_info['skip'],
+                            'headers': test_info['headers'],
+                            'bodyType': test_info['body type'],
+                            'payloadLocation': test_info['payload_location'],
+                            'payloadFiles': test_info['payloads_files']
+                        })
+
+                    categories_count += 1
+                    tests_count += len(test_data)
+
+                    tests.append({
+                        'filename': filename,
+                        'categories': [{
+                            'name': category,
+                            'tests': test_data
+                        }]
+                    })
+
+                # Append file statistics to the stats list
+                stats.append({
+                    'filename': filename,
+                    'categories_count': categories_count,
+                    'tests_count': tests_count
+                })
+
+    # Get the list of directories in the 'PayloadDB' folder
+    payload_db_dir = path.join(__folder__, 'PayloadDB')
+    payload_dbs = [name for name in os.listdir(payload_db_dir) if os.path.isdir(os.path.join(payload_db_dir, name))]
+
+    return jsonify({'tests': tests, 'payloadDbs': payload_dbs, 'stats': stats})
+
+
+# Routes for results page
+
+@app.route('/summary', methods=['GET'])
+def get_summary():
+    filename = request.args.get('filename', default=None, type=str)
+    if filename is None:
+        return jsonify({"error": "filename parameter is required"}), 400
+    report_file = path.join(path.dirname(__file__),"reports",filename)
+    report = TestReport(report_file)
+    return jsonify(report.get_summary())
+
+@app.route('/total_failed_passed', methods=['GET'])
+def total_failed_passed():
+    filename = request.args.get('filename', default=None, type=str)
+    if filename is None:
+        return jsonify({"error": "filename parameter is required"}), 400
+    report_file = path.join(path.dirname(__file__),"reports",filename)
+    report = TestReport(report_file)
+    return jsonify(report.get_total_failed_passed())
 
 
 if __name__ == "__main__":

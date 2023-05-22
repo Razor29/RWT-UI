@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+Tests
+{% endblock %}
+
+{% block content %}
+<div class="overlay"></div>
+<div class="main-content">
+    <h2>Tests</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Loaded</th>
+            <th>Filename</th>
+            <th>Payload DB</th>
+            <th>Category</th>
+            <th>Tests Name</th>
+            <th>Skip</th>
+            <th>Request Properties</th>
+            <th>Payload Files</th>
+            <th>Expected Behavior</th>
+            <th>Payload Locations</th>
+        </tr>
+    </thead>
+    <tbody id="test-table-body">
+        <!-- Rows will be added dynamically here -->
+    </tbody>
+</table>
+
+</div>
+</div>
+{% endblock %}
+

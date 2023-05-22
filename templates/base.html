@@ -6,9 +6,12 @@
     <title>Radware WAF Tester</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
     <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </head>
 <body>
+
     <!-- Top bar -->
     <div class="top-bar">
         <div class="title">
@@ -29,6 +32,7 @@
                 <li><a href="{{ url_for('configurations') }}"><img src="{{ url_for('static', filename='icon_configuration.svg') }}" alt="Configurations"></a></li>
                 <li><a href="{{ url_for('tests') }}"><img src="{{ url_for('static', filename='icon_tests.svg') }}" alt="Tests"></a></li>
                 <li><a href="{{ url_for('database') }}"><img src="{{ url_for('static', filename='icon_database.svg') }}" alt="Database"></a></li>
+                <li><a href="{{ url_for('runtest') }}"><img src="{{ url_for('static', filename='icon_runtest.svg') }}" alt="Run Test"></a></li>
                 <li><a href="{{ url_for('results') }}"><img src="{{ url_for('static', filename='icon_results.svg') }}" alt="Results"></a></li>
         </ul>
     </nav>

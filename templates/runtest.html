@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="main-content">
+    <h2>Run Test</h2>
+<form id="run-test-form">
+  <table>
+    <thead>
+      <tr>
+        <th>Configuration File</th>
+        <th>Tests File</th>
+        <th>Payload DB</th>
+        <th>Detailed Success</th>
+        <th>Detailed Failure</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <select id="config-file-select"></select>
+        </td>
+        <td>
+          <select id="test-file-select"></select>
+        </td>
+        <td>
+          <select id="payload-db-select"></select>
+        </td>
+        <td>
+          <input type="checkbox" id="detailed-success-checkbox">
+        </td>
+        <td>
+          <input type="checkbox" id="detailed-failure-checkbox">
+        </td>
+        <td>
+          <button type="submit">Start Test</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>
+
+<script src="{{ url_for('static', filename='runtest.js') }}"></script>
+</div>
+{% endblock %}

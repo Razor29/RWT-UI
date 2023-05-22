@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<div class="main-content">
+    <div class="results-page">
+    <h2>Results</h2>
+    <div class="d-flex">
+      <div class="d-flex align-items-center mr-2">
+        <div class="form-group mb-0">
+          <label for="report-file-select">Report File:</label>
+          <select id="report-file-select">
+            <!-- Options here -->
+          </select>
+        </div>
+      </div>
+      <div class="d-flex align-items-center">
+        <button type="submit" class="btn btn-primary" id="display-button">Display</button>
+      </div>
+    </div>
+    <!-- Placeholder for displaying report -->
+    <div id="report-display">
+          <canvas id="summary-chart"></canvas>
+          <canvas id="total-chart"></canvas>
+
+    </div>
+    <script src="/static/reports.js"></script>
+    </div>
+</div>
+{% endblock %}

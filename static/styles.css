@@ -227,3 +227,6 @@ th:last-child::before {
   background-color: #f1f1f1;
 }
 
+#report-file-select {
+  height: 38px;
+}

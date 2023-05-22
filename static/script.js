@@ -19,26 +19,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         document.getElementById('save-edit').addEventListener('click', () => {
             const row = document.querySelector('.editing');
-        saveConfig(row);
+            saveConfig(row);
         });
         const addNewConfigButton = document.getElementById('add-new-config');
         addNewConfigButton.addEventListener('click', handleAddNewConfig);
         const overlay = document.querySelector('.overlay');
         overlay.addEventListener('click', () => {
-        const editForm = document.querySelector('.edit-form');
-        editForm.style.display = 'none';
-        overlay.style.display = 'none';
+            const editForm = document.querySelector('.edit-form');
+            editForm.style.display = 'none';
+            overlay.style.display = 'none';
 
-        // Find the row with the 'editing' class and remove it
-        const editingRow = document.querySelector('.editing');
-        if (editingRow) {
-            editingRow.classList.remove('editing');
-        }
+            // Find the row with the 'editing' class and remove it
+            const editingRow = document.querySelector('.editing');
+            if (editingRow) {
+                editingRow.classList.remove('editing');
+            }
 
-        // If the row was newly added but not saved, remove it
-        if (editingRow && editingRow.dataset.newRow === 'true') {
-            editingRow.remove();
-        }
+            // If the row was newly added but not saved, remove it
+            if (editingRow && editingRow.dataset.newRow === 'true') {
+                editingRow.remove();
+            }
         });
     } else if (currentPage === "/database") {
         // Database Page
@@ -47,8 +47,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.onclick = hideContextMenu;
         const fileExplorer = document.getElementById('file-explorer');
         if (fileExplorer) {
-            loadFileExplorer('/tests');
+            loadFileExplorer('/payloadDB');
         }
+    } else if (currentPage === "/tests") {
+        // Tests Page
+        loadTests();
     }
 });
 
@@ -183,20 +186,20 @@ function saveConfig(row) {
         }
     };
     fetch('/api/save-config', {
-        method: 'POST',
-        body: JSON.stringify(configData),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            console.log('Configuration saved successfully');
-        } else {
-            console.error('Error saving configuration:', data.error);
-        }
-    });
+            method: 'POST',
+            body: JSON.stringify(configData),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log('Configuration saved successfully');
+            } else {
+                console.error('Error saving configuration:', data.error);
+            }
+        });
 }
 
 function handleAddNewConfig() {
@@ -224,96 +227,261 @@ function handleAddNewConfig() {
     newRow.dataset.newRow = 'true';
 }
 
+// Tests Page Functions
+
+async function loadTests() {
+    const response = await fetch('/api/tests');
+    const data = await response.json();
+    const tests = data.tests;
+    const payloadDbs = data.payloadDbs;
+    const stats = data.stats;
+    const processedFiles = new Set();
+
+    const tbody = document.getElementById('test-table-body');
+    tbody.innerHTML = '';
+
+    tests.forEach(test => {
+        // Get the stats for the current file
+        const fileStats = stats.find(stat => stat.filename === test.filename);
+        const totalTestsInFile = fileStats ? fileStats.tests_count : 0;
+
+        test.categories.forEach((category, categoryIndex) => {
+            // Calculate total number of tests in each category
+            let totalTestsInCategory = category.tests.length;
+
+            category.tests.forEach((testData, index) => {
+                const row = document.createElement('tr');
+
+                if (!processedFiles.has(test.filename)) {
+                    processedFiles.add(test.filename);
+
+                    // Create the "Loaded" cell with a radio button
+                    const loadedCell = document.createElement('td');
+                    loadedCell.rowSpan = totalTestsInFile;
+                    loadedCell.innerHTML = `<input type="radio" name="loaded" value="${test.filename}">`;
+                    row.appendChild(loadedCell);
+                    // Create the "Filename" cell with the filename and SVG icons
+                    const filenameCell = document.createElement('td');
+                    filenameCell.rowSpan = totalTestsInFile;
+                    filenameCell.innerHTML = `
+                        ${test.filename}
+                            <img src="/static/icons/icon-pencil.svg" class="icon-pencil">
+                            <img src="/static/icons/icon-trash.svg" class="icon-trash">
+                    `;
+                    row.appendChild(filenameCell);
+
+                    // Create the "Payload DB" cell with a dropdown menu
+                    const payloadDbCell = document.createElement('td');
+                    payloadDbCell.rowSpan = totalTestsInFile;
+                    payloadDbCell.innerHTML = `
+                        <select>
+                            ${payloadDbs.map(db => `<option value="${db}">${db}</option>`).join('')}
+                        </select>
+                    `;
+                    row.appendChild(payloadDbCell);
+                }
+
+                if (index === 0) {
+                    let totalTestsInCategory = category.tests.length;
+                    // Create the "Category" cell with the category name and SVG icons
+                    const categoryCell = document.createElement('td');
+                    categoryCell.rowSpan = totalTestsInCategory;
+                    categoryCell.innerHTML = `
+                        ${category.name}
+                            <img src="/static/icons/icon-plus.svg" class="icon-plus">
+                            <img src="/static/icons/icon-pencil.svg" class="icon-pencil">
+                            <img src="/static/icons/icon-trash.svg" class="icon-trash">
+                    `;
+                    row.appendChild(categoryCell);
+                }
+                // Create the "Test Name" cell
+                const testNameCell = document.createElement('td');
+                testNameCell.textContent = testData.name;
+                row.appendChild(testNameCell);
+
+                // Create the "Skip" cell with a checkbox
+                const skipCell = document.createElement('td');
+                skipCell.innerHTML = `<input type="checkbox" ${testData.skip ? 'checked' : ''}>`;
+                row.appendChild(skipCell);
+
+                // Create the "Request Properties" cell
+                const requestPropertiesCell = document.createElement('td');
+                const headers = Object.keys(testData.headers).map(header => `${header}: ${testData.headers[header]}`).join(', ');
+                requestPropertiesCell.innerHTML = `
+        <div>Headers: ${headers ? headers : 'None'}</div>
+        <div>Body Type: ${testData['body type']}</div>
+    `;
+                row.appendChild(requestPropertiesCell);
+
+                // Create the "Payload Files" cell with divs for each payload file
+                const payloadFilesCell = document.createElement('td');
+                payloadFilesCell.innerHTML = testData['payloadFiles']
+                    .map(payloadFile => `<div>${payloadFile.file}</div>`)
+                    .join('');
+                row.appendChild(payloadFilesCell);
+
+                // Create the "Expected Behavior" cell with divs for each expected behavior
+                const expectedBehaviorCell = document.createElement('td');
+                expectedBehaviorCell.innerHTML = testData['payloadFiles']
+                    .map(payloadFile => `<div>${payloadFile.expected}</div>`)
+                    .join('');
+                row.appendChild(expectedBehaviorCell);
+
+                const payloadLocationsCell = document.createElement('td');
+                payloadLocationsCell.innerHTML = `
+            <div>URL: ${testData.payloadLocation.url}</div>
+            <div>Body: ${JSON.stringify(testData.payloadLocation.body)}</div>
+            <div>Params: ${testData.payloadLocation.parameters.length > 0 ? testData.payloadLocation.parameters.join(', ') : 'None'}</div>
+            <div>Cookies: ${testData.payloadLocation.cookies.length > 0 ? testData.payloadLocation.cookies.join(', ') : 'None'}</div>
+            <div>Headers: ${testData.payloadLocation.headers.length > 0 ? testData.payloadLocation.headers.join(', ') : 'None'}</div>
+        `;
+                row.appendChild(payloadLocationsCell);
+
+                // Append the row to the table body
+                tbody.appendChild(row);
+            });
+
+
+
+            // Add event listeners to the SVG icons
+            const pencilIcons = document.querySelectorAll('img.icon-pencil');
+            pencilIcons.forEach(icon => {
+                icon.addEventListener('click', handleEdit);
+            });
+
+            const trashIcons = document.querySelectorAll('img.icon-trash');
+            trashIcons.forEach(icon => {
+                icon.addEventListener('click', handleDelete);
+            });
+
+            const plusIcons = document.querySelectorAll('img.icon-plus');
+            plusIcons.forEach(icon => {
+                icon.addEventListener('click', handleAdd);
+            });
+        });
+    });
+
+}
+
+
+function handleEdit(event) {
+    const icon = event.target;
+    const cell = icon.closest('td');
+    // TODO: Implement the edit action
+}
+
+function handleDelete(event) {
+    const icon = event.target;
+    const cell = icon.closest('td');
+    // TODO: Implement the delete action
+}
+
+function handleAdd(event) {
+    const icon = event.target;
+    const cell = icon.closest('td');
+    // TODO: Implement the add action
+}
 
 // Database Page Functions
 function createContextMenu() {
-  const menu = document.createElement('ul');
-  menu.className = 'context-menu';
+    const menu = document.createElement('ul');
+    menu.className = 'context-menu';
 
-  const options = [
-    { label: 'Rename', action: 'rename' },
-    { label: 'Delete', action: 'delete' },
-    { label: 'New Directory', action: 'new-directory' },
-    { label: 'New File', action: 'new-file' },
-  ];
+    const options = [{
+            label: 'Rename',
+            action: 'rename'
+        },
+        {
+            label: 'Delete',
+            action: 'delete'
+        },
+        {
+            label: 'New Directory',
+            action: 'new-directory'
+        },
+        {
+            label: 'New File',
+            action: 'new-file'
+        },
+    ];
 
-  options.forEach(option => {
-    const listItem = document.createElement('li');
-    listItem.textContent = option.label;
-    listItem.dataset.action = option.action;
-    listItem.onclick = (event) => contextMenuAction(event, option.action);
-    menu.appendChild(listItem);
-  });
+    options.forEach(option => {
+        const listItem = document.createElement('li');
+        listItem.textContent = option.label;
+        listItem.dataset.action = option.action;
+        listItem.onclick = (event) => contextMenuAction(event, option.action);
+        menu.appendChild(listItem);
+    });
 
-  return menu;
+    return menu;
 }
 
 function showContextMenu(event, target) {
-  if (!target) return; // Add this line
-  event.preventDefault();
-  const contextMenu = document.querySelector('.context-menu');
-  contextMenu.style.display = 'block';
-  contextMenu.style.left = `${event.clientX}px`;
-  contextMenu.style.top = `${event.clientY}px`;
-  contextMenu.dataset.targetPath = target; // Change this line
+    if (!target) return; // Add this line
+    event.preventDefault();
+    const contextMenu = document.querySelector('.context-menu');
+    contextMenu.style.display = 'block';
+    contextMenu.style.left = `${event.clientX}px`;
+    contextMenu.style.top = `${event.clientY}px`;
+    contextMenu.dataset.targetPath = target; // Change this line
 }
 
 function hideContextMenu() {
-  const contextMenu = document.querySelector('.context-menu');
-  contextMenu.style.display = 'none';
+    const contextMenu = document.querySelector('.context-menu');
+    contextMenu.style.display = 'none';
 }
 
 function contextMenuAction(event, action) {
-  const targetPath = event.currentTarget.closest('.context-menu').dataset.targetPath; // Change this line
-  const target = document.querySelector(`[data-path="${targetPath}"]`);
+    const targetPath = event.currentTarget.closest('.context-menu').dataset.targetPath; // Change this line
+    const target = document.querySelector(`[data-path="${targetPath}"]`);
 
-  if (!target) return;
+    if (!target) return;
 
-  // Get the parent directory item
-  const parentDirItem = target.closest('.directory');
-  const parentPath = parentDirItem ? parentDirItem.dataset.path : '';
+    // Get the parent directory item
+    const parentDirItem = target.closest('.directory');
+    const parentPath = parentDirItem ? parentDirItem.dataset.path : '';
 
-  switch (action) {
-    case 'rename':
-      // Rename item
-      const newName = prompt('Enter new name:');
-      if (newName) {
-        const newPath = parentPath + '/' + newName;
-        if (renameItem(target.dataset.path, newPath)) {
-          target.textContent = newName;
-          target.dataset.path = newPath;
-        }
-      }
-      break;
-    case 'delete':
-      // Delete item
-      if (confirm('Are you sure you want to delete this item?')) {
-        if (deleteItem(target.dataset.path)) {
-          target.remove();
-        }
-      }
-      break;
-    case 'new-directory':
-      // Create new directory
-      const newDirName = prompt('Enter new directory name:');
-      if (newDirName) {
-        if (createNewDirectory(parentPath, newDirName)) {
-          loadFileExplorer(parentPath, parentDirItem);
-        }
-      }
-      break;
-    case 'new-file':
-      // Create new file
-      const newFileName = prompt('Enter new file name:');
-      if (newFileName) {
-		if (createNewFile(parentPath, newFileName)) {
-			loadFileExplorer(parentPath, parentDirItem);
-			}
-		}
-		break;
-		default:
-	console.error('Unknown context menu action:', action);
-	}
+    switch (action) {
+        case 'rename':
+            // Rename item
+            const newName = prompt('Enter new name:');
+            if (newName) {
+                const newPath = parentPath + '/' + newName;
+                if (renameItem(target.dataset.path, newPath)) {
+                    target.textContent = newName;
+                    target.dataset.path = newPath;
+                }
+            }
+            break;
+        case 'delete':
+            // Delete item
+            if (confirm('Are you sure you want to delete this item?')) {
+                if (deleteItem(target.dataset.path)) {
+                    target.remove();
+                }
+            }
+            break;
+        case 'new-directory':
+            // Create new directory
+            const newDirName = prompt('Enter new directory name:');
+            if (newDirName) {
+                if (createNewDirectory(parentPath, newDirName)) {
+                    loadFileExplorer(parentPath, parentDirItem);
+                }
+            }
+            break;
+        case 'new-file':
+            // Create new file
+            const newFileName = prompt('Enter new file name:');
+            if (newFileName) {
+                if (createNewFile(parentPath, newFileName)) {
+                    loadFileExplorer(parentPath, parentDirItem);
+                }
+            }
+            break;
+        default:
+            console.error('Unknown context menu action:', action);
+    }
 }
 
 async function loadFileExplorer(path, listItem) {
@@ -416,69 +584,80 @@ async function saveFileContent() {
 }
 
 async function renameItem(srcPath, destPath) {
-  try {
-    const response = await fetch('/api/rename', {
-      method: 'POST',
-      body: new FormData(Object.entries({ src_path: srcPath, dest_path: destPath })),
-    });
-    const data = await response.json();
-    if (data.error) {
-      throw new Error(data.error);
+    try {
+        const response = await fetch('/api/rename', {
+            method: 'POST',
+            body: new FormData(Object.entries({
+                src_path: srcPath,
+                dest_path: destPath
+            })),
+        });
+        const data = await response.json();
+        if (data.error) {
+            throw new Error(data.error);
+        }
+        return data.success;
+    } catch (error) {
+        console.error('Error renaming item:', error);
+        return false;
     }
-    return data.success;
-  } catch (error) {
-    console.error('Error renaming item:', error);
-    return false;
-  }
 }
 
 async function deleteItem(targetPath) {
-  try {
-    const response = await fetch('/api/delete', {
-      method: 'POST',
-      body: new FormData(Object.entries({ target_path: targetPath })),
-    });
-    const data = await response.json();
-    if (data.error) {
-      throw new Error(data.error);
+    try {
+        const response = await fetch('/api/delete', {
+            method: 'POST',
+            body: new FormData(Object.entries({
+                target_path: targetPath
+            })),
+        });
+        const data = await response.json();
+        if (data.error) {
+            throw new Error(data.error);
+        }
+        return data.success;
+    } catch (error) {
+        console.error('Error deleting item:', error);
+        return false;
     }
-    return data.success;
-  } catch (error) {
-    console.error('Error deleting item:', error);
-    return false;
-  }
 }
 
 async function createNewDirectory(parentPath, dirName) {
-  try {
-    const response = await fetch('/api/new-directory', {
-      method: 'POST',
-      body: new FormData(Object.entries({ parent_path: parentPath, dir_name: dirName })),
-    });
-    const data = await response.json();
-    if (data.error) {
-      throw new Error(data.error);
+    try {
+        const response = await fetch('/api/new-directory', {
+            method: 'POST',
+            body: new FormData(Object.entries({
+                parent_path: parentPath,
+                dir_name: dirName
+            })),
+        });
+        const data = await response.json();
+        if (data.error) {
+            throw new Error(data.error);
+        }
+        return data.success;
+    } catch (error) {
+        console.error('Error creating new directory:', error);
+        return false;
     }
-    return data.success;
-  } catch (error) {
-    console.error('Error creating new directory:', error);
-    return false;
-  }
 }
 
 async function createNewFile(parentPath, fileName) {
-  try {
-    const response = await fetch('/api/new-file', {
-      method: 'POST',
-      body: new FormData(Object.entries({ parent_path: parentPath, file_name: fileName })),
-    });
-    const data = await response.json();
-    if (data.error) {
-      throw new Error(data.error);
+    try {
+        const response = await fetch('/api/new-file', {
+            method: 'POST',
+            body: new FormData(Object.entries({
+                parent_path: parentPath,
+                file_name: fileName
+            })),
+        });
+        const data = await response.json();
+        if (data.error) {
+            throw new Error(data.error);
+        }
+        return data.success;
+    } catch (error) {
+        console.error('Error creating new file:', error);
+        return false;
     }
-    return data.success;
-  } catch (error) {
-    console.error('Error creating new file:', error);
-    return false;
-  }
 }
