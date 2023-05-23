@@ -11,6 +11,9 @@ async function loadReportFiles() {
   });
 }
 
+let summaryChart = null;
+let totalChart = null;
+
 async function loadReportData(reportFile) {
   const summaryResponse = await fetch(`/summary?filename=${reportFile}`);
   const totalResponse = await fetch(`/total_failed_passed?filename=${reportFile}`);
@@ -22,7 +25,14 @@ async function loadReportData(reportFile) {
   const summaryFailedData = summaryLabels.map(key => summaryData[key].Failed);
   const summaryPassedData = summaryLabels.map(key => summaryData[key].Passed);
 
-  new Chart(document.getElementById('summary-chart').getContext('2d'), {
+  if (summaryChart) {
+    summaryChart.destroy();
+  }
+  if (totalChart) {
+    totalChart.destroy();
+  }
+
+  summaryChart = new Chart(document.getElementById('summary-chart').getContext('2d'), {
     type: 'bar',
     data: {
       labels: summaryLabels,
@@ -52,7 +62,7 @@ async function loadReportData(reportFile) {
     }
   });
 
-  new Chart(document.getElementById('total-chart').getContext('2d'), {
+  totalChart =new Chart(document.getElementById('total-chart').getContext('2d'), {
     type: 'pie',
     data: {
       labels: ['Failed', 'Passed'],

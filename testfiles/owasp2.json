@@ -10,8 +10,8 @@
                 "url": false,
                 "body": {},
                 "headers": ["Referer"],
-                "cookies": {},
-                "parameters": {}
+                "cookies": [],
+                "parameters": []
             },
             "payloads_files": [
                 {
@@ -30,8 +30,8 @@
                 "url": true,
                 "body": {},
                 "headers": [],
-                "cookies": {},
-                "parameters": {}
+                "cookies": [],
+                "parameters": []
             },
             "payloads_files": [
                 {
@@ -55,8 +55,8 @@
                     "parameter": "username"
                 },
                 "headers": [],
-                "cookies": {},
-                "parameters": {}
+                "cookies": [],
+                "parameters": []
             },
             "payloads_files": [
                 {
@@ -79,7 +79,7 @@
                 "url": false,
                 "body": {},
                 "headers": [],
-                "cookies": {},
+                "cookies": [],
                 "parameters": [
                     "search"
                 ]
@@ -107,8 +107,8 @@
                 "url": true,
                 "body": {},
                 "headers": [],
-                "cookies": {},
-                "parameters": {}
+                "cookies": [],
+                "parameters": []
             },
             "payloads_files": [
                 {
@@ -133,8 +133,8 @@
                 "url": true,
                 "body": {},
                 "headers": [],
-                "cookies": {},
-                "parameters": {}
+                "cookies": [],
+                "parameters": []
             },
             "payloads_files": [
                 {

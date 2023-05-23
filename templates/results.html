@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <div class="main-content">
     <div class="results-page">
     <h2>Results</h2>
@@ -22,10 +21,16 @@
       </div>
     </div>
     <!-- Placeholder for displaying report -->
-    <div id="report-display">
-          <canvas id="summary-chart"></canvas>
-          <canvas id="total-chart"></canvas>
 
+    <div id="report-display">
+      <div class="widget">
+        <div class="chart-title">Summary Chart</div>
+        <canvas id="summary-chart"></canvas>
+      </div>
+      <div class="widget">
+        <div class="chart-title">Total Failed/Passed</div>
+        <canvas id="total-chart"></canvas>
+      </div>
     </div>
     <script src="/static/reports.js"></script>
     </div>

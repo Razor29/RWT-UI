@@ -7,29 +7,93 @@ Tests
 {% block content %}
 <div class="overlay"></div>
 <div class="main-content">
-    <h2>Tests</h2>
+    <div class="header-container">
+        <h2>Tests</h2>
+        <button id="add-new-test" class="btn btn-primary mb-3">+ Add New</button> <!-- Add this line -->
+    </div>
+    <table class="tests-table">
+        <thead>
+            <tr>
+                <!-- Remove the "Loaded" column -->
+                <th class="narrow">Filename</th>
+                <th class="narrow">Payload DB</th>
+                <th>Category</th>
+                <th>Tests Name</th>
+                <th class="narrow">Skip</th>
+                <th>Request Properties</th>
+                <th>Payload Files</th>
+                <th>Payload Locations</th>
+            </tr>
+        </thead>
+        <tbody id="test-table-body">
+            <!-- Rows will be added dynamically here -->
+        </tbody>
+    </table>
+     <script src="/static/tests.js"></script>
 
-<table>
-    <thead>
-        <tr>
-            <th>Loaded</th>
-            <th>Filename</th>
-            <th>Payload DB</th>
-            <th>Category</th>
-            <th>Tests Name</th>
-            <th>Skip</th>
-            <th>Request Properties</th>
-            <th>Payload Files</th>
-            <th>Expected Behavior</th>
-            <th>Payload Locations</th>
-        </tr>
-    </thead>
-    <tbody id="test-table-body">
-        <!-- Rows will be added dynamically here -->
-    </tbody>
-</table>
 
-</div>
+     <form id="create-test-file-form"  class="form-popup" method="POST" action="/api/create-test-file">
+    <div class="mb-3">
+        <label for="filename" class="form-label">Filename:</label>
+        <input type="text" class="form-control" id="filename" name="filename" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+<form id="edit-test-file-form" method="PUT" action="/api/edit-test-file">
+    <div class="mb-3">
+        <label for="filename" class="form-label">Filename:</label>
+        <input type="text" class="form-control" id="filename" name="filename" value="Current Filename" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+<form id="add-category-form" method="POST" action="/api/add-category">
+    <div class="mb-3">
+        <label for="category" class="form-label">Category Name:</label>
+        <input type="text" class="form-control" id="category" name="category" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+<form id="edit-category-form"  method="PUT" action="/api/edit-category">
+    <div class="mb-3">
+        <label for="category" class="form-label">Category Name:</label>
+        <input type="text" class="form-control" id="category" name="category" value="Current Category Name" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+<form id="add-test-form" method="POST" action="/api/add-test">
+    <div class="mb-3">
+        <label for="test" class="form-label">Test Name:</label>
+        <input type="text" class="form-control" id="test" name="test" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+<form id="edit-test-form" method="PUT" action="/api/edit-test">
+    <div class="mb-3">
+        <label for="test" class="form-label">Test Name:</label>
+        <input type="text" class="form-control" id="test" name="test" value="Current Test Name" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+<form id="edit-properties-form" method="PUT" action="/api/edit-properties">
+    <div class="mb-3">
+        <label for="headers" class="form-label">Headers:</label>
+        <input type="text" class="form-control" id="headerName" name="headerName" placeholder="Name" required>
+        <input type="text" class="form-control" id="headerValue" name="headerValue" placeholder="Value" required>
+    </div>
+    <div class="mb-3">
+        <label for="bodyType" class="form-label">Body Type:</label>
+        <select class="form-select" id="bodyType" name="bodyType">
+            <option value="non-json">Non JSON</option>
+            <option value="json">JSON</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
 </div>
 {% endblock %}
-

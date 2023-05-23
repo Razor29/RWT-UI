@@ -3,12 +3,15 @@
 {% block content %}
 <div class="overlay"></div>
 <div class="main-content">
-    <h2>Configurations</h2>
-    <button id="add-new-config">Add New</button>
-    <table>
+    <div class="configurations-content">
+
+    <div class="header-container">  <!-- Add this line -->
+        <h2>Configurations</h2>
+        <button id="add-new-config" class="btn btn-primary mb-3">+ Add New</button>
+    </div>
+    <table class="table table-striped configurations-table">
         <thead>
             <tr>
-                <th>Loaded</th>
                 <th>Filename</th>
                 <th>URL</th>
                 <th>Blocking Page Regex</th>
@@ -16,30 +19,28 @@
                 <th>User-Agent</th>
                 <th>Host</th>
                 <th colspan="2">XFF</th>
-                <th></th> <!-- Empty cell in the top right corner -->
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             {% for config in configs %}
-                <tr data-filename="{{ config.filename }}" data-loaded="{{ config.loaded }}">
-                    <td>
-                        <input type="radio" name="loaded" {% if config.loaded %}checked{% endif %}>
-                    </td>
-                    <td>{{ config.filename }}</td>
-                    {% for key, value in config.data.items() %}
-                        {% if key == "xff" %}
-                            {% for k, v in value.items() %}
-                                <td>{{ k }}</td>
-                                <td>{{ v }}</td>
-                            {% endfor %}
-                        {% else %}
-                            <td>{{ value }}</td>
-                        {% endif %}
-                    {% endfor %}
-                    <td>
-                        <button class="edit-config">Edit</button>
-                    </td>
-                </tr>
+            <tr data-filename="{{ config.filename }}">
+                <td title="{{ config.filename }}">{{ config.filename }}</td>
+                {% for key, value in config.data.items() %}
+                    {% if key == "xff" %}
+                        {% for k, v in value.items() %}
+                            <td title="{{ k }}">{{ k }}</td>
+                            <td title="{{ v }}">{{ v }}</td>
+                        {% endfor %}
+                    {% else %}
+                        <td title="{{ value }}">{{ value }}</td>
+                    {% endif %}
+                {% endfor %}
+                <td>
+                    <img src="{{ url_for('static', filename='icons/icon-pencil.svg') }}" class="edit-config" alt="Edit">
+                    <img src="{{ url_for('static', filename='icons/icon-trash.svg') }}" class="delete-config" alt="Delete">
+                </td>
+            </tr>
             {% endfor %}
         </tbody>
     </table>
@@ -63,7 +64,33 @@
         <input type="text" id="edit-xff-name" class="edit-data" placeholder="XFF Name">
         <label for="edit-xff-value">XFF Value</label>
         <input type="text" id="edit-xff-value" class="edit-data" placeholder="XFF Value">
-        <button id="save-edit">Save</button>
+        <button id="save-edit" class="btn btn-primary mt-3">Save</button>
+    </div>
+            <div class="new-form">
+        <h3>New Configuration</h3>
+        <label for="new-filename">Filename</label>
+        <input type="text" id="new-filename" placeholder="Filename">
+        <label for="new-url">URL</label>
+        <input type="text" id="new-url" class="new-data" placeholder="URL">
+        <label for="new-blocking-page-regex">Blocking Page Regex</label>
+        <input type="text" id="new-blocking-page-regex" class="new-data" placeholder="Blocking Page Regex">
+        <label for="new-threads">Threads</label>
+        <input type="text" id="new-threads" class="new-data" placeholder="Threads">
+        <label for="new-user-agent">User-Agent</label>
+        <input type="text" id="new-user-agent" class="new-data" placeholder="User-Agent">
+        <label for="new-host">Host</label>
+        <input type="text" id="new-host" class="new-data" placeholder="Host">
+        <label for="new-xff-name">XFF Name</label>
+        <input type="text" id="new-xff-name" class="new-data" placeholder="XFF Name">
+        <label for="new-xff-value">XFF Value</label>
+        <input type="text" id="new-xff-value" class="new-data" placeholder="XFF Value">
+        <button id="save-new" class="btn btn-primary mt-3">Save</button>
+    </div>
+        <script src="{{ url_for('static', filename='configurations.js') }}"></script>
+
+
+
     </div>
 </div>
+
 {% endblock %}

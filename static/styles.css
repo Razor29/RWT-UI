@@ -23,8 +23,15 @@ body {
     border: 1px solid rgba(208, 208, 208, 0.5);
 }
 
+
 .top-bar .title {
-    font-size: 24px;
+    -webkit-text-size-adjust: 100%;
+    font-variant: tabular-nums;
+    font-feature-settings: "tnum","tnum";
+    font-size: 18px;
+    font-weight: 400;
+    color: rgb(60, 65, 68);
+    font-family: Roboto;
 }
 
 /* Left-side navigation bar styles */
@@ -84,33 +91,46 @@ nav ul li a img {
     margin-top: 50px;
     padding: 20px;
 }
+.header-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: top;
+    margin-bottom: 20px;  /* Adjust as needed */
+}
+
+.header-container h2 {
+    font-size: 28px;
+    margin-right: 20px; /* Adjust as per your need */
+}
+
 
 /* Table styles (Used in Configurations page) */
-table {
+.configurations-table {
+    margin-top: 0;  /* Remove top margin */
     border-collapse: collapse;
     width: 100%;
-    margin: 20px 0;
     text-align: left;
     overflow: hidden;
     word-wrap: break-word;
     table-layout: fixed;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Add a minor soft shadow */
 }
 
-th, td {
-    border: 1px solid #999;
+.configurations-table th, .configurations-table td {
+    border: 1px solid rgba(153, 153, 153, 0.2); /* Change border opacity to make it nearly invisible */
     padding: 0.5rem;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 }
 
-th {
+.configurations-table th {
     background-color: #f2f2f2;
     font-weight: bold;
 }
 
 /* Add this for the empty cell in the top right corner */
-th:last-child::before {
+.configurations-table th:last-child::before {
     content: "";
 }
 
@@ -122,10 +142,36 @@ th:last-child::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.2);
     z-index: 999;
 }
+#test-form {
+    margin-top: 0;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: left;
+    overflow: hidden;
+    word-wrap: break-word;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(153, 153, 153, 0.2);
+}
 
+#test-form label, #test-form input, #test-form select {
+    padding: 0.5rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;  /* makes the form fields take the full width */
+}
+
+#test-form label {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+#test-form label:last-child::before {
+    content: "";
+}
 /* Modify this for the edit form */
 .edit-form {
     display: none;
@@ -151,6 +197,126 @@ th:last-child::before {
     margin-top: 10px;
 }
 
+.new-form {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #999;
+    z-index: 1000;
+    width: 50%; /* Make the form wider */
+}
+
+.new-form input {
+    display: block;
+    margin-bottom: 10px;
+    width: 100%; /* Make the input fields fit the width of the form */
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+}
+
+.new-form button {
+    margin-top: 10px;
+}
+
+/* Tooltip styles for truncated cell text */
+.configurations-table .tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.configurations-table .tooltip::after {
+    content: attr(data-title);
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+
+.configurations-table th, .configurations-table td {
+    border: 1px solid rgba(153, 153, 153, 0.2);
+    padding: 0.5rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 12px;  // make the text smaller
+}
+.configurations-table .tooltip:hover::after {
+    visibility: visible;
+    opacity: 1;
+}
+
+#save-edit {
+    /* Your styles for the save button */
+    background-color: grey;
+    color: white;
+    /* ... */
+}
+.edit-config,
+.delete-config {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+
+    /* tests page   */
+.tests-table {
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    width: 100%;
+    text-align: left;
+    overflow: hidden;
+    word-wrap: break-word;
+    table-layout: fixed;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.tests-table th, .tests-table td {
+    border: 1px solid rgba(153, 153, 153, 0.2);
+    padding: 0.5rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 12px;  // make the text smaller
+}
+
+.tests-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.tests-table th:last-child::before {
+    content: "";
+}
+.form-popup {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background: #fff;  /* Set form background to white */
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 80%;  /* Set form width to 80% of the screen */
+    max-width: 500px;  /* Set maximum width of the form */
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);  /* Add a little shadow to the form */
+}
 /* Database Page Styles */
 
 
@@ -229,4 +395,60 @@ th:last-child::before {
 
 #report-file-select {
   height: 38px;
+}
+
+#report-display {
+  display: flex;
+  justify-content: space-between;
+}
+
+.widget {
+  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin: 20px;
+  overflow: auto;
+}
+
+.widget:first-child {
+  flex: 1;
+}
+
+.widget:last-child {
+  flex: 0 0 340px;
+}
+
+.chart-title {
+  text-align: center;
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+/* This will position the cell relatively, so the SVG icons will be positioned relative to the cell */
+.hover-icons {
+  position: relative;
+}
+
+/* This styles the SVG overlay */
+.hover-icons .svg-overlay {
+  display: none;  /* Initially hidden */
+  position: absolute;  /* Positioned relative to the cell */
+  bottom: 5px;  /* Positioned to the bottom-right corner */
+  right: 5px;
+}
+
+/* This shows the SVG overlay when the cell is hovered over */
+.hover-icons:hover .svg-overlay {
+  display: block;
+}
+
+/* This styles the SVG icons */
+.hover-icons .svg-overlay img {
+  width: 16px;  /* Set the size of the SVG icons here */
+  height: 16px;
+  margin-left: 5px;
+}
+
+.narrow {
+    width: 120px;  /* adjust this value to your liking */
 }
