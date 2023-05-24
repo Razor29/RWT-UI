@@ -5,7 +5,7 @@
             "headers": {
                 "Accept": "*/*"
             },
-            "body type": "",
+            "body_type": "",
             "payload_location": {
                 "url": true,
                 "body": {},
@@ -29,7 +29,7 @@
             "headers": {
                 "Accept": "text/html"
             },
-            "body type": "",
+            "body_type": "",
             "payload_location": {
                 "url": true,
                 "body": {},
@@ -55,7 +55,7 @@
             "headers": {
                 "Accept": "application/json"
             },
-            "body type": "json",
+            "body_type": "json",
             "payload_location": {
                 "url": false,
                 "body": {
@@ -82,7 +82,7 @@
             "headers": {
                 "Accept": "application/json"
             },
-            "body type": "json",
+            "body_type": "json",
             "payload_location": {
                 "url": false,
                 "body": {},

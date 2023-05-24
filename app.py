@@ -5,8 +5,13 @@ from flask import Flask, render_template, url_for, request, jsonify
 from pathlib import Path
 from os import path
 from TestReport import TestReport
-
+from collections import defaultdict
+from jinja2 import Environment, select_autoescape, FileSystemLoader, ext
 app = Flask(__name__)
+app.jinja_env.add_extension('jinja2.ext.do')
+
+
+
 __folder__ = path.abspath(path.dirname(__file__))
 
 ######################################################
@@ -121,9 +126,45 @@ def delete_configuration():
 def get_test_file_path(filename):
     return Path(__file__).parent / "test_files" / f"{filename}.json"
 
+
+
 @app.route('/tests')
 def tests():
-    return render_template('tests.html')
+    table_data = get_tests_reformat()
+    return render_template('tests.html', configs=table_data)
+
+def get_tests_reformat():
+    json_files_dir = os.path.join(__folder__, "testfiles")
+    payload_db_dir = os.path.join(__folder__, "payloadDB")
+    table_values = {
+        "MetaData": {
+            "total_files": 0,
+            "total_categories": 0,
+        },
+        "payloadDB": [d for d in os.listdir(payload_db_dir) if os.path.isdir(os.path.join(payload_db_dir, d))],
+        "Rows": []
+    }
+
+    for filename in os.listdir(json_files_dir):
+        if filename.endswith('.json'):
+            with open(os.path.join(json_files_dir, filename), 'r') as file:
+                data = json.load(file)
+                table_values["MetaData"]["total_files"] += 1
+                table_values["MetaData"][filename] = {"total_tests": 0}
+
+                for category in data:
+                    table_values["MetaData"]["total_categories"] += 1
+                    table_values["MetaData"][filename][category] = {"test_count": len(data[category])}
+                    table_values["MetaData"][filename]["total_tests"] += (len(data[category]))
+
+                    for test in data[category]:
+                        table_values["Rows"].append({
+                            'filename': filename,
+                            'category': category,
+                            'test_name': test,
+                            'test_data': data[category][test],
+                        })
+    return table_values
 
 @app.route('/api/test-file',methods=['POST'])
 def create_test_file():
@@ -585,12 +626,20 @@ def total_failed_passed():
 ######################################################
 # Unknown page functions                             #
 ######################################################
+import os
+import json
+from collections import defaultdict
+
+
+
+
 
 
 @app.route('/api/tests-files', methods=['GET'])
 def get_tests_files():
     tests_files_dir = path.join(__folder__, "testfiles")
     tests_files = [f for f in os.listdir(tests_files_dir) if os.path.isfile(os.path.join(tests_files_dir, f))]
+
     return jsonify(tests_files)
 
 
