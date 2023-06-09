@@ -9,7 +9,6 @@
       <tr>
         <th>Configuration File</th>
         <th>Tests File</th>
-        <th>Payload DB</th>
         <th>Detailed Success</th>
         <th>Detailed Failure</th>
         <th></th>
@@ -24,22 +23,25 @@
           <select id="test-file-select"></select>
         </td>
         <td>
-          <select id="payload-db-select"></select>
-        </td>
-        <td>
           <input type="checkbox" id="detailed-success-checkbox">
         </td>
         <td>
           <input type="checkbox" id="detailed-failure-checkbox">
         </td>
         <td>
-          <button type="submit">Start Test</button>
+            <button id="run-test" class="btn btn-primary mb-3">Run Test</button>
         </td>
       </tr>
     </tbody>
   </table>
 </form>
-
+    <div class="progress-info">
+        <div id="test-info">Tests: 0/0</div>
+        <div id="current-test">Current Test: </div>
+    </div>
+    <div class="progress-bar-container">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
 <script src="{{ url_for('static', filename='runtest.js') }}"></script>
 </div>
 {% endblock %}

@@ -1,10 +1,13 @@
 import os
 import json
 import shutil
-from flask import Flask, render_template, url_for, request, jsonify
+from RadwareWAFTester import RadwareWAFTester
+from flask import Flask, render_template, redirect, url_for, request, jsonify
 from pathlib import Path
 from os import path
 from TestReport import TestReport
+from threading import Thread
+
 from collections import defaultdict
 from jinja2 import Environment, select_autoescape, FileSystemLoader, ext
 app = Flask(__name__)
@@ -13,6 +16,7 @@ app.jinja_env.add_extension('jinja2.ext.do')
 
 
 __folder__ = path.abspath(path.dirname(__file__))
+radware_waf_tester = None
 
 ######################################################
 # Configurations page functions                      #
@@ -124,7 +128,7 @@ def delete_configuration():
 # tests page functions                               #
 ######################################################
 def get_test_file_path(filename):
-    return Path(__file__).parent / "test_files" / f"{filename}.json"
+    return Path(__file__).parent / "testfiles" / f"{filename}.json"
 
 
 
@@ -165,6 +169,28 @@ def get_tests_reformat():
                             'test_data': data[category][test],
                         })
     return table_values
+
+
+@app.route('/api/get-test-payload-files', methods=['GET'])
+def get_test_payload_files():
+    root_dir = os.path.dirname(os.path.abspath(__file__))  # get the directory of the current file
+    payloadDB_dir = os.path.join(root_dir, 'payloadDB')  # join it with the relative path to payloadDB
+
+    files_list = []
+
+    # Walk through payloadDB_dir
+    for dir_name, subdir_list, file_list in os.walk(payloadDB_dir):
+        for fname in file_list:
+            # Construct the file path from the directory and file name
+            file_path = os.path.join(dir_name, fname)
+            # Remove the payloadDB_dir from the file_path to get a relative path
+            relative_path = os.path.relpath(file_path, payloadDB_dir)
+            # Replace backslashes with forward slashes for a more standard format
+            relative_path = relative_path.replace("\\", "/")
+            # Append it to the list
+            files_list.append(relative_path)
+
+    return jsonify(files_list)
 
 @app.route('/api/test-file',methods=['POST'])
 def create_test_file():
@@ -329,6 +355,37 @@ def delete_test_file_category():
         json.dump(content, f)
 
     return jsonify({"message": "category deleted successfully"}), 200
+
+@app.route('/api/test-file-skip',methods=['PUT'])
+def update_test_file_skip():
+    data = request.get_json()
+    filename = data.get('filename')
+    category = data.get('category')
+    test = data.get('test')
+    skip = data.get('skip')
+
+    file_path = get_test_file_path(filename)
+
+    if not file_path.exists():
+        return jsonify({"error": "file does not exist"}), 400
+
+    with file_path.open() as f:
+        content = json.load(f)
+
+    if category not in content:
+        return jsonify({"error": "category does not exist"}), 400
+    if test not in content[category]:
+        return jsonify({"error": "test does not exist"}), 400
+
+    content[category][test]['skip'] = skip
+
+    with file_path.open('w') as f:
+        json.dump(content, f)
+
+    return jsonify({"message": "test skip status updated successfully"}), 200
+
+
+
 
 @app.route('/api/test-file-test',methods=['PUT'])
 def update_test_file_test():
@@ -514,6 +571,70 @@ def update_test_file_location():
 def database():
     return render_template('database.html')
 
+
+@app.route('/api/rename', methods=['POST'])
+def rename():
+    src_path = request.form.get('src_path')
+    dest_path = request.form.get('dest_path')
+
+    if src_path and dest_path:
+        try:
+            os.rename(src_path, dest_path)
+            return jsonify(success=True)
+        except Exception as e:
+            return jsonify(error=str(e)), 500
+
+    return jsonify(error='Missing parameters'), 400
+
+
+@app.route('/api/delete', methods=['POST'])
+def delete():
+    target_path = request.form.get('target_path')
+
+    if target_path:
+        try:
+            if os.path.isfile(target_path):
+                os.remove(target_path)
+            elif os.path.isdir(target_path):
+                shutil.rmtree(target_path)
+            return jsonify(success=True)
+        except Exception as e:
+            return jsonify(error=str(e)), 500
+
+    return jsonify(error='Missing parameters'), 400
+
+
+@app.route('/api/new-directory', methods=['POST'])
+def new_directory():
+    parent_path = request.form.get('parent_path')
+    dir_name = request.form.get('dir_name')
+
+    if parent_path and dir_name:
+        try:
+            new_dir_path = os.path.join(parent_path, dir_name)
+            os.makedirs(new_dir_path, exist_ok=True)
+            return jsonify(success=True)
+        except Exception as e:
+            return jsonify(error=str(e)), 500
+
+    return jsonify(error='Missing parameters'), 400
+
+
+@app.route('/api/new-file', methods=['POST'])
+def new_file():
+    parent_path = request.form.get('parent_path')
+    file_name = request.form.get('file_name')
+
+    if parent_path and file_name:
+        try:
+            new_file_path = os.path.join(parent_path, file_name)
+            Path(new_file_path).touch()
+            return jsonify(success=True)
+        except Exception as e:
+            return jsonify(error=str(e)), 500
+
+    return jsonify(error='Missing parameters'), 400
+
 @app.route('/api/files', methods=['GET'])
 def api_get_files():
     path = request.args.get('path', '/payloadDB')
@@ -592,6 +713,46 @@ def get_file_content():
 def runtest():
     return render_template('runtest.html')
 
+@app.route('/api/runtest-start', methods=['POST'])
+def post_runtest_start():
+    global radware_waf_tester
+
+    # Get the configuration from the request data
+    data = request.get_json()
+    configuration_file = path.join("configurations", data.get("configuration_file", "config.json"))
+    test_file = path.join("testfiles", data.get("test_file", "tests.json"))
+    report_success = data.get("success", False)
+    report_failure = data.get("failure", False)
+
+    # Create a new RadwareWAFTester instance
+    radware_waf_tester = RadwareWAFTester(
+        configuration_file=configuration_file,
+        test_file=test_file,
+        report_success=report_success,
+        report_failure=report_failure,
+        payload_path=path.join("payloadDB")
+    )
+
+    # Start the test
+    Thread(target=radware_waf_tester.start_test, args=(radware_waf_tester.get_url(),)).start()
+
+    return jsonify({"message": "Test started"})
+
+
+
+
+@app.route('/api/runtest-progress', methods=['GET'])
+def get_runtest_progress():
+    # Get the current progress from the RadwareWAFTester instance
+    progress = radware_waf_tester.test_progress
+
+    # If the test is complete, include the results filename in the redirect URL
+    # if progress['test_complete']:
+    #     return redirect(url_for('results', filename=progress['results_filename']))
+
+    # Return the progress as JSON
+    return jsonify(progress)
+
 ######################################################
 # Results page functions                             #
 ######################################################
@@ -622,19 +783,6 @@ def total_failed_passed():
     report = TestReport(report_file)
     return jsonify(report.get_total_failed_passed())
 
-
-######################################################
-# Unknown page functions                             #
-######################################################
-import os
-import json
-from collections import defaultdict
-
-
-
-
-
-
 @app.route('/api/tests-files', methods=['GET'])
 def get_tests_files():
     tests_files_dir = path.join(__folder__, "testfiles")
@@ -642,67 +790,86 @@ def get_tests_files():
 
     return jsonify(tests_files)
 
+@app.route('/api/configurations-files', methods=['GET'])
+def get_configurations_files():
+    configurations_files_dir = path.join(__folder__, "configurations")
+    configurations_files = [f for f in os.listdir(configurations_files_dir) if os.path.isfile(os.path.join(configurations_files_dir, f))]
+
+    return jsonify(configurations_files)
+
+######################################################
+# Unknown page functions                             #
+######################################################
 
 
 
 
-@app.route('/api/payload-dbs', methods=['GET'])
-def get_payload_dbs():
-    payload_db_dir = path.join(__folder__, "payloadDB")
-    payload_dbs = [d for d in os.listdir(payload_db_dir) if os.path.isdir(os.path.join(payload_db_dir, d))]
-    return jsonify(payload_dbs)
 
-@app.route('/api/tests', methods=['GET'])
-def get_tests():
-    json_files_dir = path.join(__folder__, "testfiles")
-    tests = []
-    stats = []
 
-    # Iterate over each JSON file in the directory
-    for filename in os.listdir(json_files_dir):
-        if filename.endswith('.json'):
-            with open(os.path.join(json_files_dir, filename), 'r') as file:
-                data = json.load(file)
 
-                # Initialize variables for statistics
-                categories_count = 0
-                tests_count = 0
 
-                for category, category_data in data.items():
-                    test_data = []
-                    for test_name, test_info in category_data.items():
-                        test_data.append({
-                            'name': test_name,
-                            'skip': test_info['skip'],
-                            'headers': test_info['headers'],
-                            'bodyType': test_info['body type'],
-                            'payloadLocation': test_info['payload_location'],
-                            'payloadFiles': test_info['payloads_files']
-                        })
 
-                    categories_count += 1
-                    tests_count += len(test_data)
 
-                    tests.append({
-                        'filename': filename,
-                        'categories': [{
-                            'name': category,
-                            'tests': test_data
-                        }]
-                    })
 
-                # Append file statistics to the stats list
-                stats.append({
-                    'filename': filename,
-                    'categories_count': categories_count,
-                    'tests_count': tests_count
-                })
 
-    # Get the list of directories in the 'PayloadDB' folder
-    payload_db_dir = path.join(__folder__, 'PayloadDB')
-    payload_dbs = [name for name in os.listdir(payload_db_dir) if os.path.isdir(os.path.join(payload_db_dir, name))]
 
-    return jsonify({'tests': tests, 'payloadDbs': payload_dbs, 'stats': stats})
+# @app.route('/api/payload-dbs', methods=['GET'])
+# def get_payload_dbs():
+#     payload_db_dir = path.join(__folder__, "payloadDB")
+#     payload_dbs = [d for d in os.listdir(payload_db_dir) if os.path.isdir(os.path.join(payload_db_dir, d))]
+#     return jsonify(payload_dbs)
+
+# @app.route('/api/tests', methods=['GET'])
+# def get_tests():
+#     json_files_dir = path.join(__folder__, "testfiles")
+#     tests = []
+#     stats = []
+#
+#     # Iterate over each JSON file in the directory
+#     for filename in os.listdir(json_files_dir):
+#         if filename.endswith('.json'):
+#             with open(os.path.join(json_files_dir, filename), 'r') as file:
+#                 data = json.load(file)
+#
+#                 # Initialize variables for statistics
+#                 categories_count = 0
+#                 tests_count = 0
+#
+#                 for category, category_data in data.items():
+#                     test_data = []
+#                     for test_name, test_info in category_data.items():
+#                         test_data.append({
+#                             'name': test_name,
+#                             'skip': test_info['skip'],
+#                             'headers': test_info['headers'],
+#                             'bodyType': test_info['body type'],
+#                             'payloadLocation': test_info['payload_location'],
+#                             'payloadFiles': test_info['payloads_files']
+#                         })
+#
+#                     categories_count += 1
+#                     tests_count += len(test_data)
+#
+#                     tests.append({
+#                         'filename': filename,
+#                         'categories': [{
+#                             'name': category,
+#                             'tests': test_data
+#                         }]
+#                     })
+#
+#                 # Append file statistics to the stats list
+#                 stats.append({
+#                     'filename': filename,
+#                     'categories_count': categories_count,
+#                     'tests_count': tests_count
+#                 })
+#
+#     # Get the list of directories in the 'PayloadDB' folder
+#     payload_db_dir = path.join(__folder__, 'PayloadDB')
+#     payload_dbs = [name for name in os.listdir(payload_db_dir) if os.path.isdir(os.path.join(payload_db_dir, name))]
+#
+#     return jsonify({'tests': tests, 'payloadDbs': payload_dbs, 'stats': stats})
 
 
 
@@ -710,68 +877,6 @@ def get_tests():
 
 # ...
 
-@app.route('/api/rename', methods=['POST'])
-def rename():
-    src_path = request.form.get('src_path')
-    dest_path = request.form.get('dest_path')
-
-    if src_path and dest_path:
-        try:
-            os.rename(src_path, dest_path)
-            return jsonify(success=True)
-        except Exception as e:
-            return jsonify(error=str(e)), 500
-
-    return jsonify(error='Missing parameters'), 400
-
-
-@app.route('/api/delete', methods=['POST'])
-def delete():
-    target_path = request.form.get('target_path')
-
-    if target_path:
-        try:
-            if os.path.isfile(target_path):
-                os.remove(target_path)
-            elif os.path.isdir(target_path):
-                shutil.rmtree(target_path)
-            return jsonify(success=True)
-        except Exception as e:
-            return jsonify(error=str(e)), 500
-
-    return jsonify(error='Missing parameters'), 400
-
-
-@app.route('/api/new-directory', methods=['POST'])
-def new_directory():
-    parent_path = request.form.get('parent_path')
-    dir_name = request.form.get('dir_name')
-
-    if parent_path and dir_name:
-        try:
-            new_dir_path = os.path.join(parent_path, dir_name)
-            os.makedirs(new_dir_path, exist_ok=True)
-            return jsonify(success=True)
-        except Exception as e:
-            return jsonify(error=str(e)), 500
-
-    return jsonify(error='Missing parameters'), 400
-
-
-@app.route('/api/new-file', methods=['POST'])
-def new_file():
-    parent_path = request.form.get('parent_path')
-    file_name = request.form.get('file_name')
-
-    if parent_path and file_name:
-        try:
-            new_file_path = os.path.join(parent_path, file_name)
-            Path(new_file_path).touch()
-            return jsonify(success=True)
-        except Exception as e:
-            return jsonify(error=str(e)), 500
-
-    return jsonify(error='Missing parameters'), 400
 
 
 

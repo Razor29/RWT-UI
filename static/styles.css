@@ -1,8 +1,35 @@
+/* ========================================== */
+/*                General styles              */
+/* ========================================== */
+
+
 /* General styles */
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
+/* Main content styles (Common to all pages) */
+.main-content {
+    margin-left: 48px;
+    margin-top: 50px;
+    padding: 20px;
+}
+
+
+.header-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: top;
+    margin-bottom: 20px;  /* Adjust as needed */
+}
+
+.header-container h2 {
+    font-size: 28px;
+    margin-right: 20px; /* Adjust as per your need */
+}
+/* ========================================== */
+/*              Base.html styles              */
+/* ========================================== */
 
 /* Top bar styles */
 .top-bar {
@@ -61,6 +88,7 @@ body {
     top: 0;
     margin-bottom: 50px;
     margin-top: 10px;
+    margin-left: 5px;
 }
 
 nav ul {
@@ -76,33 +104,39 @@ nav ul li {
 }
 
 nav ul li a {
-    display: block;
+    display: flex; /* Change this to flex */
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center the image vertically */
+    height: 48px; /* Set the height of the anchor tags */
+    width: 48px; /* Set the width of the anchor tags */
 }
+
 
 nav ul li a img {
     width: 30px; /* 20% smaller */
     height: 30px; /* 20% smaller */
-    margin-top: 15px
+    margin: 0; /* Remove the top margin */
 }
 
-/* Main content styles (Common to all pages) */
-.main-content {
-    margin-left: 48px;
-    margin-top: 50px;
-    padding: 20px;
-}
-.header-container {
-    display: flex;
-    justify-content: flex-start;
-    align-items: top;
-    margin-bottom: 20px;  /* Adjust as needed */
+
+
+.left-nav a {
+    width: 38px; /* Set the width of the anchor tags */
+    height: 38px; /* Set the height of the anchor tags */
+    display: flex; /* Use flexbox to center the image */
+    align-items: center; /* Center the image vertically */
+    justify-content: center; /* Center the image horizontally */
 }
 
-.header-container h2 {
-    font-size: 28px;
-    margin-right: 20px; /* Adjust as per your need */
+.left-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.15); /* white with 75% transparency */
+    border-radius: 5px; /* round edges */
 }
 
+
+/* ========================================== */
+/*          configuration.html styles         */
+/* ========================================== */
 
 /* Table styles (Used in Configurations page) */
 .configurations-table {
@@ -135,7 +169,7 @@ nav ul li a img {
 }
 
 /* Add this for the edit form */
-.overlay {
+.conf-overlay {
     display: none;
     position: fixed;
     top: 0;
@@ -145,33 +179,7 @@ nav ul li a img {
     background-color: rgba(0, 0, 0, 0.2);
     z-index: 999;
 }
-#test-form {
-    margin-top: 0;
-    margin-bottom: 20px;
-    width: 100%;
-    text-align: left;
-    overflow: hidden;
-    word-wrap: break-word;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(153, 153, 153, 0.2);
-}
 
-#test-form label, #test-form input, #test-form select {
-    padding: 0.5rem;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    display: block;  /* makes the form fields take the full width */
-}
-
-#test-form label {
-    background-color: #f2f2f2;
-    font-weight: bold;
-}
-
-#test-form label:last-child::before {
-    content: "";
-}
 /* Modify this for the edit form */
 .edit-form {
     display: none;
@@ -271,9 +279,31 @@ nav ul li a img {
     height: 20px;
     cursor: pointer;
 }
+/* ========================================== */
+/*             tests.html styles              */
+/* ========================================== */
+.test-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 999;
+}
+.very-narrow {
+    width: 5%; /* adjust as needed */
+}
+.narrow {
+    width: 10%; /* adjust as needed */
+}
+.wrap-text {
+    white-space: normal;
+    word-wrap: break-word;
+}
 
 
-    /* tests page   */
 .tests-table {
     margin-top: 0;
     margin-bottom: 20px;
@@ -303,13 +333,13 @@ nav ul li a img {
 .tests-table th:last-child::before {
     content: "";
 }
-.form-popup {
+.popup-form {
     display: none;
     position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1000;
+    z-index: 1100;
     background: #fff;  /* Set form background to white */
     border: 1px solid #ccc;
     padding: 20px;
@@ -317,8 +347,110 @@ nav ul li a img {
     max-width: 500px;  /* Set maximum width of the form */
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);  /* Add a little shadow to the form */
 }
-/* Database Page Styles */
+/* This will position the cell relatively, so the SVG icons will be positioned relative to the cell */
+.hover-icons {
+  position: relative;
+}
 
+/* This styles the SVG overlay */
+.hover-icons .svg-overlay {
+  display: none;  /* Initially hidden */
+  position: absolute;  /* Positioned relative to the cell */
+  bottom: 5px;  /* Positioned to the bottom-right corner */
+  right: 5px;
+}
+
+/* This shows the SVG overlay when the cell is hovered over */
+.hover-icons:hover .svg-overlay {
+  display: block;
+}
+
+/* edit request properties form style */
+
+.edit-request-properties-form .form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 5px;
+    padding-right: 0;
+
+}
+
+.edit-request-properties-form .form-column {
+    flex: 1;
+}
+
+
+.edit-request-properties-form .icon-plus,
+.edit-request-properties-form .icon-trash {
+    width: 20px;
+    height: 20px;
+
+
+}
+.edit-request-properties-form .form-section {
+    padding-top: 10px;
+    padding-left: 0;
+    padding-right: 0;
+}
+.edit-request-properties-form label {
+    font-size: 1em; /* adjust this value to match the size of the "Body Type" text */
+}
+.edit-request-properties-form label,
+.edit-request-properties-form input {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* This styles the SVG icons */
+.hover-icons .svg-overlay img {
+  width: 16px;  /* Set the size of the SVG icons here */
+  height: 16px;
+  margin-left: 5px;
+}
+
+
+
+.divided-cell, .request-properties-cell {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.cell-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+}
+
+.last-row {
+    border-bottom: none;
+}
+
+.cell-key {
+    flex-basis: 50%;
+    border-right: 1px solid #ddd;
+    padding-right: 10px;
+    margin-right: -1px;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cell-value {
+    flex-basis: 50%;
+    padding-left: 10px; /* Add some padding to create space between the text and the border */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+/* ========================================== */
+/*           database.html styles             */
+/* ========================================== */
 
 .file-explorer-container {
     display: flex;
@@ -393,6 +525,55 @@ nav ul li a img {
   background-color: #f1f1f1;
 }
 
+/* ========================================== */
+/*           runtest.html styles              */
+/* ========================================== */
+
+/* Run Test Form Styles */
+.test-form {
+    background-color: #f2f3f4; /* Change to your preferred color */
+    border-radius: 10px; /* This will give the form rounded corners */
+    padding: 20px; /* Add some padding so the content isn't touching the edges */
+    margin-bottom: 20px; /* Add some space below the form */
+}
+
+.test-form td {
+    border: 1px solid #ccc; /* Add a border to the cells */
+    padding: 10px; /* Add some padding so the content isn't touching the edges */
+    width: 200px;
+}
+
+.test-form select, .test-form input[type="checkbox"] {
+    width: 100%; /* Make the select and checkbox elements take up the full width of the cell */
+}
+
+/* Progress Bar Styles */
+.progress-bar-container {
+    background-color: #f2f3f4; /* Change to your preferred color */
+    border-radius: 10px; /* This will give the progress bar container rounded corners */
+    padding: 20px; /* Add some padding so the progress bar isn't touching the edges */
+    margin-bottom: 20px; /* Add some space below the progress bar container */
+}
+
+.progress-bar {
+    background-color: #007bff; /* Change to your preferred color */
+    height: 20px; /* Change to your preferred height */
+    border-radius: 10px; /* This will give the progress bar rounded corners */
+    width: 0; /* Initially, the progress bar should be empty */
+}
+
+/* Progress Info Styles */
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px; /* Add some space below the progress info */
+}
+
+/* ========================================== */
+/*           results.html styles              */
+/* ========================================== */
+
+
 #report-file-select {
   height: 38px;
 }
@@ -424,31 +605,5 @@ nav ul li a img {
   margin-bottom: 20px;
 }
 
-/* This will position the cell relatively, so the SVG icons will be positioned relative to the cell */
-.hover-icons {
-  position: relative;
-}
 
-/* This styles the SVG overlay */
-.hover-icons .svg-overlay {
-  display: none;  /* Initially hidden */
-  position: absolute;  /* Positioned relative to the cell */
-  bottom: 5px;  /* Positioned to the bottom-right corner */
-  right: 5px;
-}
 
-/* This shows the SVG overlay when the cell is hovered over */
-.hover-icons:hover .svg-overlay {
-  display: block;
-}
-
-/* This styles the SVG icons */
-.hover-icons .svg-overlay img {
-  width: 16px;  /* Set the size of the SVG icons here */
-  height: 16px;
-  margin-left: 5px;
-}
-
-.narrow {
-    width: 120px;  /* adjust this value to your liking */
-}

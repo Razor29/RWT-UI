@@ -85,3 +85,23 @@ document.getElementById('display-button').addEventListener('click', function(eve
 });
 
 loadReportFiles();
+
+async function selectReportFile(reportFile) {
+  // Select the report file in the dropdown
+  const select = document.getElementById('report-file-select');
+  select.value = reportFile;
+
+  // Load the report data
+  loadReportData(reportFile);
+}
+
+window.addEventListener('load', function() {
+  // Get the report file from the URL parameters
+  const urlParams = new URLSearchParams(window.location.search);
+  const reportFile = urlParams.get('filename');
+
+  // If a report file is specified, select it
+  if (reportFile) {
+    selectReportFile(reportFile);
+  }
+});

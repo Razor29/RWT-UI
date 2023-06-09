@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const editForm = document.querySelector('.edit-form');
-    const overlay = document.querySelector('.overlay');
+    const overlay = document.querySelector('.conf-overlay');
     const newForm = document.querySelector('.new-form');
     let originalFilename;  // Variable to store the original filename
 
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     overlay.style.display = 'block';
     };
     // Close the form when the overlay is clicked
-    document.querySelector('.overlay').onclick = () => {
+    document.querySelector('.conf-overlay').onclick = () => {
         const newForm = document.querySelector('.new-form');
 
         // Check if the new form is currently displayed

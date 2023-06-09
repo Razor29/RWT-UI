@@ -6,6 +6,7 @@ from os import path
 from multiprocessing.pool import ThreadPool
 from requests.compat import urlparse, urljoin, quote_plus
 from datetime import datetime
+from time import time
 
 
 __app_name__ = "Radware WAF Tester"
@@ -50,12 +51,12 @@ class RadwareWAFTester(object):
         formatted_datetime = current_datetime.strftime("report-%m_%d_%y-%I_%M%p.json")
 
         # Set the default value for report_path if it's not provided
-        if report_path is None:
-            self.report_path = path.join(__folder__, "reports", formatted_datetime)
-        else:
-            self.report_path = report_path
+
+        self.report_path = path.join(__folder__, "reports", formatted_datetime)
+
         # Initialize the logger
         self.logger = logging.getLogger(__name__)
+
 
         # Load the configuration file
         self.config = self._load_tests(configuration_file)
@@ -69,9 +70,12 @@ class RadwareWAFTester(object):
         self.report_failure = report_failure
 
         # Create a thread pool with the number of threads specified in the configuration file
-        self.pool = ThreadPool(self.config.get("threads"))
-
+        self.pool = ThreadPool(1)
+        self.payload_counts, self.test_count = self.count_payloads()
+        print(self.payload_counts)
         # Initialize the report  dictionaries
+        self.test_progress = {"Tests": "0/0", "progress": "0", "current_test_name": "", "test_complete": False, "results_filename":formatted_datetime}
+
         self.report = {}
 
     @staticmethod
@@ -102,6 +106,65 @@ class RadwareWAFTester(object):
             f.write(report)
             f.flush()
 
+        self.test_progress["test_complete"] = True
+
+    def count_payloads(self):
+        """
+        Count the number of payloads for each test in each category.
+
+        Returns:
+            dict: A dictionary containing the payload counts for each test in each category.
+        """
+        test_count = 0
+        payload_counts = {}
+
+        # Iterate through the tests
+        for category, tests in self.tests.items():
+            payload_counts[category] = {}
+
+            for test_name, test in tests.items():
+                # Skip the test if it's marked to be skipped or has no payload location or payload file
+                if test.get("skip") or not test.get("payloads_files"):
+                    continue
+
+                if test["payload_location"]["url"] == False and not test["payload_location"]["body"] and  not test["payload_location"]["headers"]  and  not test["payload_location"]["cookies"]  and  not test["payload_location"]["parameters"]:
+                    continue
+
+                test_count += 1
+
+                # Initialize the payload count for the test
+                payload_counts[category][test_name] = {"payload count": 0}
+
+                # Iterate through the payload files for the test
+                for db in test["payloads_files"]:
+                    # Read the payloads from the file and count them
+                    with open(path.join(self.payload_path, db["file"]), encoding="utf8") as payloads_file:
+                        payload_count = sum(1 for _ in payloads_file)
+
+                    # Add the payload count to the total count for the test
+                    payload_counts[category][test_name]["payload count"] += payload_count
+        print (test_count)
+        return payload_counts, test_count
+
+    def update_test_progress(self, current_test, total_tests, current_payload, total_payloads, current_testname = "", test_complete = False, results_filename = ""):
+        """
+        Update the test progress.
+
+        Args:
+            current_test (int): The number of the current test.
+            total_tests (int): The total number of tests.
+            current_payload (int): The number of the current payload.
+            total_payloads (int): The total number of payloads for the current test.
+        """
+        # Update the test progress
+        self.test_progress["Tests"] = f"{current_test}/{total_tests}"
+        self.test_progress["progress"] = str((current_payload / total_payloads) * 100)
+        if current_testname:
+            self.test_progress["current_test_name"] = current_testname
+        if test_complete:
+            self.test_progress["test_complete"] = test_complete
+        if results_filename:
+            self.test_progress["results_filename"] = results_filename
 
 
     def get_url(self):
@@ -122,16 +185,21 @@ class RadwareWAFTester(object):
             url (str): The base URL of the application to be tested.
         """
         # Iterate through the payload files specified for the current test
+        total_tests = self.test_count
+        current_test = 0
+
         for test_category, tests in self.tests.items():
 
             test_name = test_category
-
+            print(test_category)
             for key, val in tests.items():
+                self.test_progress["current_test_name"] = key
                 test = key
                 # Skip the test if it's marked to be skipped
                 if val["skip"] is True:
                     continue
 
+                current_test += 1
                 # Iterate through the payloads files specified for the current test
                 for db in val["payloads_files"]:
                     expected = db["expected"]
@@ -141,9 +209,17 @@ class RadwareWAFTester(object):
                     with open(path.join(self.payload_path, db["file"]), encoding="utf8") as payloads_file:
                         payloads = payloads_file.readlines()
 
-                    # Iterate through the payloads
+                    # Get the total number of payloads for the current test
+                    total_payloads = self.payload_counts[test_category][key]["payload count"]
+
+                    # Initialize the current payload counter
+                    current_payload = 0
                     # TODO add multiple checks of payload to identify charecters or formatting which can crash the code
                     for payload in payloads:
+                        # Increment the current payload counter
+                        current_payload += 1
+                        # Update the test progress
+                        self.update_test_progress(current_test, total_tests, current_payload, total_payloads)
                         headers = {}
                         if payload.endswith('\n'):
                             payload = payload.rstrip('\n')
@@ -155,6 +231,7 @@ class RadwareWAFTester(object):
                         if val["headers"]:
                             headers.update(val["headers"])
 
+                        print(self.test_progress)
                         # Send requests with the payload in the URL
                         if val["payload_location"]["url"]:
                             location = "url"
@@ -199,6 +276,8 @@ class RadwareWAFTester(object):
                                     headers[header] = payload.lstrip()
                                     self.send_request(url, headers, test_name, test, payload, location, expected, http_method=http_method)
 
+
+        print(self.test_progress)
         print("Test Complete")
         self.export_report(report_path=self.report_path)
 

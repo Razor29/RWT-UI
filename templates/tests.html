@@ -5,31 +5,21 @@ Tests
 {% endblock %}
 
 {% block content %}
-<div class="overlay"></div>
+<div class="test-overlay"></div>
 <div class="main-content">
     <div class="header-container">
-        <h2>Tests</h2>
-        <button id="add-new-test" class="btn btn-primary mb-3">+ Add New</button> <!-- Add this line -->
+        <h2>Test Suites</h2>
+        <button id="add-new-test" class="btn btn-primary mb-3">+ Add New</button>
     </div>
-    <style>
-    .clickable-cell {
-        transition: background-color 0.3s ease;
-        cursor: pointer;
-    }
-
-    .clickable-cell:hover {
-        background-color: #f5f5f5;
-    }
-</style>
 
     <table class="tests-table">
         <thead>
             <tr>
-                <th>Filename</th>
-                <th>Category</th>
-                <th>Test Name</th>
-                <th>Skip</th>
-                <th>Request Properties</th>
+                <th class="narrow">Test Suite</th>
+                <th class="wrap-text narrow">Category</th>
+                <th class="very-narrow">Skip</th>
+                <th class="wrap-text narrow">Test Name</th>
+                <th class="narrow">Request Headers</th>
                 <th>Payload Files</th>
                 <th>Payload Location</th>
             </tr>
@@ -42,32 +32,317 @@ Tests
                 {% do category_counter.update({(row.filename, row.category): category_counter.get((row.filename, row.category), configs.MetaData[row.filename][row.category].test_count) - 1}) %}
                 <tr>
                     {% if filename_counter[row.filename] == configs.MetaData[row.filename].total_tests - 1 %}
-                        <td class="clickable-cell" rowspan="{{ configs.MetaData[row.filename].total_tests }}">{{ row.filename }}</td>
+                        <td class="clickable-cell hover-icons" rowspan="{{ configs.MetaData[row.filename].total_tests }}">
+                            {{ row.filename | replace('.json', '') }}
+                            <div class="svg-overlay">
+                                <img src="/static/icons/icon-pencil.svg" class="icon-pencil edit-file" data-filename="{{ row.filename }}">
+                                <img src="/static/icons/icon-trash.svg" class="icon-trash delete-file" data-filename="{{ row.filename }}">
+                            </div>
+                        </td>
                     {% endif %}
                     {% if category_counter[(row.filename, row.category)] == configs.MetaData[row.filename][row.category].test_count - 1 %}
-                        <td rowspan="{{ configs.MetaData[row.filename][row.category].test_count }}">{{ row.category }}</td>
+                        <td class="hover-icons" rowspan="{{ configs.MetaData[row.filename][row.category].test_count }}">
+                            {{ row.category }}
+                            <div class="svg-overlay">
+                                <img src="/static/icons/icon-plus.svg" class="icon-plus add-category" data-category="{{ row.category }}">
+                                <img src="/static/icons/icon-pencil.svg" class="icon-pencil edit-category" data-category="{{ row.category }}">
+                                <img src="/static/icons/icon-trash.svg" class="icon-trash delete-category" data-category="{{ row.category }}">
+                            </div>
+                        </td>
                     {% endif %}
-                    <td class="clickable-cell">{{ row.test_name }}</td>
                     <td><input type="checkbox" name="skip" value="skip" {% if row.test_data.skip %} checked {% endif %}></td>
-                    <td class="clickable-cell">
-                        Headers: {{ row.test_data.headers }}<br>
-                        Body Type: {{ row.test_data.body_type }}
+
+                    <td class="hover-icons">
+                        {{ row.test_name }}
+                        <div class="svg-overlay">
+                            <img src="/static/icons/icon-plus.svg" class="icon-plus add-test" data-test="{{ row.test_name }}">
+                            <img src="/static/icons/icon-pencil.svg" class="icon-pencil edit-test" data-test="{{ row.test_name }}">
+                            <img src="/static/icons/icon-trash.svg" class="icon-trash delete-test" data-test="{{ row.test_name }}">
+                        </div>
                     </td>
-                    <td class="clickable-cell">
+<td class="hover-icons divided-cell request-headers-cell">
+    {% set headers = row.test_data.headers.items() %}
+    {% for name, value in headers %}
+        <div class="cell-row {% if loop.index == headers|length %}last-row{% endif %}">
+            <span class="cell-key">{{ name }}</span>
+            <span class="cell-value">{{ value }}</span>
+        </div>
+    {% endfor %}
+    {% for i in range(headers|length, 7) %}
+        <div class="cell-row {% if loop.index == 7 %}last-row{% endif %}">
+            <span class="cell-key"></span>
+            <span class="cell-value"></span>
+        </div>
+    {% endfor %}
+    <div class="svg-overlay">
+        <img src="/static/icons/icon-pencil.svg" class="icon-pencil edit-request-headers-icon" data-headers="{{ row.test_data.headers | tojson | safe }}">
+    </div>
+</td>
+
+                    <td class="hover-icons divided-cell">
                         {% for payload in row.test_data.payloads_files %}
-                            {{ payload.file }} | {{ payload.expected }}<br>
+                            <div class="cell-row {% if loop.last %}last-row{% endif %}">
+                                <span class="cell-key">{{ payload.file }}</span>
+                                <span class="cell-value">{{ payload.expected }}</span>
+                            </div>
                         {% endfor %}
+                        <div class="svg-overlay">
+                            <img src="/static/icons/icon-pencil.svg" class="icon-pencil edit-payload-files-icon" data-payloads="{{ row.test_data.payloads_files | tojson | safe }}">
+                        </div>
                     </td>
-                    <td class="clickable-cell">
-                        URL: {{ row.test_data.payload_location.url }}<br>
-                        Body: {{ row.test_data.payload_location.body }}<br>
-                        Cookie: {% for cookie in row.test_data.payload_location.cookies %}{{ cookie }}{% if not loop.last %}, {% endif %}{% endfor %}<br>
-                        Headers: {% for header in row.test_data.payload_location.headers %}{{ header }}{% if not loop.last %}, {% endif %}{% endfor %}<br>
-                        Parameters: {% for parameter in row.test_data.payload_location.parameters %}{{ parameter }}{% if not loop.last %}, {% endif %}{% endfor %}
+                    <td class="hover-icons divided-cell">
+                        <div class="cell-row">
+                            <span class="cell-key">URL:</span>
+                            <span class="cell-value">{{ row.test_data.payload_location.url }}</span>
+                        </div>
+                        {% if row.test_data.payload_location.body %}
+                            <div class="cell-row">
+                                <span class="cell-key">Body Method:</span>
+                                <span class="cell-value">{{ row.test_data.payload_location.body.method if 'method' in row.test_data.payload_location.body else '' }}</span>
+                            </div>
+                            <div class="cell-row">
+                                <span class="cell-key">Body Parameter:</span>
+                                <span class="cell-value">{{ row.test_data.payload_location.body.parameter if 'parameter' in row.test_data.payload_location.body else '' }}</span>
+                            </div>
+                        {% else %}
+                            <div class="cell-row">
+                                 <span class="cell-key">Body Type:</span>
+                                  <span class="cell-value">{{ row.test_data.body_type }}</span>
+                             </div>
+                            <div class="cell-row">
+                                <span class="cell-key">Body Method:</span>
+                                <span class="cell-value"></span>
+                            </div>
+                            <div class="cell-row">
+                                <span class="cell-key">Body Parameter:</span>
+                                <span class="cell-value"></span>
+                            </div>
+                        {% endif %}
+                        <div class="cell-row">
+                            <span class="cell-key">Cookie:</span>
+                            <span class="cell-value">{% for cookie in row.test_data.payload_location.cookies %}{{ cookie }}{% if not loop.last %}, {% endif %}{% endfor %}</span>
+                        </div>
+                        <div class="cell-row">
+                            <span class="cell-key">Headers:</span>
+                            <span class="cell-value">{% for header in row.test_data.payload_location.headers %}{{ header }}{% if not loop.last %}, {% endif %}{% endfor %}</span>
+                        </div>
+                        <div class="cell-row last-row">
+                            <span class="cell-key">Parameters:</span>
+                            <span class="cell-value">{% for parameter in row.test_data.payload_location.parameters %}{{ parameter }}{% if not loop.last %}, {% endif %}{% endfor %}</span>
+                        </div>
+                        <div class="svg-overlay">
+                            <img src="/static/icons/icon-pencil.svg" class="icon-pencil edit-payload-location-icon">
+                        </div>
                     </td>
+
+
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+    <div class="popup-form new-test-file-form" style="display: none;">
+        <h3>Create New Test Suite</h3>
+        <label for="new-test-filename">Test Suite Name</label>
+        <input type="text" id="new-test-filename" placeholder="name">
+        <button id="save-test-filename-btn" class="btn btn-primary mt-3">Save</button>
+   </div>
+
+   <div class="popup-form edit-test-file-form" style="display: none;">
+        <h3>Edit Test Suite Name</h3>
+        <label for="edit-test-filename">Test Suite Name</label>
+        <input type="text" id="edit-test-filename" placeholder="name">
+        <button id="edit-test-filename-btn" class="btn btn-primary mt-3">Save</button>
+   </div>
+
+   <div class="popup-form new-test-category-form" style="display: none;">
+        <h3>Create Test Category</h3>
+        <label for="new-test-category">Category</label>
+        <input type="text" id="new-test-category" placeholder="Category">
+        <button id="save-test-category-btn" class="btn btn-primary mt-3">Save</button>
+   </div>
+
+   <div class="popup-form edit-test-category-form" style="display: none;">
+        <h3>Edit Test Category</h3>
+        <label for="edit-test-category">Category</label>
+        <input type="text" id="edit-test-category" placeholder="Category">
+        <button id="edit-test-category-btn" class="btn btn-primary mt-3">Save</button>
+   </div>
+
+   <div class="popup-form new-test-test-form" style="display: none;">
+        <h3>Create New Test</h3>
+        <label for="new-test-test">Test</label>
+        <input type="text" id="new-test-test" placeholder="Test">
+        <button id="save-test-test-btn" class="btn btn-primary mt-3">Save</button>
+   </div>
+
+   <div class="popup-form edit-test-test-form" style="display: none;">
+        <h3>Edit Test</h3>
+        <label for="edit-test-test">Test</label>
+        <input type="text" id="edit-test-test" placeholder="Test">
+        <button id="edit-test-test-btn" class="btn btn-primary mt-3">Save</button>
+   </div>
+
+<div class="popup-form edit-request-headers-form" style="display: none;">
+    <h3>Edit Request Headers</h3>
+
+        <div class="form-section">
+            <div class="form-row">
+                <div class="form-column">
+                    <p id="header-name">Header Name</p>
+                </div>
+                <div class="form-column">
+                    <p id="header-value">Header Value</p>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                           <div class="form-column">
+                <input type="text" id="header-name-1" placeholder="Header Name">
+            </div>
+            <div class="form-column">
+                <input type="text" id="header-value-1" placeholder="Header Value">
+            </div>
+
+            </div>
+                        <div class="form-row">
+                           <div class="form-column">
+                <input type="text" id="header-name-2" placeholder="Header Name">
+            </div>
+            <div class="form-column">
+                <input type="text" id="header-value-2" placeholder="Header Value">
+            </div>
+
+            </div>
+                        <div class="form-row">
+                           <div class="form-column">
+                <input type="text" id="header-name-3" placeholder="Header Name">
+            </div>
+            <div class="form-column">
+                <input type="text" id="header-value-3" placeholder="Header Value">
+            </div>
+
+            </div>
+                        <div class="form-row">
+                           <div class="form-column">
+                <input type="text" id="header-name-4" placeholder="Header Name">
+            </div>
+            <div class="form-column">
+                <input type="text" id="header-value-4" placeholder="Header Value">
+            </div>
+
+            </div>
+                        <div class="form-row">
+                           <div class="form-column">
+                <input type="text" id="header-name-5" placeholder="Header Name">
+            </div>
+            <div class="form-column">
+                <input type="text" id="header-value-5" placeholder="Header Value">
+            </div>
+
+            </div>
+    </div>
+
+
+    <button id="save-request-headers-btn" class="btn btn-primary mt-3">Save</button>
+</div>
+
+<div class="popup-form edit-payload-files-form" style="display: none;">
+    <h3>Edit Payload Files</h3>
+
+    <div class="form-section">
+        <div class="form-row">
+            <div class="form-column">
+                <p>Payload Files</p>
+            </div>
+            <div class="form-column">
+                <p>Expected Behavior</p>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-column">
+                <select id="payload-file-1">
+                    <!-- Options will be populated by JavaScript -->
+                </select>
+            </div>
+            <div class="form-column">
+                <select id="expected-behavior-1">
+                    <option value="Block">Block</option>
+                    <option value="Pass">Pass</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-column">
+                <select id="payload-file-2">
+                    <!-- Options will be populated by JavaScript -->
+                </select>
+            </div>
+            <div class="form-column">
+                <select id="expected-behavior-2">
+                    <option value="Block">Block</option>
+                    <option value="Pass">Pass</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <button id="save-payload-files-btn" class="btn btn-primary mt-3">Save</button>
+
+</div>
+    <div class="popup-form edit-payload-location-form" style="display: none;">
+    <h3>Edit Payload Locations</h3>
+
+    <div class="form-section">
+        <label for="url-checkbox">URL:</label>
+        <input type="checkbox" id="url-checkbox">
+    </div>
+    <div class="form-section">
+        <label for="body-type">Body Type:</label>
+        <select id="body-type">
+            <option value="none">None</option>
+            <option value="form">Form</option>
+            <option value="xml">XML</option>
+            <option value="json">JSON</option>
+            <option value="text">Text</option>
+            <option value="general">General</option>
+        </select>
+    </div>
+    <div class="form-section">
+        <label for="body-method">Body Method:</label>
+        <select id="body-method">
+            <option value="PUT">PUT</option>
+            <option value="POST">POST</option>
+            <option value="PATCH">PATCH</option>
+        </select>
+    </div>
+
+    <div class="form-section">
+        <label for="body-parameter">Body Parameter:</label>
+        <input type="text" id="body-parameter" placeholder="Body Parameter">
+    </div>
+
+    <div class="form-section">
+        <label for="cookies">Cookies:</label>
+        <input type="text" id="cookies" placeholder="Cookie Names">
+    </div>
+
+    <div class="form-section">
+        <label for="headers">Headers:</label>
+        <input type="text" id="headers" placeholder="Header Names">
+    </div>
+
+    <div class="form-section">
+        <label for="parameters">Parameters:</label>
+        <input type="text" id="parameters" placeholder="Parameter Names">
+    </div>
+
+    <button id="save-payload-location-btn" class="btn btn-primary mt-3">Save</button>
+</div>
+
+    <script src="{{ url_for('static', filename='tests.js') }}"></script>
+
 </div>
 {% endblock %}
