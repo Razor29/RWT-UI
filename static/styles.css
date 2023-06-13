@@ -314,14 +314,18 @@ nav ul li a img {
     word-wrap: break-word;
     table-layout: fixed;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
 }
 
 .tests-table th, .tests-table td {
-    border: 1px solid rgba(153, 153, 153, 0.2);
-    padding: 0.5rem;
+    border: 1px solid rgba(153, 153, 153, 0.5);
+    padding-left: 10px;
+    text-indent: 5px;
+    padding: 0rem;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    height: 40px;
     font-size: 12px;  // make the text smaller
 }
 
@@ -343,10 +347,11 @@ nav ul li a img {
     background: #fff;  /* Set form background to white */
     border: 1px solid #ccc;
     padding: 20px;
-    width: 80%;  /* Set form width to 80% of the screen */
-    max-width: 500px;  /* Set maximum width of the form */
+    max-width: 800px;  /* Set maximum width of the form */
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);  /* Add a little shadow to the form */
 }
+
+
 /* This will position the cell relatively, so the SVG icons will be positioned relative to the cell */
 .hover-icons {
   position: relative;
@@ -402,7 +407,41 @@ nav ul li a img {
     padding: 0;
 }
 
+.edit-payload-files-form {
+    width: 80%; /* adjust this value as needed */
+    margin: auto;
+}
 
+#payload-file-1,#payload-file-2,#payload-file-3,#payload-file-4,
+#payload-file-5,#payload-file-6,#payload-file-7 {
+    width: 600px; /* adjust this value as needed */
+}
+
+#expected-behavior-1,#expected-behavior-2,#expected-behavior-3,#expected-behavior-4,
+#expected-behavior-5,#expected-behavior-6,#expected-behavior-7 {
+    width: 150px; /* adjust this value as needed */
+}
+
+#header-name-1,#header-name-2,#header-name-3,#header-name-4,
+#header-name-5,#header-name-6,#header-name-7 {
+    width: 300px; /* adjust this value as needed */
+}
+#header-value-1,#header-value-2,#header-value-3,#header-value-4,
+#header-value-5,#header-value-6,#header-value-7 {
+    width: 300px; /* adjust this value as needed */
+}
+
+.payload-files-form-header {
+   width: 600px;
+}
+
+.request-header-key-header {
+   width: 300px;
+}
+
+.request-header-value-header {
+   width: 300px;
+}
 /* This styles the SVG icons */
 .hover-icons .svg-overlay img {
   width: 16px;  /* Set the size of the SVG icons here */
@@ -417,36 +456,44 @@ nav ul li a img {
     vertical-align: middle;
 }
 
-.cell-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 0;
-    width: 100%;
-    border-bottom: 1px solid #ddd;
-}
 
-.last-row {
-    border-bottom: none;
-}
 
-.cell-key {
+.cell-key, .cell-value {
     flex-basis: 50%;
-    border-right: 1px solid #ddd;
-    padding-right: 10px;
-    margin-right: -1px;
-    box-sizing: border-box;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.cell-value {
-    flex-basis: 50%;
-    padding-left: 10px; /* Add some padding to create space between the text and the border */
     box-sizing: border-box; /* Include padding and border in element's total width and height */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    height: 2.0em; /* Set a minimum height for the cells */
+}
+
+.cell-key {
+    border-right: 1px solid #ddd;
+    padding-right: 10px;
+    text-indent: 5px;
+    margin-right: -1px;
+}
+
+.cell-value {
+    padding-left: 0px; /* Add some padding to create space between the text and the border */
+}
+
+.cell-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 0;
+    width: 100%;
+    border-bottom: 1px solid #ddd; /* Add a border to the bottom of each row */
+}
+.cell-key.wide {
+    flex-basis: 130%;
+}
+.last-row {
+    border-bottom: none;
+}
+
+.popup-form new-test-file-form {
+  width: 50%;
 }
 /* ========================================== */
 /*           database.html styles             */

@@ -1,0 +1,1 @@
+{"Category 1": {"test 1": {"skip": true, "headers": {}, "body type": "", "payload_location": {"url": false, "body": {}, "headers": [], "cookies": [], "parameters": []}, "payloads_files": [{"file": "", "expected": ""}]}}}

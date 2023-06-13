@@ -13,8 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('#nav-tests img').src = document.querySelector('#nav-tests img').dataset.activeSrc;
     } else if (currentPage.includes('database')) {
         document.querySelector('#nav-database img').src = document.querySelector('#nav-database img').dataset.activeSrc;
-    } else if (currentPage.includes('runtest')) {
-        document.querySelector('#nav-runtest img').src = document.querySelector('#nav-runtest img').dataset.activeSrc;
     } else if (currentPage.includes('results')) {
         document.querySelector('#nav-results img').src = document.querySelector('#nav-results img').dataset.activeSrc;
     } else {

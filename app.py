@@ -217,7 +217,7 @@ def create_test_file():
                 "payloads_files": [
                     {
                         "file": "",
-                        "expected": "block"
+                        "expected": ""
                     }
                 ]
             }
@@ -319,7 +319,7 @@ def add_test_file_category():
             "payloads_files": [
                 {
                     "file": "",
-                    "expected": "block"
+                    "expected": ""
                 }
             ]
         }
@@ -449,7 +449,7 @@ def add_test_file_test():
         "payloads_files": [
             {
                 "file": "",
-                "expected": "block"
+                "expected": ""
             }
         ]
     }
@@ -506,7 +506,6 @@ def update_test_file_properties():
         return jsonify({"error": "category or test does not exist"}), 400
 
     content[category][test]['headers'] = properties['headers']
-    content[category][test]['body type'] = properties['body type']
 
     with file_path.open('w') as f:
         json.dump(content, f)
@@ -545,6 +544,7 @@ def update_test_file_location():
     filename = data.get('filename')
     category = data.get('category')
     test = data.get('test')
+    body_type = data.get('body type')
     location = data.get('location')
 
     file_path = get_test_file_path(filename)
@@ -559,6 +559,7 @@ def update_test_file_location():
         return jsonify({"error": "category or test does not exist"}), 400
 
     content[category][test]['payload_location'] = location
+    content[category][test]['body type'] = body_type
 
     with file_path.open('w') as f:
         json.dump(content, f)
@@ -701,10 +702,11 @@ def get_file_content():
     if not os.path.isfile(full_path):
         return jsonify({'error': 'Path is not a file'})
 
-    with open(full_path, 'r') as file:
+    with open(full_path, 'r', encoding='utf-8') as file:  # Specify the encoding here
         content = file.read()
 
     return jsonify({'content': content})
+
 
 ######################################################
 # Runtest page functions                             #
