@@ -138,6 +138,54 @@ nav ul li a img {
 /*          configuration.html styles         */
 /* ========================================== */
 
+/* Run Test Form Styles */
+.test-form {
+    background-color: #f2f3f4; /* Change to your preferred color */
+    border-radius: 10px; /* This will give the form rounded corners */
+    padding: 20px; /* Add some padding so the content isn't touching the edges */
+    margin-bottom: 20px; /* Add some space below the form */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Add a minor soft shadow */
+        font-size: 12px;  // make the text smaller
+}
+
+.test-form td {
+    border: 1px solid rgba(153, 153, 153, 0.2); /* Change border opacity to make it nearly invisible */
+    padding: 10px; /* Add some padding so the content isn't touching the edges */
+    width: 200px;
+        font-size: 12px;  // make the text smaller
+}
+
+.test-form select, .test-form input[type="checkbox"] {
+    width: 100%; /* Make the select and checkbox elements take up the full width of the cell */
+        font-size: 12px;  // make the text smaller
+}
+
+/* Progress Bar Styles */
+.progress-bar-container {
+    background-color: #f2f3f4; /* Change to your preferred color */
+    border-radius: 10px; /* This will give the progress bar container rounded corners */
+    padding: 20px; /* Add some padding so the progress bar isn't touching the edges */
+    margin-bottom: 20px; /* Add some space below the progress bar container */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Add a minor soft shadow */
+        font-size: 12px;  // make the text smaller
+}
+
+.progress-bar {
+    background-color: #007bff; /* Change to your preferred color */
+    height: 20px; /* Change to your preferred height */
+    border-radius: 10px; /* This will give the progress bar rounded corners */
+    width: 0; /* Initially, the progress bar should be empty */
+        font-size: 12px;  // make the text smaller
+}
+
+/* Progress Info Styles */
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px; /* Add some space below the progress info */
+    font-size: 12px;  // make the text smaller
+}
+
 /* Table styles (Used in Configurations page) */
 .configurations-table {
     margin-top: 0;  /* Remove top margin */
@@ -149,7 +197,9 @@ nav ul li a img {
     table-layout: fixed;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Add a minor soft shadow */
 }
-
+.configurations-table tbody tr {
+    background-color: #ffffff;
+}
 .configurations-table th, .configurations-table td {
     border: 1px solid rgba(153, 153, 153, 0.2); /* Change border opacity to make it nearly invisible */
     padding: 0.5rem;
@@ -504,6 +554,10 @@ nav ul li a img {
     border: 1px solid #999;
     height: 80vh;
     margin-bottom: 1rem;
+
+        border-radius: 10px; /* Soft edges */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Slight drop shadow */
+     overflow: hidden; /* Add this line */
 }
 
 .file-explorer {
@@ -572,49 +626,22 @@ nav ul li a img {
   background-color: #f1f1f1;
 }
 
-/* ========================================== */
-/*           runtest.html styles              */
-/* ========================================== */
+.file-explorer-container {
 
-/* Run Test Form Styles */
-.test-form {
-    background-color: #f2f3f4; /* Change to your preferred color */
-    border-radius: 10px; /* This will give the form rounded corners */
-    padding: 20px; /* Add some padding so the content isn't touching the edges */
-    margin-bottom: 20px; /* Add some space below the form */
 }
 
-.test-form td {
-    border: 1px solid #ccc; /* Add a border to the cells */
-    padding: 10px; /* Add some padding so the content isn't touching the edges */
-    width: 200px;
-}
-
-.test-form select, .test-form input[type="checkbox"] {
-    width: 100%; /* Make the select and checkbox elements take up the full width of the cell */
-}
-
-/* Progress Bar Styles */
-.progress-bar-container {
-    background-color: #f2f3f4; /* Change to your preferred color */
-    border-radius: 10px; /* This will give the progress bar container rounded corners */
-    padding: 20px; /* Add some padding so the progress bar isn't touching the edges */
-    margin-bottom: 20px; /* Add some space below the progress bar container */
-}
-
-.progress-bar {
-    background-color: #007bff; /* Change to your preferred color */
-    height: 20px; /* Change to your preferred height */
-    border-radius: 10px; /* This will give the progress bar rounded corners */
-    width: 0; /* Initially, the progress bar should be empty */
-}
-
-/* Progress Info Styles */
-.progress-info {
+.save-button-container {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px; /* Add some space below the progress info */
+    justify-content: flex-end; /* Align items to the right */
+    margin-bottom: 10px; /* Some space below the button */
 }
+.header-container.databases {
+    display: flex;
+    justify-content: space-between; /* Align items on the line */
+    align-items: center; /* Align items vertically */
+    margin-bottom: 10px; /* Some space below the header */
+}
+
 
 /* ========================================== */
 /*           results.html styles              */

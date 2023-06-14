@@ -1,13 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="main-content">
-    <h2>Databases</h2>
+<div class="main-content container">
+    <div class="header-container databases">
+        <h2>Databases</h2>
+        <button onclick="saveFileContent()" class="btn btn-primary">Save</button>
+    </div>
     <div class="file-explorer-container">
         <ul id="file-explorer" class="file-explorer">
         </ul>
         <textarea id="text-editor" class="text-editor"></textarea>
     </div>
-    <button onclick="saveFileContent()">Save</button>
+    <script src="/static/databases.js"></script>
 </div>
 {% endblock %}
