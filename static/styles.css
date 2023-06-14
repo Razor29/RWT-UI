@@ -548,6 +548,7 @@ nav ul li a img {
 /* ========================================== */
 /*           database.html styles             */
 /* ========================================== */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/codemirror.min.css');
 
 .file-explorer-container {
     display: flex;

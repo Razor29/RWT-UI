@@ -183,15 +183,13 @@ async function loadFileContent(path) {
         console.error(data.error);
         return;
     } else {
-        const editor = document.getElementById('text-editor');
-        editor.value = data.content;
+        myCodeMirror.setValue(data.content);
     }
 }
 
 async function saveFileContent() {
-    const editor = document.getElementById('text-editor');
-    const path = editor.dataset.path;
-    const content = editor.value;
+    const path = myCodeMirror.getDoc().getMeta('filePath');
+    const content = myCodeMirror.getValue();
 
     const formData = new FormData();
     formData.append('path', path);
@@ -268,7 +266,10 @@ async function createNewDirectory(parentPath, dirName) {
         return false;
     }
 }
-
+var myCodeMirror = CodeMirror.fromTextArea(document.querySelector('.codemirror-textarea'), {
+    lineNumbers: true,
+    mode: 'text' // replace 'text' with the mode you want to use
+});
 async function createNewFile(parentPath, fileName) {
     try {
         const response = await fetch('/api/new-file', {

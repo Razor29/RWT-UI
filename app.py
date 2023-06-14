@@ -7,6 +7,9 @@ from pathlib import Path
 from os import path
 from TestReport import TestReport
 from threading import Thread
+from flask_codemirror import CodeMirror
+from flask_codemirror.fields import CodeMirrorField
+from wtforms import Form
 
 from collections import defaultdict
 from jinja2 import Environment, select_autoescape, FileSystemLoader, ext
@@ -17,7 +20,23 @@ app.jinja_env.add_extension('jinja2.ext.do')
 
 __folder__ = path.abspath(path.dirname(__file__))
 radware_waf_tester = None
-
+CODEMIRROR_LANGUAGES = ['text']
+WTF_CSRF_ENABLED = True
+SECRET_KEY = 'secret'
+app.config.update(
+    CODEMIRROR_LANGUAGES = ['text'],
+    WTF_CSRF_ENABLED = True,
+    SECRET_KEY = 'secret',
+    CODEMIRROR_THEME='3024-night'
+)
+codemirror = CodeMirror(app)
+class MyForm(Form):
+    source_code = CodeMirrorField(language='python', config={'lineNumbers' : 'true'})
+@app.route('/submit', methods=['POST'])
+def submit():
+    text = request.form.get('text')
+    # process the text
+    return redirect(url_for('index'))
 ######################################################
 # Configurations page functions                      #
 ######################################################
@@ -570,6 +589,7 @@ def update_test_file_location():
 ######################################################
 @app.route('/database')
 def database():
+
     return render_template('database.html')
 
 
