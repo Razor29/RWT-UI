@@ -555,20 +555,34 @@ nav ul li a img {
     border: 1px solid #999;
     height: 80vh;
     margin-bottom: 1rem;
-
-        border-radius: 10px; /* Soft edges */
+    border-radius: 10px; /* Soft edges */
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Slight drop shadow */
-     overflow: hidden; /* Add this line */
+    overflow: hidden; /* Add this line */
 }
 
 .file-explorer {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    width: 30%;
+    width: 250px; /* Set a fixed width */
+    min-width: 250px; /* Prevent the file explorer from shrinking */
     height: 100%;
     overflow: auto;
     border-right: 1px solid #999;
+}
+
+.CodeMirror {
+    width: 100% !important;
+    height: 100% !important;
+}
+.CodeMirror.cm-s-default.disabled {
+    pointer-events: none !important;
+    background-color: #f0f0f0 !important;
+    opacity: 0.5 !important;
+}
+
+.CodeMirror-linenumber {
+    color: #3e46c4 !important;
 }
 
 .file-explorer li {
@@ -600,8 +614,10 @@ nav ul li a img {
     outline: none;
     resize: none;
     font-family: monospace;
-    font-size: 1
-	padding: 0.5rem;
+    font-size: 1rem;
+    padding: 0.5rem;
+    height: calc(100% - 1rem); /* Subtract the total vertical padding */
+    overflow: auto; /* Add a scrollbar when necessary */
 }
 
 .text-editor:focus {

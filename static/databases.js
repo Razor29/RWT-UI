@@ -1,13 +1,31 @@
+
+var myCodeMirror = CodeMirror.fromTextArea(document.querySelector('.codemirror-textarea'), {
+    lineNumbers: true,
+    mode: 'text' // replace 'text' with the mode you want to use
+});
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const contextMenu = createContextMenu();
     document.body.appendChild(contextMenu);
     document.body.onclick = hideContextMenu;
+    myCodeMirror.getWrapperElement().classList.add('disabled');
+
     const fileExplorer = document.getElementById('file-explorer');
     if (fileExplorer) {
         loadFileExplorer('/payloadDB');
-    }
 
+        // Add the event listener here
+        fileExplorer.oncontextmenu = (event) => {
+            // If the user right-clicks on a file or directory, use its path
+            const target = event.target.closest('.file, .directory');
+            const targetPath = target ? target.dataset.path : '/payloadDB'; // Use the root path if the user right-clicks on the file explorer itself
+
+            showContextMenu(event, targetPath);
+        };
+    }
 });
+
 
 
 function createContextMenu() {
@@ -184,8 +202,11 @@ async function loadFileContent(path) {
         return;
     } else {
         myCodeMirror.setValue(data.content);
+        myCodeMirror.getWrapperElement().classList.remove('disabled'); // Add this line
     }
 }
+
+
 
 async function saveFileContent() {
     const path = myCodeMirror.getDoc().getMeta('filePath');
@@ -266,10 +287,7 @@ async function createNewDirectory(parentPath, dirName) {
         return false;
     }
 }
-var myCodeMirror = CodeMirror.fromTextArea(document.querySelector('.codemirror-textarea'), {
-    lineNumbers: true,
-    mode: 'text' // replace 'text' with the mode you want to use
-});
+
 async function createNewFile(parentPath, fileName) {
     try {
         const response = await fetch('/api/new-file', {
@@ -282,6 +300,9 @@ async function createNewFile(parentPath, fileName) {
         const data = await response.json();
         if (data.error) {
             throw new Error(data.error);
+        }
+        if (data.success) {
+            myCodeMirror.getWrapperElement().classList.remove('disabled'); // Add this line
         }
         return data.success;
     } catch (error) {

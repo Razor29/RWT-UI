@@ -13,5 +13,57 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.0/mode/python/python.min.js"></script>
     <script src="/static/databases.js"></script>
+
+       <div class="popup-form new-db-file" style="display: none;">
+       <div>
+        <h3>Create New File</h3>
+       </div>
+       <div>
+        <input type="text" id="new-db-file" placeholder="Filename">
+       </div>
+       <div>
+        <button id="new-db-file-btn" class="btn btn-primary mt-3">Save</button>
+       </div>
+   </div>
+
+      <div class="popup-form edit-db-file" style="display: none;">
+       <div>
+        <h3>Rename File</h3>
+       </div>
+       <div>
+        <input type="text" id="edit-db-file" placeholder="Filename">
+       </div>
+       <div>
+        <button id="edit-db-file-btn" class="btn btn-primary mt-3">Save</button>
+       </div>
+   </div>
+
+          <div class="popup-form new-db-directory" style="display: none;">
+       <div>
+        <h3>Create New Directory</h3>
+       </div>
+       <div>
+        <input type="text" id="new-db-directory" placeholder="Directory Name">
+       </div>
+       <div>
+        <button id="new-db-directory-btn" class="btn btn-primary mt-3">Save</button>
+       </div>
+   </div>
+
+
+      <div class="popup-form edit-db-directory" style="display: none;">
+       <div>
+        <h3>Rename Directory</h3>
+       </div>
+       <div>
+        <input type="text" id="edit-db-directory" placeholder="Directory Name">
+       </div>
+       <div>
+        <button id="edit-db-directory-btn" class="btn btn-primary mt-3">Save</button>
+       </div>
+   </div>
+
+
+
 </div>
 {% endblock %}
