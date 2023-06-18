@@ -1,6 +1,7 @@
         {% extends 'base.html' %}
 
 {% block content %}
+        <div class="database-overlay"></div>
 <div class="main-content container">
     <div class="header-container databases">
         <h2>Databases</h2>
@@ -11,8 +12,7 @@
         </ul>
         <textarea id="text-editor" class="text-editor codemirror-textarea"></textarea>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.0/mode/python/python.min.js"></script>
-    <script src="/static/databases.js"></script>
+
 
        <div class="popup-form new-db-file" style="display: none;">
        <div>
@@ -26,17 +26,30 @@
        </div>
    </div>
 
-      <div class="popup-form edit-db-file" style="display: none;">
-       <div>
+<div class="popup-form edit-db-directory" style="display: none;">
+    <div>
+        <h3>Rename Directory</h3>
+    </div>
+    <div>
+        <input type="text" id="edit-db-directory" placeholder="Directory Name">
+    </div>
+    <div>
+        <button id="edit-db-directory-btn" class="btn btn-primary mt-3">Save</button>
+    </div>
+</div>
+
+<div class="popup-form edit-db-file" style="display: none;">
+    <div>
         <h3>Rename File</h3>
-       </div>
-       <div>
+    </div>
+    <div>
         <input type="text" id="edit-db-file" placeholder="Filename">
-       </div>
-       <div>
+    </div>
+    <div>
         <button id="edit-db-file-btn" class="btn btn-primary mt-3">Save</button>
-       </div>
-   </div>
+    </div>
+</div>
+
 
           <div class="popup-form new-db-directory" style="display: none;">
        <div>
@@ -51,19 +64,9 @@
    </div>
 
 
-      <div class="popup-form edit-db-directory" style="display: none;">
-       <div>
-        <h3>Rename Directory</h3>
-       </div>
-       <div>
-        <input type="text" id="edit-db-directory" placeholder="Directory Name">
-       </div>
-       <div>
-        <button id="edit-db-directory-btn" class="btn btn-primary mt-3">Save</button>
-       </div>
-   </div>
 
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.0/mode/python/python.min.js"></script>
+    <script src="/static/databases.js"></script>
 </div>
 {% endblock %}

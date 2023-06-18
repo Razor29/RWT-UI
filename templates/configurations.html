@@ -5,60 +5,65 @@
 <div class="main-content">
 
 
-    <h2>Run Test</h2>
-<form class="test-form" id="run-test-form">
-  <table>
-    <thead>
-      <tr>
-        <th>Configuration File</th>
-        <th>Tests File</th>
-        <th>Detailed Success</th>
-        <th>Detailed Failure</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <select id="config-file-select"></select>
-        </td>
-        <td>
-          <select id="test-file-select"></select>
-        </td>
-        <td>
-          <input type="checkbox" id="detailed-success-checkbox">
-        </td>
-        <td>
-          <input type="checkbox" id="detailed-failure-checkbox">
-        </td>
-        <td>
-            <button id="run-test" class="btn btn-primary mb-3">Run Test</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</form>
-    <div class="progress-info">
-        <div id="test-info">Tests: 0/0</div>
-        <div id="current-test">Current Test: </div>
+    <h3>Run Test</h3>
+<div class="test-container">
+    <div class="test-section">
+        <form class="test-form" id="run-test-form">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Configuration File</th>
+                        <th>Tests File</th>
+                        <th>Detailed Success</th>
+                        <th>Detailed Failure</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <select id="config-file-select"></select>
+                        </td>
+                        <td>
+                            <select id="test-file-select"></select>
+                        </td>
+                        <td>
+                            <input type="checkbox" id="detailed-success-checkbox">
+                        </td>
+                        <td>
+                            <input type="checkbox" id="detailed-failure-checkbox">
+                        </td>
+                        <td>
+                            <button id="run-test" class="btn btn-primary mb-3">Run Test</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+        <div class="progress-section">
+            <div class="progress-info">
+                <div id="test-info">Tests: 0/0</div>
+                <div id="current-test">Current Test: </div>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+        </div>
     </div>
-    <div class="progress-bar-container">
-        <div class="progress-bar" id="progress-bar"></div>
-    </div>
-<script src="{{ url_for('static', filename='runtest.js') }}"></script>
-        <div class="configurations-content">
+    <script src="{{ url_for('static', filename='runtest.js') }}"></script>
+</div>
+
 
     <div class="header-container">  <!-- Add this line -->
-        <h2>Configurations</h2>
+        <h3>Test Configurations</h3>
         <button id="add-new-config" class="btn btn-primary mb-3">+ Add New</button>
     </div>
     <table class="table configurations-table">
         <thead>
             <tr>
-                <th>Filename</th>
+                <th>Test Configuration</th>
                 <th>URL</th>
                 <th>Blocking Page Regex</th>
-                <th>Threads</th>
                 <th>User-Agent</th>
                 <th>Host</th>
                 <th colspan="2">XFF</th>
@@ -97,8 +102,6 @@
         <input type="text" id="edit-url" class="edit-data" placeholder="URL">
         <label for="edit-blocking-page-regex">Blocking Page Regex</label>
         <input type="text" id="edit-blocking-page-regex" class="edit-data" placeholder="Blocking Page Regex">
-        <label for="edit-threads">Threads</label>
-        <input type="text" id="edit-threads" class="edit-data" placeholder="Threads">
         <label for="edit-user-agent">User-Agent</label>
         <input type="text" id="edit-user-agent" class="edit-data" placeholder="User-Agent">
         <label for="edit-host">Host</label>
@@ -117,8 +120,6 @@
         <input type="text" id="new-url" class="new-data" placeholder="URL">
         <label for="new-blocking-page-regex">Blocking Page Regex</label>
         <input type="text" id="new-blocking-page-regex" class="new-data" placeholder="Blocking Page Regex">
-        <label for="new-threads">Threads</label>
-        <input type="text" id="new-threads" class="new-data" placeholder="Threads">
         <label for="new-user-agent">User-Agent</label>
         <input type="text" id="new-user-agent" class="new-data" placeholder="User-Agent">
         <label for="new-host">Host</label>

@@ -1,7 +1,6 @@
 {
   "url": "http://10.100.0.137:31022/",
   "blocking_page_regex": "Case ID:\\s*([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})",
-  "threads": 2,
   "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36",
   "host": "hackazon.kwaf.lab",
   "xff": {"X-Forwarded-For": "10.10.10.11"}

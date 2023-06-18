@@ -18,6 +18,7 @@ app.jinja_env.add_extension('jinja2.ext.do')
 
 
 
+
 __folder__ = path.abspath(path.dirname(__file__))
 radware_waf_tester = None
 CODEMIRROR_LANGUAGES = ['text']
@@ -595,34 +596,57 @@ def database():
 
 @app.route('/api/rename', methods=['POST'])
 def rename():
-    src_path = request.form.get('src_path')
-    dest_path = request.form.get('dest_path')
+    # Get the path and new name from the request data
+    request_data = request.get_json()
+    old_path = request_data.get('path')
+    new_name = request_data.get('newName')
 
-    if src_path and dest_path:
-        try:
-            os.rename(src_path, dest_path)
-            return jsonify(success=True)
-        except Exception as e:
-            return jsonify(error=str(e)), 500
+    # Validate the request data
+    if not old_path or not new_name:
+        return jsonify(success=False, error="Invalid request data"), 400
 
-    return jsonify(error='Missing parameters'), 400
+    # Ensure the new name does not include any disallowed characters
+    if '/' in new_name or '\\' in new_name or ':' in new_name:
+        return jsonify(success=False, error="Invalid character in new name"), 400
+
+    try:
+        # Convert relative path to absolute path
+        relative_path = old_path.replace('/', os.sep).lstrip(os.sep)
+        relative_path = relative_path.replace('\\', '/')
+        full_path = os.path.join(os.path.dirname(__file__), relative_path)
+
+        # Construct the new path
+        directory = os.path.dirname(full_path)
+        new_full_path = os.path.join(directory, new_name)
+
+        # Rename the file or directory
+        os.rename(full_path, new_full_path)
+
+        return jsonify(success=True)
+    except Exception as e:
+        # If an error occurred during renaming, return a server error
+        return jsonify(success=False, error=str(e)), 500
 
 
 @app.route('/api/delete', methods=['POST'])
 def delete():
-    target_path = request.form.get('target_path')
+    path = request.json.get('path')
+    relative_path = path.replace('/', os.sep).lstrip(os.sep)
+    relative_path = relative_path.replace('\\', '/')
 
-    if target_path:
-        try:
-            if os.path.isfile(target_path):
-                os.remove(target_path)
-            elif os.path.isdir(target_path):
-                shutil.rmtree(target_path)
-            return jsonify(success=True)
-        except Exception as e:
-            return jsonify(error=str(e)), 500
+    # Get absolute path
+    full_path = os.path.join(os.path.dirname(__file__), relative_path)
+    print(full_path)
+    try:
+        # Check if it's a directory
+        if os.path.isdir(full_path):
+            shutil.rmtree(full_path, ignore_errors = False)
+        else:
+            os.remove(full_path)
+        return jsonify(success=True), 200
+    except Exception as e:
+        return jsonify(success=False, error=str(e)), 500
 
-    return jsonify(error='Missing parameters'), 400
 
 
 @app.route('/api/new-directory', methods=['POST'])
@@ -685,24 +709,40 @@ def api_get_files():
 
 @app.route('/api/files', methods=['POST'])
 def api_create_file_or_folder():
-    path = request.form.get('path')
-    if not path.startswith('/payloadDB'):
-        return jsonify({'error': 'Invalid path'}), 400
-
-    full_path = os.path.join(os.getcwd(), path.strip('/'))
+    data = request.get_json()
+    relative_path = data['path']
+    item_name = data['name']
+    # Convert path to be OS specific
+    relative_path = relative_path.replace('/', os.sep).lstrip(os.sep)
+    # Get absolute path
+    full_path = os.path.join(os.path.dirname(__file__), relative_path, item_name)
+    print(full_path)
     if os.path.exists(full_path):
         return jsonify({'error': 'File or folder already exists'}), 400
 
     try:
-        if request.form.get('is_directory') == 'true':
+        if data['is_directory']:
             os.makedirs(full_path)
         else:
             with open(full_path, 'w') as f:
-                f.write(request.form.get('content', ''))
+                f.write(data.get('content', ''))
         return jsonify({'success': True})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+
+
+
+@app.route('/api/is-directory', methods=['GET'])
+def is_directory():
+    relative_path = request.args.get('path', default = '.', type = str) # Value '/payloadDB/OWASP-top10'
+    flipped_path = relative_path.replace('/', '\\').lstrip('\\') # Value 'payloadDB\OWASP-top10'
+    print(flipped_path)
+    print(path.dirname(__file__)) # Value 'C:\Users\taly\PycharmProjects\RWT-UI'
+    absolute_path = os.path.join(path.dirname(__file__), flipped_path)
+    print(absolute_path)
+    is_directory = os.path.isdir(absolute_path)
+    return jsonify(isDirectory=is_directory)
 
 
 @app.route('/api/file-content', methods=['GET'])
@@ -726,6 +766,27 @@ def get_file_content():
         content = file.read()
 
     return jsonify({'content': content})
+
+
+@app.route('/api/save-file', methods=['POST'])
+def api_save_file():
+    data = request.get_json()
+    relative_path = data['path']
+    file_data = data['content']  # get file data from POST request
+
+    # Convert path to be OS specific
+    relative_path = relative_path.replace('/', os.sep).lstrip(os.sep)
+
+    # Get absolute path
+    full_path = os.path.join(os.path.dirname(__file__), relative_path)
+
+    try:
+        with open(full_path, 'w') as file:
+            file.write(file_data)
+        return jsonify({'success': True}), 200
+    except Exception as e:
+        return jsonify({'error': str(e), 'success': False}), 500
+
 
 
 ######################################################
@@ -752,7 +813,8 @@ def post_runtest_start():
         test_file=test_file,
         report_success=report_success,
         report_failure=report_failure,
-        payload_path=path.join("payloadDB")
+        payload_path=path.join("payloadDB"),
+        ui=True
     )
 
     # Start the test

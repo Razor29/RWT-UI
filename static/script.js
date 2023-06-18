@@ -20,13 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Database Page
-    const contextMenu = createContextMenu();
-    document.body.appendChild(contextMenu);
-    document.body.onclick = hideContextMenu;
-    const fileExplorer = document.getElementById('file-explorer');
-    if (fileExplorer) {
-        loadFileExplorer('/payloadDB');
-    }
+
+
 
 });
 

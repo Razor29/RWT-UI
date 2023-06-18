@@ -28,7 +28,7 @@ class RadwareWAFTester(object):
 
     def __init__(self, configuration_file=path.join(__folder__, "configurations", "config.json"),
                  test_file=path.join(__folder__, "testfiles", "tests.json"), payload_path=path.join(__folder__, "payloadDB"),
-                 report_path=path.join(__folder__, "reports", "report.json"), report_success=False, report_failure=False):
+                 report_path=path.join(__folder__, "reports", "report.json"), report_success=False, report_failure=False, ui=False):
         """
         Initializes the RadwareWAFTester instance.
 
@@ -68,13 +68,16 @@ class RadwareWAFTester(object):
         self.payload_path = payload_path
         self.report_success = report_success
         self.report_failure = report_failure
-
+        self.ui = ui
         # Create a thread pool with the number of threads specified in the configuration file
         self.pool = ThreadPool(1)
-        self.payload_counts, self.test_count = self.count_payloads()
-        print(self.payload_counts)
+        if self.ui:
+            self.payload_counts, self.test_count = self.count_payloads()
+            print(self.payload_counts)
         # Initialize the report  dictionaries
-        self.test_progress = {"Tests": "0/0", "progress": "0", "current_test_name": "", "test_complete": False, "results_filename":formatted_datetime}
+        if self.ui:
+            self.test_progress = {"Tests": "0/0", "progress": "0", "current_test_name": "", "test_complete": False,
+                                  "results_filename": formatted_datetime}
 
         self.report = {}
 
@@ -106,7 +109,8 @@ class RadwareWAFTester(object):
             f.write(report)
             f.flush()
 
-        self.test_progress["test_complete"] = True
+        if self.ui:
+            self.test_progress["test_complete"] = True
 
     def count_payloads(self):
         """
@@ -184,22 +188,26 @@ class RadwareWAFTester(object):
         Args:
             url (str): The base URL of the application to be tested.
         """
-        # Iterate through the payload files specified for the current test
-        total_tests = self.test_count
-        current_test = 0
+        # if UI- Iterate through the payload files specified for the current test
+        if self.ui:
+            total_tests = self.test_count
+            current_test = 0
 
         for test_category, tests in self.tests.items():
 
             test_name = test_category
-            print(test_category)
+            if self.ui:
+                print(test_category)
             for key, val in tests.items():
-                self.test_progress["current_test_name"] = key
+                if self.ui:
+                    self.test_progress["current_test_name"] = key
                 test = key
                 # Skip the test if it's marked to be skipped
                 if val["skip"] is True:
                     continue
 
-                current_test += 1
+                if self.ui:
+                    current_test += 1
                 # Iterate through the payloads files specified for the current test
                 for db in val["payloads_files"]:
                     expected = db["expected"]
@@ -209,17 +217,19 @@ class RadwareWAFTester(object):
                     with open(path.join(self.payload_path, db["file"]), encoding="utf8") as payloads_file:
                         payloads = payloads_file.readlines()
 
-                    # Get the total number of payloads for the current test
-                    total_payloads = self.payload_counts[test_category][key]["payload count"]
+                    if self.ui:
+                        # Get the total number of payloads for the current test
+                        total_payloads = self.payload_counts[test_category][key]["payload count"]
 
-                    # Initialize the current payload counter
-                    current_payload = 0
+                        # Initialize the current payload counter
+                        current_payload = 0
                     # TODO add multiple checks of payload to identify charecters or formatting which can crash the code
                     for payload in payloads:
-                        # Increment the current payload counter
-                        current_payload += 1
-                        # Update the test progress
-                        self.update_test_progress(current_test, total_tests, current_payload, total_payloads)
+                        if self.ui:
+                            # Increment the current payload counter
+                            current_payload += 1
+                            # Update the test progress
+                            self.update_test_progress(current_test, total_tests, current_payload, total_payloads)
                         headers = {}
                         if payload.endswith('\n'):
                             payload = payload.rstrip('\n')
@@ -231,7 +241,6 @@ class RadwareWAFTester(object):
                         if val["headers"]:
                             headers.update(val["headers"])
 
-                        print(self.test_progress)
                         # Send requests with the payload in the URL
                         if val["payload_location"]["url"]:
                             location = "url"
@@ -257,8 +266,10 @@ class RadwareWAFTester(object):
                         if val["payload_location"]["body"]:
                             body_info = val["payload_location"]["body"]
                             content_type = body_info.get("type", "non-json")
-                            http_method = body_info["method"]
-                            body = {body_info["parameter"]: payload}
+                            if content_type == "xml":
+                                body = payload
+                            else:
+                                body = {body_info["parameter"]: payload}
                             location = "Body"
                             self.send_request(url, headers, test_name, test, payload, location, expected, content_type=content_type, http_method=http_method, body=body)
 
@@ -268,8 +279,8 @@ class RadwareWAFTester(object):
                                 if header.lower() in map(str.lower, self.config.keys()) or header.lower() in map(str.lower,self.config["xff"].keys()):
                                     temp = header
                                     headers[header] = payload.lstrip()
-                                    self.send_request(url, headers, test_name, test, payload, location, expected, http_method=http_method)
                                     location = "Header: " + header
+                                    self.send_request(url, headers, test_name, test, payload, location, expected, http_method=http_method)
                                     headers[header] = temp
                                 else:
                                     location = "Header: " + header

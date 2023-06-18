@@ -2,24 +2,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const editForm = document.querySelector('.edit-form');
     const overlay = document.querySelector('.conf-overlay');
     const newForm = document.querySelector('.new-form');
-    let originalFilename;  // Variable to store the original filename
+    let originalFilename;
 
     // Edit configuration
     document.querySelectorAll('.edit-config').forEach(img => {
 
         img.onclick = () => {
             const row = img.parentElement.parentElement;
-            originalFilename = row.getAttribute('data-filename');  // Store the original filename
+            originalFilename = row.getAttribute('data-filename');
             const cells = row.querySelectorAll('td');
 
             document.querySelector('#edit-filename').value = originalFilename;
             document.querySelector('#edit-url').value = cells[1].getAttribute('title');
             document.querySelector('#edit-blocking-page-regex').value = cells[2].getAttribute('title');
-            document.querySelector('#edit-threads').value = cells[3].getAttribute('title');
-            document.querySelector('#edit-user-agent').value = cells[4].getAttribute('title');
-            document.querySelector('#edit-host').value = cells[5].getAttribute('title');
-            document.querySelector('#edit-xff-name').value = cells[6].getAttribute('title');
-            document.querySelector('#edit-xff-value').value = cells[7].getAttribute('title');
+            document.querySelector('#edit-user-agent').value = cells[3].getAttribute('title');  // Changed index from 4 to 3
+            document.querySelector('#edit-host').value = cells[4].getAttribute('title');  // Changed index from 5 to 4
+            document.querySelector('#edit-xff-name').value = cells[5].getAttribute('title');  // Changed index from 6 to 5
+            document.querySelector('#edit-xff-value').value = cells[6].getAttribute('title');  // Changed index from 7 to 6
 
             // Show the edit form and darken the overlay
             editForm.style.display = 'block';
@@ -89,7 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const filename = document.querySelector('#edit-filename').value;
         const url = document.querySelector('#edit-url').value;
         const blockingPageRegex = document.querySelector('#edit-blocking-page-regex').value;
-        const threads = document.querySelector('#edit-threads').value;
         const userAgent = document.querySelector('#edit-user-agent').value;
         const host = document.querySelector('#edit-host').value;
         const xffName = document.querySelector('#edit-xff-name').value;
@@ -102,7 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
             data: {
                 url: url,
                 blocking_page_regex: blockingPageRegex,
-                threads: threads,
                 user_agent: userAgent,
                 host: host,
                 xff: {
@@ -131,28 +128,26 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 // Save new configuration
-document.querySelector('#save-new').onclick = () => {
-    // Get the data from the new form
-    const newFilename = document.querySelector('#new-filename').value;
-    const newUrl = document.querySelector('#new-url').value;
-    const newBlockingPageRegex = document.querySelector('#new-blocking-page-regex').value;
-    const newThreads = document.querySelector('#new-threads').value;
-    const newUserAgent = document.querySelector('#new-user-agent').value;
-    const newHost = document.querySelector('#new-host').value;
-    const newXffName = document.querySelector('#new-xff-name').value;
-    const newXffValue = document.querySelector('#new-xff-value').value;
+    document.querySelector('#save-new').onclick = () => {
+        // Get the data from the new form
+        const newFilename = document.querySelector('#new-filename').value;
+        const newUrl = document.querySelector('#new-url').value;
+        const newBlockingPageRegex = document.querySelector('#new-blocking-page-regex').value;
+        const newUserAgent = document.querySelector('#new-user-agent').value;
+        const newHost = document.querySelector('#new-host').value;
+        const newXffName = document.querySelector('#new-xff-name').value;
+        const newXffValue = document.querySelector('#new-xff-value').value;
 
-    const newData = {
-        filename: newFilename,
-        data: {
-            url: newUrl,
-            blocking_page_regex: newBlockingPageRegex,
-            threads: newThreads,
-            user_agent: newUserAgent,
-            host: newHost,
-            xff: {
-                [newXffName]: newXffValue
-            }
+        const newData = {
+            filename: newFilename,
+            data: {
+                url: newUrl,
+                blocking_page_regex: newBlockingPageRegex,
+                user_agent: newUserAgent,
+                host: newHost,
+                xff: {
+                    [newXffName]: newXffValue
+                }
         }
     };
 

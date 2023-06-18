@@ -833,62 +833,75 @@ editPayloadFilesBtns.forEach((btn) => {
         if (testElement) {
             currentTest = testElement.dataset.test;
         }
-        // Fetch the data from the API
-        fetch('/api/get-test-payload-files')
-            .then(response => response.json())
-            .then(data => {
-                // populate the form with the existing payload files data
-                for (let i = 0; i < rows.length; i++) {
-                    let cells = rows[i].querySelectorAll("span");
-                    let file = cells[0].textContent.trim();  // trim() is used to remove any leading or trailing whitespace
-                    let expectedBehavior = cells[1].textContent;
-                    expectedBehavior = expectedBehavior.charAt(0).toUpperCase() + expectedBehavior.slice(1);
+// Fetch the data from the API
+fetch('/api/get-test-payload-files')
+    .then(response => response.json())
+    .then(data => {
+        // populate the form with the existing payload files data
+        for (let i = 0; i < rows.length; i++) {
+            let cells = rows[i].querySelectorAll("span");
+            let file = cells[0].textContent.trim();  // trim() is used to remove any leading or trailing whitespace
+            let expectedBehavior = cells[1].textContent;
+            expectedBehavior = expectedBehavior.charAt(0).toUpperCase() + expectedBehavior.slice(1);
 
-                    // check if the row has data before populating the form
-                    if (file || expectedBehavior) {
-                        // populate the payload file dropdown
-                        let payloadFileDropdown = document.querySelector("#payload-file-" + (i + 1));
+            // populate the payload file dropdown
+            let payloadFileDropdown = document.querySelector("#payload-file-" + (i + 1));
 
-                        // Clear any existing options
-                        payloadFileDropdown.innerHTML = '';
+            // Clear any existing options
+            payloadFileDropdown.innerHTML = '';
 
-                        // Add an empty option
-                        let emptyOption = document.createElement('option');
-                        emptyOption.text = '';
-                        emptyOption.value = '';
-                        payloadFileDropdown.add(emptyOption);
+            // Add an empty option
+            let emptyOption = document.createElement('option');
+            emptyOption.text = '';
+            emptyOption.value = '';
+            payloadFileDropdown.add(emptyOption);
 
-                        // Add each item from the data as a new option in the dropdown
-                        data.forEach(item => {
-                            let option = document.createElement('option');
-                            option.text = item; // Assuming the item is a string
-                            option.value = item;
-                            payloadFileDropdown.add(option);
-                        });
+            // Add each item from the data as a new option in the dropdown
+            data.forEach(item => {
+                let option = document.createElement('option');
+                option.text = item; // Assuming the item is a string
+                option.value = item;
+                payloadFileDropdown.add(option);
+            });
 
-                        // Set the selected option to the current file or to the empty option if the file is empty
-                        payloadFileDropdown.value = file || '';
+            // Set the selected option to the current file or to the empty option if the file is empty
+            payloadFileDropdown.value = file || '';
 
-                        // populate the expected behavior dropdown
-                        let expectedBehaviorDropdown = document.querySelector("#expected-behavior-" + (i + 1));
-                        expectedBehaviorDropdown.value = expectedBehavior || '';
-                    }
-                }
+            // populate the expected behavior dropdown
+            let expectedBehaviorDropdown = document.querySelector("#expected-behavior-" + (i + 1));
+            expectedBehaviorDropdown.value = expectedBehavior || '';
+        }
 
-                // clear any remaining payload file rows
-                for (let i = rows.length + 1; i <= 7; i++) {
-                    let payloadFileDropdown = document.querySelector("#payload-file-" + i);
-                    let expectedBehaviorDropdown = document.querySelector("#expected-behavior-" + i);
-                    if (payloadFileDropdown && expectedBehaviorDropdown) {
-                        payloadFileDropdown.innerHTML = '';
-                        expectedBehaviorDropdown.value = '';
-                    }
-                }
+        // populate any remaining payload file dropdowns
+        for (let i = rows.length + 1; i <= 7; i++) {
+            let payloadFileDropdown = document.querySelector("#payload-file-" + i);
+            if (payloadFileDropdown) {
+                // Clear any existing options
+                payloadFileDropdown.innerHTML = '';
 
-                // show the form
-                showForm(editPayloadFilesForm);
-            })
-            .catch(error => console.error('Error:', error));
+                // Add an empty option
+                let emptyOption = document.createElement('option');
+                emptyOption.text = '';
+                emptyOption.value = '';
+                payloadFileDropdown.add(emptyOption);
+
+                // Add each item from the data as a new option in the dropdown
+                data.forEach(item => {
+                    let option = document.createElement('option');
+                    option.text = item; // Assuming the item is a string
+                    option.value = item;
+                    payloadFileDropdown.add(option);
+                });
+
+                // Since no selected file is corresponding to this dropdown, set it to empty
+                payloadFileDropdown.value = '';
+            }
+        }
+
+        // show the form
+        showForm(editPayloadFilesForm);
+    })
+    .catch(error => console.error('Error:', error));
     });
 });
 

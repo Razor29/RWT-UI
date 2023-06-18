@@ -15,7 +15,9 @@ body {
     padding: 20px;
 }
 
-
+.container {
+  max-width: 90% !important;
+}
 .header-container {
     display: flex;
     justify-content: flex-start;
@@ -139,12 +141,18 @@ nav ul li a img {
 /* ========================================== */
 
 /* Run Test Form Styles */
-.test-form {
+
+.test-container {
     background-color: #f2f3f4; /* Change to your preferred color */
     border-radius: 10px; /* This will give the form rounded corners */
     padding: 20px; /* Add some padding so the content isn't touching the edges */
     margin-bottom: 20px; /* Add some space below the form */
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Add a minor soft shadow */
+}
+.test-form {
+    border-radius: 10px; /* This will give the form rounded corners */
+    padding: 20px; /* Add some padding so the content isn't touching the edges */
+    margin-bottom: 20px; /* Add some space below the form */
         font-size: 12px;  // make the text smaller
 }
 
@@ -162,11 +170,9 @@ nav ul li a img {
 
 /* Progress Bar Styles */
 .progress-bar-container {
-    background-color: #f2f3f4; /* Change to your preferred color */
     border-radius: 10px; /* This will give the progress bar container rounded corners */
     padding: 20px; /* Add some padding so the progress bar isn't touching the edges */
     margin-bottom: 20px; /* Add some space below the progress bar container */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Add a minor soft shadow */
         font-size: 12px;  // make the text smaller
 }
 
@@ -586,10 +592,19 @@ nav ul li a img {
 }
 
 .file-explorer li {
-    padding: 0.5rem;
+    list-style-type: none;
+    padding: 5px 0;
     cursor: pointer;
 }
 
+#file-explorer .selected {
+    background-color: yellow;
+    color: black; /* black text for visibility */
+}
+
+.file-explorer .arrow {
+    cursor: pointer;
+}
 .file-explorer li:hover {
     background-color: #f2f2f2;
 }
@@ -658,7 +673,16 @@ nav ul li a img {
     align-items: center; /* Align items vertically */
     margin-bottom: 10px; /* Some space below the header */
 }
-
+.database-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    /* temporary background color */
+    background-color: rgba(0, 0, 0, 0.5);
+}
 
 /* ========================================== */
 /*           results.html styles              */
