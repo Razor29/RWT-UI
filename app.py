@@ -95,7 +95,6 @@ def update_configuration():
     filename = data.get('filename')
     original_filename = data.get('original_filename')
     config_data = data.get('data')
-    config_data["threads"] = int(config_data["threads"])
 
     # Define the directory where the config files are stored
     config_dir = path.join(path.dirname(__file__), "configurations")
@@ -849,8 +848,10 @@ def get_reports_files():
 @app.route('/results')
 def results():
     return render_template('results.html')
+
 @app.route('/summary', methods=['GET'])
 def get_summary():
+    # Get overall Passed and Failed
     filename = request.args.get('filename', default=None, type=str)
     if filename is None:
         return jsonify({"error": "filename parameter is required"}), 400
@@ -858,8 +859,8 @@ def get_summary():
     report = TestReport(report_file)
     return jsonify(report.get_summary())
 
-@app.route('/total_failed_passed', methods=['GET'])
-def total_failed_passed():
+@app.route('/category_total_failed_passed', methods=['GET'])
+def category_total_failed_passed():
     filename = request.args.get('filename', default=None, type=str)
     if filename is None:
         return jsonify({"error": "filename parameter is required"}), 400
@@ -881,9 +882,47 @@ def get_configurations_files():
 
     return jsonify(configurations_files)
 
-######################################################
-# Unknown page functions                             #
-######################################################
+
+@app.route('/overall_passed_failed', methods=['GET'])
+def overall_passed_failed():
+    # Get overall Passed and Failed
+    filename = request.args.get('filename', default=None, type=str)
+    if filename is None:
+        return jsonify({"error": "filename parameter is required"}), 400
+    report_file = path.join(path.dirname(__file__),"reports",filename)
+    report = TestReport(report_file)
+    return jsonify(report.get_total_failed_passed())
+
+@app.route('/category_passed_failed', methods=['GET'])
+def category_passed_failed():
+    # Get Passed and Failed per category
+    filename = request.args.get('filename', default=None, type=str)
+    if filename is None:
+        return jsonify({"error": "filename parameter is required"}), 400
+    report_file = path.join(path.dirname(__file__),"reports",filename)
+    report = TestReport(report_file)
+    return jsonify(report.get_passed_failed_per_category())
+
+@app.route('/test_passed_failed', methods=['GET'])
+def test_passed_failed():
+    # Get Passed and Failed per test
+    filename = request.args.get('filename', default=None, type=str)
+    if filename is None:
+        return jsonify({"error": "filename parameter is required"}), 400
+    report_file = path.join(path.dirname(__file__),"reports",filename)
+    report = TestReport(report_file)
+    return jsonify(report.get_passed_failed_per_test())
+
+@app.route('/test_passed_failed_specific_category', methods=['GET'])
+def test_passed_failed_specific_category():
+    # Get Passed and Failed per test for a specific category
+    filename = request.args.get('filename', default=None, type=str)
+    category = request.args.get('category', default=None, type=str)
+    if filename is None or category is None:
+        return jsonify({"error": "filename and category parameters are required"}), 400
+    report_file = path.join(path.dirname(__file__),"reports",filename)
+    report = TestReport(report_file)
+    return jsonify({test: details for test, details in report.get_passed_failed_per_test().items() if test.startswith(category)})
 
 
 
@@ -895,78 +934,6 @@ def get_configurations_files():
 
 
 
-
-
-# @app.route('/api/payload-dbs', methods=['GET'])
-# def get_payload_dbs():
-#     payload_db_dir = path.join(__folder__, "payloadDB")
-#     payload_dbs = [d for d in os.listdir(payload_db_dir) if os.path.isdir(os.path.join(payload_db_dir, d))]
-#     return jsonify(payload_dbs)
-
-# @app.route('/api/tests', methods=['GET'])
-# def get_tests():
-#     json_files_dir = path.join(__folder__, "testfiles")
-#     tests = []
-#     stats = []
-#
-#     # Iterate over each JSON file in the directory
-#     for filename in os.listdir(json_files_dir):
-#         if filename.endswith('.json'):
-#             with open(os.path.join(json_files_dir, filename), 'r') as file:
-#                 data = json.load(file)
-#
-#                 # Initialize variables for statistics
-#                 categories_count = 0
-#                 tests_count = 0
-#
-#                 for category, category_data in data.items():
-#                     test_data = []
-#                     for test_name, test_info in category_data.items():
-#                         test_data.append({
-#                             'name': test_name,
-#                             'skip': test_info['skip'],
-#                             'headers': test_info['headers'],
-#                             'bodyType': test_info['body type'],
-#                             'payloadLocation': test_info['payload_location'],
-#                             'payloadFiles': test_info['payloads_files']
-#                         })
-#
-#                     categories_count += 1
-#                     tests_count += len(test_data)
-#
-#                     tests.append({
-#                         'filename': filename,
-#                         'categories': [{
-#                             'name': category,
-#                             'tests': test_data
-#                         }]
-#                     })
-#
-#                 # Append file statistics to the stats list
-#                 stats.append({
-#                     'filename': filename,
-#                     'categories_count': categories_count,
-#                     'tests_count': tests_count
-#                 })
-#
-#     # Get the list of directories in the 'PayloadDB' folder
-#     payload_db_dir = path.join(__folder__, 'PayloadDB')
-#     payload_dbs = [name for name in os.listdir(payload_db_dir) if os.path.isdir(os.path.join(payload_db_dir, name))]
-#
-#     return jsonify({'tests': tests, 'payloadDbs': payload_dbs, 'stats': stats})
-
-
-
-
-
-# ...
-
-
-
-
-
-
-# Routes for results page
 
 
 

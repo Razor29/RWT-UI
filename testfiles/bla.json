@@ -1,1 +1,0 @@
-{"Category 1": {"test 1": {"skip": true, "headers": {"referer": "google.com"}, "body_type": "form", "payload_location": {"url": false, "body": {"method": "POST", "parameter": "id"}, "cookies": [], "headers": [], "parameters": []}, "payloads_files": [{"file": "OWASP-top10/A01/A01 Path Traversal URL Clean.txt", "expected": "Block"}]}}}

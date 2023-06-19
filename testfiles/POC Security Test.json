@@ -1,0 +1,480 @@
+{
+    "Injection": {
+        "SQL injection in GET Request": {
+            "skip": false,
+            "headers": {
+                "Accept": "*/*"
+            },
+            "body_type": "",
+            "payload_location": {
+                "url": false,
+                "body": {},
+                "headers": [],
+                "cookies": [],
+                "parameters": ["id"]
+            },
+            "payloads_files": [
+                {
+                    "file": "POC Security Test/Injection/SQL GET.txt",
+                    "expected": "block"
+                }
+            ]
+        },
+        "SQL injection in User Agent": {
+            "skip": false,
+            "headers": {
+                "Accept": "text/html"
+            },
+            "body_type": "",
+            "payload_location": {
+                "url": false,
+                "body": {},
+                "headers": ["User-Agent"],
+                "cookies": [],
+                "parameters": []
+            },
+            "payloads_files": [
+                {
+                    "file": "POC Security Test/Injection/SQL User-Agent.txt",
+                    "expected": "block"
+                }
+            ]
+        },
+        "Blind SQL injection time based": {
+            "skip": false,
+            "headers": {
+                "Accept": "text/html"
+            },
+            "body_type": "",
+            "payload_location": {
+                "url": false,
+                "body": {},
+                "headers": [],
+                "cookies": [],
+                "parameters": ["user"]
+            },
+            "payloads_files": [
+                {
+                    "file": "POC Security Test/Injection/Blind SQL Time Based.txt",
+                    "expected": "block"
+                }
+            ]
+        },
+        "Blind SQL injection Boolean based": {
+            "skip": false,
+            "headers": {
+                "Accept": "text/html"
+            },
+            "body_type": "",
+            "payload_location": {
+                "url": false,
+                "body": {},
+                "headers": [],
+                "cookies": [],
+                "parameters": ["user"]
+            },
+            "payloads_files": [
+                {
+                    "file": "POC Security Test/Injection/SQL Boolean.txt",
+                    "expected": "block"
+                }
+
+            ]
+        },
+        "No SQL Injection": {
+            "skip": false,
+            "headers": {
+                "Accept": "text/html"
+            },
+            "body_type": "",
+            "payload_location": {
+                "url": false,
+                "body": {},
+                "headers": [],
+                "cookies": [],
+                "parameters": ["id"]
+            },
+            "payloads_files": [
+                {
+                    "file": "POC Security Test/Injection/NO SQL.txt",
+                    "expected": "block"
+                }
+            ]
+        },
+        "XML Injection": {
+            "skip": false,
+            "headers": {
+                "Accept": "application/xml"
+            },
+            "body_type": "xml",
+            "payload_location": {
+                "url": false,
+                "body": {
+                    "method": "POST",
+                    "parameter": ""
+                },
+                "headers": [],
+                "cookies": [],
+                "parameters": []
+            },
+            "payloads_files": [
+                {
+                    "file": "POC Security Test/Injection/XML Injections.txt",
+                    "expected": "block"
+                }
+            ]
+        },
+        "Server Side Includes Injection": {
+            "skip": false,
+            "headers": {
+                "Accept": "text/html"
+            },
+            "body_type": "",
+            "payload_location": {
+                "url": false,
+                "body": {
+                    "method": "POST",
+                    "parameter": "id"
+                },
+                "headers": [],
+                "cookies": [],
+                "parameters": []
+            },
+            "payloads_files": [
+                {
+                    "file": "POC Security Test/Injection/SSII.txt",
+                    "expected": "block"
+                }
+            ]
+        },
+        "Xpath Injection": {
+            "skip": false,
+            "headers": {
+                "Accept": "text/html"
+            },
+            "body_type": "",
+            "payload_location": {
+                "url": false,
+                "body": {
+                    "method": "POST",
+                    "parameter": "username"
+                },
+                "headers": [],
+                "cookies": [],
+                "parameters": []
+            },
+            "payloads_files": [
+                {
+                    "file": "POC Security Test/Injection/XPath injection.txt",
+                    "expected": "block"
+                }
+            ]
+        },
+         "PHP Code Injection": {
+            "skip": false,
+            "headers": {
+                "Accept": "text/html"
+            },
+            "body_type": "",
+            "payload_location": {
+                "url": false,
+                "body": {
+                    "method": "POST",
+                    "parameter": "username"
+                },
+                "headers": [],
+                "cookies": [],
+                "parameters": []
+            },
+            "payloads_files": [
+                {
+                    "file": "POC Security Test/Injection/PHP Injection.txt",
+                    "expected": "block"
+                }
+            ]
+        },
+        "Command Injection": {
+            "skip": false,
+            "headers": {
+                "Accept": "text/html"
+            },
+            "body_type": "",
+            "payload_location": {
+                "url": false,
+                "body": {
+                    "method": "POST",
+                    "parameter": "username"
+                },
+                "headers": [],
+                "cookies": [],
+                "parameters": []
+            },
+            "payloads_files": [
+                {
+                    "file": "POC Security Test/Injection/Command Injection.txt",
+                    "expected": "block"
+                }
+            ]
+        },
+
+        "HTML Injection reflected GET and POST ": {
+            "skip": false,
+            "headers": {
+                "Accept": "text/html"
+            },
+            "body_type": "",
+            "payload_location": {
+                "url": true,
+                "body": {
+                    "method": "POST",
+                    "parameter": "username"
+                },
+                "headers": [],
+                "cookies": [],
+                "parameters": []
+            },
+            "payloads_files": [
+                {
+                    "file": "POC Security Test/Injection/HTML Injection.txt",
+                    "expected": "block"
+                }
+            ]
+        },
+
+        "Database Interrogation": {
+            "skip": false,
+            "headers": {
+                "Accept": "text/html"
+            },
+            "body_type": "",
+            "payload_location": {
+                "url": false,
+                "body": {
+                    "method": "POST",
+                    "parameter": "username"
+                },
+                "headers": [],
+                "cookies": [],
+                "parameters": ["id"]
+            },
+            "payloads_files": [
+                {
+                    "file": "POC Security Test/Injection/DB Interrogation.txt",
+                    "expected": "block"
+                }
+            ]
+        }
+    },
+    "Broken Access Control": {
+        "Broken Access Control": {
+            "skip": false,
+            "headers": {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            "body_type": "",
+            "payload_location": {
+                "url": true,
+                "body": {},
+                "headers": [],
+                "cookies": [],
+                "parameters": ["id"]
+            },
+            "payloads_files": [
+                {
+                    "file": "POC Security Test/Broken Access Control/Broken Access Control.txt",
+                    "expected": "block"
+                }
+            ]
+        },
+         "Function call - GET query parameter": {
+            "skip": false,
+            "headers": {
+                "Content-Type": "text/html"
+            },
+            "body_type": "",
+            "payload_location": {
+                "url": false,
+                "body": {},
+                "headers": [],
+                "cookies": {},
+                "parameters": [
+                    "search"
+                ]
+            },
+            "payloads_files": [
+                {
+                    "file": "POC Security Test/Broken Access Control/Function Call.txt",
+                    "expected": "block"
+                }
+            ]
+        },
+		"Function call - POST body": {
+            "skip": false,
+            "headers": {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            "body_type": "",
+            "payload_location": {
+                "url": false,
+                "body": {
+                    "method": "POST",
+                    "parameter": "id"
+                },
+                "headers": [],
+                "cookies": [],
+                "parameters": []
+            },
+            "payloads_files": [
+                {
+                    "file": "POC Security Test/Broken Access Control/Function Call.txt",
+                    "expected": "block"
+                }
+            ]
+        }
+    },
+    "XSS": {
+        "All XSS": {
+            "skip": false,
+            "headers": {
+                "Accept": "*/*"
+            },
+            "body_type": "",
+            "payload_location": {
+                "url": false,
+                "body": {
+                    "method": "POST",
+                    "parameter": "id"
+                },
+                "headers": [],
+                "cookies": [],
+                "parameters": [
+                    "url"
+                ]
+            },
+            "payloads_files": [
+                {
+                    "file": "POC Security Test/XSS/XSS Injections.txt",
+                    "expected": "block"
+                }
+            ]
+        }
+    },
+    "Directory Traversal": {
+        "Directory and File Traversal": {
+            "skip": false,
+            "headers": {
+                "Accept": "*/*"
+            },
+            "body_type": "",
+            "payload_location": {
+                "url": false,
+                "body": {
+                    "method": "POST",
+                    "parameter": "id"
+                },
+                "headers": [],
+                "cookies": [],
+                "parameters": ["id"]
+            },
+            "payloads_files": [
+                {
+                    "file": "POC Security Test/Directory Traversal/File Traversal.txt",
+                    "expected": "block"
+                }
+            ]
+        }
+    },
+	"HTTP manipulations": {
+        "HTTP Response Splitting (CRLF injection)": {
+            "skip": false,
+            "headers": {
+                "Accept": "*/*"
+            },
+            "body_type": "",
+            "payload_location": {
+                "url": true,
+                "body": {},
+                "headers": [],
+                "cookies": {},
+                "parameters": {}
+            },
+            "payloads_files": [
+                {
+                    "file": "POC Security Test/HTTP manipulations/CRLF.txt",
+                    "expected": "block"
+                }
+            ]
+        },
+		"Null byte injection": {
+            "skip": false,
+            "headers": {
+                "Accept": "*/*"
+            },
+            "body_type": "",
+            "payload_location": {
+                "url": false,
+                "body": {
+                    "method": "POST",
+                    "parameter": "id"
+                },
+                "headers": [],
+                "cookies": [],
+                "parameters": ["id"]
+            },
+            "payloads_files": [
+                {
+                    "file": "POC Security Test/HTTP manipulations/Null Byte.txt",
+                    "expected": "block"
+                }
+            ]
+        }
+    },
+	"Evasion": {
+        "Base64 Encoded": {
+            "skip": false,
+            "headers": {
+                "Accept": "*/*"
+            },
+            "body_type": "",
+            "payload_location": {
+                "url": false,
+                "body": {
+                    "method": "POST",
+                    "parameter": "id"
+                },
+                "headers": [],
+                "cookies": [],
+                "parameters": ["id"]
+            },
+            "payloads_files": [
+                {
+                    "file": "POC Security Test/Evasion/Base64.txt",
+                    "expected": "block"
+                }
+            ]
+        },
+		"Multi Encoded Attacks": {
+            "skip": false,
+            "headers": {
+                "Accept": "*/*"
+            },
+            "body_type": "",
+            "payload_location": {
+                "url": false,
+                "body": {
+                    "method": "POST",
+                    "parameter": "id"
+                },
+                "headers": [],
+                "cookies": [],
+                "parameters": ["id"]
+            },
+            "payloads_files": [
+                {
+                    "file": "POC Security Test/Evasion/Multiple Encoded.txt",
+                    "expected": "block"
+                }
+            ]
+        }
+    }
+}

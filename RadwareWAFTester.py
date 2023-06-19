@@ -173,7 +173,7 @@ class RadwareWAFTester(object):
 
     def get_url(self):
         """Returns the application URL from the configuration."""
-        return self.config["application_url"]
+        return self.config["url"]
 
     def get_report(self):
         """Returns the test report."""
@@ -233,9 +233,9 @@ class RadwareWAFTester(object):
                         headers = {}
                         if payload.endswith('\n'):
                             payload = payload.rstrip('\n')
-                        headers["User-Agent"] = self.config["User-Agent"]
-                        if self.config["Host"]:
-                            headers["Host"] = self.config["Host"]
+                        headers["User-Agent"] = self.config["user_agent"]
+                        if self.config["host"]:
+                            headers["Host"] = self.config["host"]
                         if self.config["xff"]:
                             headers.update(self.config["xff"])
                         if val["headers"]:
@@ -366,9 +366,10 @@ class RadwareWAFTester(object):
         # Initialize the report for the test_name if it doesn't exist
         if test_name not in self.report:
             self.report[test_name] = {
-                "Summary": {"Failed": 0, "Passed": 0},
-                "Details": {"Failed": {}, "Passed": {}},
+                "Category Summary": {"Failed": 0, "Passed": 0},
             }
+
+
 
         trans_id = ""
         try:
@@ -384,32 +385,42 @@ class RadwareWAFTester(object):
             if "codec can't decode byte" in error:
                 re_res = re.search(self.config['blocking_page_regex'], response_content.decode("unicode_escape"))
 
+        # Initialize the report for the test if it doesn't exist
+        if test not in self.report[test_name]:
+            self.report[test_name][test] = {
+                "Test Summary": {"Failed": 0, "Passed": 0},
+                "Details": {"Failed": {}, "Passed": {}},
+            }
+
         result = {
-            "test": test,
             "payload": payload,
             "location": location,
-            "result": trans_id if trans_id else error
+            "result": trans_id if trans_id else error,
+            "status_code": response.status_code,  # Add this line
         }
 
         # Update the report based on the test results
         if re_res and expected == "block":
-            self.report[test_name]["Summary"]["Passed"] += 1
+            self.report[test_name]["Category Summary"]["Passed"] += 1
+            self.report[test_name][test]["Test Summary"]["Passed"] += 1
             log_result = "pass"
             if self.report_success is True:
-                pass_count = self.report[test_name]["Summary"]["Passed"]
-                self.report[test_name]["Details"]["Passed"][pass_count] = result
+                pass_count = self.report[test_name][test]["Test Summary"]["Passed"]
+                self.report[test_name][test]["Details"]["Passed"][pass_count] = result
         elif not re_res and expected == "pass":
-            self.report[test_name]["Summary"]["Passed"] += 1
+            self.report[test_name]["Category Summary"]["Passed"] += 1
+            self.report[test_name][test]["Test Summary"]["Passed"] += 1
             log_result = "pass"
             if self.report_success is True:
-                pass_count = self.report[test_name]["Summary"]["Passed"]
-                self.report[test_name]["Details"]["Passed"][pass_count] = result
+                pass_count = self.report[test_name][test]["Test Summary"]["Passed"]
+                self.report[test_name][test]["Details"]["Passed"][pass_count] = result
         else:
-            self.report[test_name]["Summary"]["Failed"] += 1
+            self.report[test_name]["Category Summary"]["Failed"] += 1
+            self.report[test_name][test]["Test Summary"]["Failed"] += 1
             log_result = "failed"
             if self.report_failure is True:
-                fail_count = self.report[test_name]["Summary"]["Failed"]
-                self.report[test_name]["Details"]["Failed"][fail_count] = result
+                fail_count = self.report[test_name][test]["Test Summary"]["Failed"]
+                self.report[test_name][test]["Details"]["Failed"][fail_count] = result
 
         # Log the test results
         self.logger.info(
@@ -449,4 +460,4 @@ def main(**kwargs):
     test.start_test(test.get_url())
 
 
-#main(success=True, failure=True, payload_path=path.join("payloadDB", "OWASP-top10"), test_file=path.join("testfiles", "owasp.json"))
+#main(success=True, failure=True, payload_path="payloadDB", test_file=path.join("testfiles", "POC Security Test.json"))

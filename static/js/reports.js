@@ -13,10 +13,16 @@ async function loadReportFiles() {
 
 let summaryChart = null;
 let totalChart = null;
+let currentCategory = null;
 
 async function loadReportData(reportFile) {
-  const summaryResponse = await fetch(`/summary?filename=${reportFile}`);
-  const totalResponse = await fetch(`/total_failed_passed?filename=${reportFile}`);
+  let summaryResponse;
+  if (currentCategory) {
+    summaryResponse = await fetch(`/test_passed_failed_specific_category?filename=${reportFile}&category=${currentCategory}`);
+  } else {
+    summaryResponse = await fetch(`/category_passed_failed?filename=${reportFile}`);
+  }
+  const totalResponse = await fetch(`/overall_passed_failed?filename=${reportFile}`);
 
   const summaryData = await summaryResponse.json();
   const totalData = await totalResponse.json();
@@ -31,7 +37,6 @@ async function loadReportData(reportFile) {
   if (totalChart) {
     totalChart.destroy();
   }
-
   summaryChart = new Chart(document.getElementById('summary-chart').getContext('2d'), {
     type: 'bar',
     data: {
@@ -58,11 +63,22 @@ async function loadReportData(reportFile) {
         y: {
           beginAtZero: true
         }
+      },
+      onClick: function(event, elements) {
+        if (elements.length > 0) {
+          const chartElement = elements[0];
+          const label = this.data.labels[chartElement.index];
+          const datasetLabel = this.data.datasets[chartElement.datasetIndex].label;
+          if (!currentCategory && datasetLabel === 'Passed') {
+            currentCategory = label;
+            loadReportData(reportFile, label);
+          }
+        }
       }
     }
   });
 
-  totalChart =new Chart(document.getElementById('total-chart').getContext('2d'), {
+  totalChart = new Chart(document.getElementById('total-chart').getContext('2d'), {
     type: 'pie',
     data: {
       labels: ['Failed', 'Passed'],
@@ -77,6 +93,17 @@ async function loadReportData(reportFile) {
     }
   });
 }
+
+document.getElementById('back-button').addEventListener('click', function(event) {
+  event.preventDefault();
+  if (currentCategory) {
+    currentCategory = null;
+    const reportFile = document.getElementById('report-file-select').value;
+    loadReportData(reportFile);
+  }
+});
+
+
 
 document.getElementById('display-button').addEventListener('click', function(event) {
   event.preventDefault();
@@ -104,4 +131,19 @@ window.addEventListener('load', function() {
   if (reportFile) {
     selectReportFile(reportFile);
   }
+});
+
+document.getElementById('export-json').addEventListener('click', function(event) {
+  event.preventDefault();
+  // Handle JSON export
+});
+
+document.getElementById('export-excel').addEventListener('click', function(event) {
+  event.preventDefault();
+  // Handle Excel export
+});
+
+document.getElementById('export-pdf').addEventListener('click', function(event) {
+  event.preventDefault();
+  // Handle PDF export
 });

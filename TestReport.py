@@ -1,6 +1,5 @@
 import json
 
-
 class TestReport:
     def __init__(self, file_path):
         with open(file_path, 'r') as json_file:
@@ -8,27 +7,29 @@ class TestReport:
 
     def get_summary(self):
         summary = {}
-        for test, details in self.report.items():
-            summary[test] = details['Summary']
+        for category, tests in self.report.items():
+            summary[category] = tests['Category Summary']
         return summary
 
-    def get_test_summary(self, test_name):
-        return self.report[test_name]['Summary']
+    def get_test_summary(self, category_name, test_name):
+        return self.report[category_name][test_name]['Test Summary']
 
     def get_passed_failed_per_test(self):
         details = {}
-        for test, data in self.report.items():
-            details[test] = {
-                "Passed": len(data['Details']['Passed']),
-                "Failed": len(data['Details']['Failed'])
-            }
+        for category, tests in self.report.items():
+            for test, data in tests.items():
+                if test != "Category Summary":
+                    details[test] = {
+                        "Passed": len(data['Details']['Passed']),
+                        "Failed": len(data['Details']['Failed'])
+                    }
         return details
 
-    def get_failed_details(self, test_name):
-        return self.report[test_name]['Details']['Failed']
+    def get_failed_details(self, category_name, test_name):
+        return self.report[category_name][test_name]['Details']['Failed']
 
-    def get_passed_details(self, test_name):
-        return self.report[test_name]['Details']['Passed']
+    def get_passed_details(self, category_name, test_name):
+        return self.report[category_name][test_name]['Details']['Passed']
 
     def get_total_failed_passed(self):
         total = {
@@ -36,21 +37,23 @@ class TestReport:
             "Passed": 0
         }
 
-        for test, details in self.report.items():
-            total["Failed"] += int(details['Summary']["Failed"])
-            total["Passed"] += int(details['Summary']["Passed"])
+        for category, tests in self.report.items():
+            total["Failed"] += int(tests['Category Summary']["Failed"])
+            total["Passed"] += int(tests['Category Summary']["Passed"])
         return total
-    def get_test_list(self):
+
+    def get_category_list(self):
         return list(self.report.keys())
 
-# TestReport instance initialization
-report = TestReport('reports/report-05_22_23-07_04AM.json')
+    def get_test_list(self, category_name):
+        return [test for test in self.report[category_name].keys() if test != "Category Summary"]
 
-# Fetching the required information
-print(report.get_summary())
-print(report.get_total_failed_passed())
-# print(report.get_test_list())
-# print(report.get_test_summary("A01:2021 - Broken Access Control"))
-# print(report.get_passed_failed_per_test())
-# print(report.get_failed_details("A01:2021 - Broken Access Control"))
-# print(report.get_passed_details("A01:2021 - Broken Access Control"))
+
+    def get_passed_failed_per_category(self):
+        details = {}
+        for category, tests in self.report.items():
+            details[category] = {
+                "Passed": tests['Category Summary']['Passed'],
+                "Failed": tests['Category Summary']['Failed']
+            }
+        return details
