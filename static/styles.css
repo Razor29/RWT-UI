@@ -29,6 +29,7 @@ body {
     font-size: 28px;
     margin-right: 20px; /* Adjust as per your need */
 }
+
 /* ========================================== */
 /*              Base.html styles              */
 /* ========================================== */
@@ -141,7 +142,10 @@ nav ul li a img {
 /* ========================================== */
 
 /* Run Test Form Styles */
-
+.header-container h3 {
+    font-size: 28px;
+    margin-right: 20px; /* Adjust as per your need */
+}
 .test-container {
     background-color: #f2f3f4; /* Change to your preferred color */
     border-radius: 10px; /* This will give the form rounded corners */
@@ -687,6 +691,29 @@ nav ul li a img {
 /* ========================================== */
 /*           results.html styles              */
 /* ========================================== */
+
+.modal-dialog {
+  max-width: 80%!important;
+}
+.results-table{
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+  table-layout: fixed;
+}
+.wide-column {
+  width: 200px !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+
+.wide-column:hover {
+  overflow: visible;
+  white-space: normal;
+  cursor: pointer;
+}
 
 
 #report-file-select {

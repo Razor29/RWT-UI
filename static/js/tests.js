@@ -1056,7 +1056,7 @@ savePayloadLocationBtn.addEventListener("click", function() {
         filename: currentFilename,
         category: currentCategory,
         test: currentTest,
-        'body type': bodyType || "none",
+        'body_type': bodyType || "none",
         location: payloadLocation
     };
 

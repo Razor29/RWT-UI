@@ -73,7 +73,6 @@ def create_configuration():
     data = request.get_json()
     new_filename = data.get('filename')
     config_data = data.get('data')
-    config_data["threads"] = int(config_data["threads"])
 
     # Define the directory where the config files are stored
     config_dir = path.join(path.dirname(__file__), "configurations")
@@ -563,7 +562,7 @@ def update_test_file_location():
     filename = data.get('filename')
     category = data.get('category')
     test = data.get('test')
-    body_type = data.get('body type')
+    body_type = data.get('body_type')
     location = data.get('location')
 
     file_path = get_test_file_path(filename)
@@ -578,7 +577,7 @@ def update_test_file_location():
         return jsonify({"error": "category or test does not exist"}), 400
 
     content[category][test]['payload_location'] = location
-    content[category][test]['body type'] = body_type
+    content[category][test]['body_type'] = body_type
 
     with file_path.open('w') as f:
         json.dump(content, f)
@@ -920,22 +919,47 @@ def test_passed_failed_specific_category():
     category = request.args.get('category', default=None, type=str)
     if filename is None or category is None:
         return jsonify({"error": "filename and category parameters are required"}), 400
-    report_file = path.join(path.dirname(__file__),"reports",filename)
+    report_file = path.join(path.dirname(__file__), "reports", filename)
     report = TestReport(report_file)
-    return jsonify({test: details for test, details in report.get_passed_failed_per_test().items() if test.startswith(category)})
+    return jsonify(report.get_passed_failed_per_test_for_category(category))
 
 
+@app.route('/overall_passed_failed_for_category', methods=['GET'])
+def overall_passed_failed_for_category():
+    # Get overall Passed and Failed for a specific category
+    filename = request.args.get('filename', default=None, type=str)
+    category = request.args.get('category', default=None, type=str)
+    if filename is None or category is None:
+        return jsonify({"error": "filename and category parameters are required"}), 400
+    report_file = path.join(path.dirname(__file__), "reports", filename)
+    report = TestReport(report_file)
+    category_results = report.get_passed_failed_for_category(category)
+    if category_results is not None:
+        return jsonify(category_results)
+    else:
+        return jsonify({"error": f"Category '{category}' not found in report"}), 400
 
 
+@app.route('/test_detailed_results', methods=['GET'])
+def test_detailed_results():
+    filename = request.args.get('filename')
+    category_name = request.args.get('category')
+    test_name = request.args.get('test')
+    result_type = request.args.get('result_type')
 
+    if not filename or not category_name or not test_name or not result_type:
+        return {"error": "Missing required parameters"}, 400
 
+    report_file = path.join(path.dirname(__file__), "reports", filename)
 
+    report = TestReport(report_file)
 
+    result = report.get_detailed_results(category_name, test_name, result_type)
 
+    if result is None:
+        return {"error": "No such category, test, or result type"}, 404
 
-
-
-
+    return jsonify(result)
 
 
 if __name__ == "__main__":

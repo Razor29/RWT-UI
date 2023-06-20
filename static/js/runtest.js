@@ -5,8 +5,8 @@ async function loadConfigurations() {
 
   configurations.forEach(config => {
     const option = document.createElement('option');
-    option.value = config;
-    option.text = config;
+    option.value = config.replace('.json', '');
+    option.text = config.replace('.json', '');
     select.appendChild(option);
   });
 }
@@ -18,11 +18,12 @@ async function loadTestFiles() {
 
   tests.forEach(test => {
     const option = document.createElement('option');
-    option.value = test; // Change this line
-    option.text = test;
+    option.value = test.replace('.json', ''); // Change this line
+    option.text = test.replace('.json', '');
     select.appendChild(option);
   });
 }
+
 
 
 document.getElementById('run-test-form').addEventListener('submit', function(event) {
@@ -88,4 +89,3 @@ function updateProgressBar() {
 
 loadConfigurations();
 loadTestFiles();
-loadPayloadDbs();

@@ -32,14 +32,12 @@
         </div>
       </div>
     </div>
-        <div class="d-flex align-items-center mr-2">
-  <button type="button" class="btn btn-secondary" id="back-button" disabled>Back</button>
-</div>
     <!-- Placeholder for displaying report -->
 
     <div id="report-display">
       <div class="widget">
         <div class="chart-title">Summary Chart</div>
+            <button id="back-button" style="display: none;">Back</button>
         <canvas id="summary-chart"></canvas>
       </div>
       <div class="widget">
@@ -49,5 +47,36 @@
     </div>
     <script src="/static/js/reports.js"></script>
     </div>
+    <!-- Modal -->
+<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-80" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detailsModalLabel">Detailed Test Results</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table results-table">
+          <thead>
+            <tr>
+              <th scope="col">Payload Location</th>
+              <th scope="col">Payload</th>
+              <th scope="col">Result</th>
+              <th scope="col">Status Code</th>
+            </tr>
+          </thead>
+          <tbody id="detailsTableBody">
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </div>
 {% endblock %}

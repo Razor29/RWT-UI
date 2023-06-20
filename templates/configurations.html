@@ -12,8 +12,8 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Configuration File</th>
-                        <th>Tests File</th>
+                        <th>Test Configuration</th>
+                        <th>Test Suite</th>
                         <th>Detailed Success</th>
                         <th>Detailed Failure</th>
                         <th></th>
@@ -72,8 +72,8 @@
         </thead>
         <tbody>
             {% for config in configs %}
-            <tr data-filename="{{ config.filename }}">
-                <td title="{{ config.filename }}">{{ config.filename }}</td>
+            <tr data-filename="{{ config.filename.replace('.json', '') }}">
+                <td title="{{ config.filename.replace('.json', '') }}">{{ config.filename.replace('.json', '') }}</td>
                 {% for key, value in config.data.items() %}
                     {% if key == "xff" %}
                         {% for k, v in value.items() %}
@@ -96,8 +96,8 @@
     <!-- Edit form -->
     <div class="edit-form">
         <h3>Edit Configuration</h3>
-        <label for="edit-filename">Filename</label>
-        <input type="text" id="edit-filename" placeholder="Filename">
+        <label for="edit-filename">Configuration Name</label>
+        <input type="text" id="edit-filename" placeholder="Configuration Name">
         <label for="edit-url">URL</label>
         <input type="text" id="edit-url" class="edit-data" placeholder="URL">
         <label for="edit-blocking-page-regex">Blocking Page Regex</label>
@@ -114,8 +114,8 @@
     </div>
             <div class="new-form">
         <h3>New Configuration</h3>
-        <label for="new-filename">Filename</label>
-        <input type="text" id="new-filename" placeholder="Filename">
+        <label for="new-filename">Configuration Name</label>
+        <input type="text" id="new-filename" placeholder="Configuration Name">
         <label for="new-url">URL</label>
         <input type="text" id="new-url" class="new-data" placeholder="URL">
         <label for="new-blocking-page-regex">Blocking Page Regex</label>

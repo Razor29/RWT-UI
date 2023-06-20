@@ -25,11 +25,14 @@ class TestReport:
                     }
         return details
 
-    def get_failed_details(self, category_name, test_name):
-        return self.report[category_name][test_name]['Details']['Failed']
 
-    def get_passed_details(self, category_name, test_name):
-        return self.report[category_name][test_name]['Details']['Passed']
+    def get_detailed_results(self, category_name, test_name, result_type):
+        if result_type not in ["Failed", "Passed"]:
+            raise ValueError("result_type parameter must be either 'Failed' or 'Passed'")
+        try:
+            return self.report[category_name][test_name]['Details'][result_type]
+        except KeyError:
+            return None
 
     def get_total_failed_passed(self):
         total = {
@@ -48,6 +51,15 @@ class TestReport:
     def get_test_list(self, category_name):
         return [test for test in self.report[category_name].keys() if test != "Category Summary"]
 
+    def get_passed_failed_per_test_for_category(self, category_name):
+        details = {}
+        for test, data in self.report[category_name].items():
+            if test != "Category Summary":
+                details[test] = {
+                    "Passed": len(data['Details']['Passed']),
+                    "Failed": len(data['Details']['Failed'])
+                }
+        return details
 
     def get_passed_failed_per_category(self):
         details = {}
@@ -57,3 +69,16 @@ class TestReport:
                 "Failed": tests['Category Summary']['Failed']
             }
         return details
+
+
+    def get_passed_failed_for_category(self, category_name):
+        category_summary = self.report.get(category_name, {}).get('Category Summary')
+        if category_summary:
+            return {
+                "Passed": category_summary['Passed'],
+                "Failed": category_summary['Failed']
+            }
+        else:
+            return None
+
+

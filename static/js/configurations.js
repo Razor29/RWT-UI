@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({filename: filename}),
+                     body: JSON.stringify({filename: filename + '.json'}),
                 })
                 .then(response => response.json())
                 .then(data => {
@@ -95,8 +95,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Create a JSON object with the data
         const data = {
-            original_filename: originalFilename,
-            filename: filename,
+            original_filename: originalFilename + '.json',
+            filename: filename + '.json',
             data: {
                 url: url,
                 blocking_page_regex: blockingPageRegex,
@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const newXffValue = document.querySelector('#new-xff-value').value;
 
         const newData = {
-            filename: newFilename,
+            filename: newFilename + '.json',
             data: {
                 url: newUrl,
                 blocking_page_regex: newBlockingPageRegex,

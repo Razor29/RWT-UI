@@ -17,12 +17,15 @@ let currentCategory = null;
 
 async function loadReportData(reportFile) {
   let summaryResponse;
+  let totalResponse;
+
   if (currentCategory) {
     summaryResponse = await fetch(`/test_passed_failed_specific_category?filename=${reportFile}&category=${currentCategory}`);
+    totalResponse = await fetch(`/overall_passed_failed_for_category?filename=${reportFile}&category=${currentCategory}`);
   } else {
     summaryResponse = await fetch(`/category_passed_failed?filename=${reportFile}`);
+    totalResponse = await fetch(`/overall_passed_failed?filename=${reportFile}`);
   }
-  const totalResponse = await fetch(`/overall_passed_failed?filename=${reportFile}`);
 
   const summaryData = await summaryResponse.json();
   const totalData = await totalResponse.json();
@@ -59,22 +62,32 @@ async function loadReportData(reportFile) {
       ]
     },
     options: {
+      aspectRatio: 3,
       scales: {
         y: {
           beginAtZero: true
-        }
-      },
-      onClick: function(event, elements) {
-        if (elements.length > 0) {
-          const chartElement = elements[0];
-          const label = this.data.labels[chartElement.index];
-          const datasetLabel = this.data.datasets[chartElement.datasetIndex].label;
-          if (!currentCategory && datasetLabel === 'Passed') {
-            currentCategory = label;
-            loadReportData(reportFile, label);
+        },
+        x: {
+          ticks: {
+            maxRotation: 0,
+            minRotation: 0
           }
         }
-      }
+      },
+        onClick: function(event, elements) {
+          if (elements.length > 0) {
+            const chartElement = elements[0];
+            const label = this.data.labels[chartElement.index];
+            const datasetLabel = this.data.datasets[chartElement.datasetIndex].label;
+            if (!currentCategory && datasetLabel === 'Passed') {
+              currentCategory = label;
+              loadReportData(reportFile);
+            } else if (currentCategory && (datasetLabel === 'Passed' || datasetLabel === 'Failed')) {
+              // Load detailed results for the selected test and result type (passed or failed)
+              loadDetailedResults(reportFile, currentCategory, label, datasetLabel);
+            }
+          }
+        }
     }
   });
 
@@ -92,7 +105,14 @@ async function loadReportData(reportFile) {
       ]
     }
   });
+
+  if (currentCategory) {
+    document.getElementById('back-button').style.display = 'block';
+  } else {
+    document.getElementById('back-button').style.display = 'none';
+  }
 }
+
 
 document.getElementById('back-button').addEventListener('click', function(event) {
   event.preventDefault();
@@ -112,6 +132,46 @@ document.getElementById('display-button').addEventListener('click', function(eve
 });
 
 loadReportFiles();
+
+
+async function loadDetailedResults(reportFile, category, test, resultType) {
+  const response = await fetch(`/test_detailed_results?filename=${reportFile}&category=${encodeURIComponent(category)}&test=${encodeURIComponent(test)}&result_type=${resultType}`);
+  const data = await response.json();
+
+  const tableBody = document.getElementById('detailsTableBody');
+  // Clear previous results
+  tableBody.innerHTML = '';
+
+  // Use Object.values to get an array of the values in the object
+  Object.values(data).forEach(result => {
+    let row = document.createElement('tr');
+
+    let locationCell = document.createElement('td');
+    locationCell.textContent = result.location;  // Adjusted to match data structure
+    row.appendChild(locationCell);
+
+    let payloadCell = document.createElement('td');
+    payloadCell.className = "wide-column"; // Added this line
+    payloadCell.textContent = result.payload;
+    row.appendChild(payloadCell);
+
+    let resultCell = document.createElement('td');
+    resultCell.className = "wide-column"; // Added this line
+    resultCell.textContent = result.result;
+    row.appendChild(resultCell);
+
+    let statusCodeCell = document.createElement('td');
+    statusCodeCell.textContent = result.status_code;  // Adjusted to match data structure
+    row.appendChild(statusCodeCell);
+
+    tableBody.appendChild(row);
+  });
+
+  // Show the modal
+  $('#detailsModal').modal('show');
+}
+
+
 
 async function selectReportFile(reportFile) {
   // Select the report file in the dropdown
