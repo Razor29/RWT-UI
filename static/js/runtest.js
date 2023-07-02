@@ -41,8 +41,8 @@ document.getElementById('run-test-form').addEventListener('submit', function(eve
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      configuration_file: configFile,
-      test_file: testFile,
+      configuration_file: configFile + ".json",
+      test_file: testFile + ".json",
       success: detailedSuccess,
       failure: detailedFailure
     })

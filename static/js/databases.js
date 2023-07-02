@@ -482,6 +482,7 @@ async function renameItemOnServer(targetPath, newName) {
 
 async function deleteItem(targetPath) {
     // First, check if it's a directory
+    hideContextMenu();
     const response = await fetch(`/api/is-directory?path=${encodeURIComponent(targetPath)}`);
     const result = await response.json();
 
@@ -495,14 +496,14 @@ async function deleteItem(targetPath) {
         if (deleteResponse.success) {
             // get the parent path
             const parentPath = targetPath.split("/").slice(0, -1).join("/");
-
+            console.log(parentPath)
             // Check if parentPath is empty or '/', if yes then load base directory
-            if (parentPath === "" || parentPath === "/") {
+            if (parentPath === "" || parentPath === "/" || parentPath === "/payloadDB") {
                 loadFileExplorer("/payloadDB/");
             } else {
                 // get the parent list item
                 const parentListItem = document.querySelector(`[data-path="${parentPath}"]`);
-
+                console.log(parentListItem)
                 // refresh parent
                 if (parentListItem.lastChild.tagName === 'UL') {
                     parentListItem.removeChild(parentListItem.lastChild);
@@ -580,12 +581,11 @@ for (let saveNewItemBtn of saveNewItemBtns) {
         }
 
         let targetPath = newItemForm.dataset.targetPath;
-
         const response = await createNewItemOnServer(targetPath, name, isDirectory);
 
         if (response.success) {
             // Check if targetPath is empty or '/', if yes then load base directory
-            if (targetPath === "" || targetPath === "/") {
+            if (targetPath === "" || targetPath === "/" || targetPath === "/payloadDB") {
                 loadFileExplorer("/payloadDB/");
             } else {
                 // call loadFileExplorer again with the parent directory of the newly created file/directory
