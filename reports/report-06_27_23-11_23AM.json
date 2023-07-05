@@ -1,0 +1,918 @@
+{
+  "A01:2021 - Broken Access Control": {
+    "Category Summary": {
+      "Failed": 72,
+      "Passed": 0
+    },
+    "Path Traversal - URL": {
+      "Details": {
+        "Failed": {
+          "1": {
+            "location": "url",
+            "payload": "/images/..%2fcgi/cgi_i_filter.js?_tn={{trimprefix(base64_decode(httoken)",
+            "result": "3a60be18-06e5-4796-b1f7-1b951af71005",
+            "status_code": 403
+          },
+          "2": {
+            "location": "Parameter: url",
+            "payload": "/images/..%2fcgi/cgi_i_filter.js?_tn={{trimprefix(base64_decode(httoken)",
+            "result": "ff2c66a4-72b6-44a4-afa1-4d4997ebf850",
+            "status_code": 403
+          },
+          "3": {
+            "location": "url",
+            "payload": "/wp-admin/admin-ajax.php?action=duplicator_download&file=%2F..%2Fwp-config.php",
+            "result": "08d8748d-1c80-499d-b85c-12148bdf9163",
+            "status_code": 403
+          },
+          "4": {
+            "location": "Parameter: url",
+            "payload": "/wp-admin/admin-ajax.php?action=duplicator_download&file=%2F..%2Fwp-config.php",
+            "result": "326c62c7-fa0a-46c5-893d-efc308c1df06",
+            "status_code": 403
+          },
+          "5": {
+            "location": "url",
+            "payload": "/manager/network_query.php?portNum=80&queryType=all&target=q5u4a3l2y1s.com%3Bcat+c:\\boot.ini&Submit=Do+It",
+            "result": "6de488b3-4e61-4a83-91d3-8c16f1be2989",
+            "status_code": 403
+          },
+          "6": {
+            "location": "Parameter: url",
+            "payload": "/manager/network_query.php?portNum=80&queryType=all&target=q5u4a3l2y1s.com%3Bcat+c:\\boot.ini&Submit=Do+It",
+            "result": "2978fa20-67cb-47ca-a123-658efaf36411",
+            "status_code": 403
+          },
+          "7": {
+            "location": "url",
+            "payload": "/tmui/login.jsp/..;/tmui/locallb/workspace/fileRead.jsp?fileName=/etc/passwd",
+            "result": "bdf31a66-c20e-45c0-95f6-169e624696c3",
+            "status_code": 403
+          },
+          "8": {
+            "location": "Parameter: url",
+            "payload": "/tmui/login.jsp/..;/tmui/locallb/workspace/fileRead.jsp?fileName=/etc/passwd",
+            "result": "cae90ba1-61f3-4334-b596-b56f1987a630",
+            "status_code": 403
+          },
+          "9": {
+            "location": "url",
+            "payload": "/tmui/login.jsp/..;/tmui/locallb/workspace/fileRead.jsp?fileName=/config/bigip.license",
+            "result": "5a75bc44-3d73-4a35-a734-1591f5950e88",
+            "status_code": 403
+          },
+          "10": {
+            "location": "Parameter: url",
+            "payload": "/tmui/login.jsp/..;/tmui/locallb/workspace/fileRead.jsp?fileName=/config/bigip.license",
+            "result": "714e4115-c949-4675-b9c1-f5140b94aec1",
+            "status_code": 403
+          },
+          "11": {
+            "location": "url",
+            "payload": "/index.php/Home/uploadify/fileList?path=../../../&type=.+",
+            "result": "f1d4af54-3a9a-413b-b3d1-519a3482dfee",
+            "status_code": 403
+          },
+          "12": {
+            "location": "Parameter: url",
+            "payload": "/index.php/Home/uploadify/fileList?path=../../../&type=.+",
+            "result": "5b2b3aae-b94f-4629-84ac-1485977f78a7",
+            "status_code": 403
+          },
+          "13": {
+            "location": "url",
+            "payload": "/opm/read_sessionlog.php?logFile=....//....//....//....//etc/passwd",
+            "result": "0032301d-d782-49b5-bee9-64303a8157f4",
+            "status_code": 403
+          },
+          "14": {
+            "location": "Parameter: url",
+            "payload": "/opm/read_sessionlog.php?logFile=....//....//....//....//etc/passwd",
+            "result": "398e54a9-b341-494d-b22e-216ffddfc5a0",
+            "status_code": 403
+          },
+          "15": {
+            "location": "url",
+            "payload": "/..%252F..%252F..%252F..%252F..%252F..%252F..%252F..%252F..%252F..%252F..%252Fetc%252Fpasswd%23foo/development",
+            "result": "e83ac359-6b79-4245-821d-8e138861ecee",
+            "status_code": 403
+          },
+          "16": {
+            "location": "Parameter: url",
+            "payload": "/..%252F..%252F..%252F..%252F..%252F..%252F..%252F..%252F..%252F..%252F..%252Fetc%252Fpasswd%23foo/development",
+            "result": "98fff14d-8033-4641-a6ca-d9da319d94a9",
+            "status_code": 403
+          },
+          "17": {
+            "location": "url",
+            "payload": "/wp-admin/admin-ajax.php?action=duplicator_download&file=..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd",
+            "result": "f0b7ec75-477d-4f62-b8f3-742ac6f30e22",
+            "status_code": 403
+          },
+          "18": {
+            "location": "Parameter: url",
+            "payload": "/wp-admin/admin-ajax.php?action=duplicator_download&file=..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd",
+            "result": "39fa67aa-9e10-4883-8d61-1d382cff9d2f",
+            "status_code": 403
+          },
+          "19": {
+            "location": "url",
+            "payload": "..%255c",
+            "result": "f6494015-8e90-4e3a-be73-938a5b038d02",
+            "status_code": 403
+          },
+          "20": {
+            "location": "Parameter: url",
+            "payload": "..%255c",
+            "result": "5e0504b6-5696-4b5c-8293-3d74b5fd265f",
+            "status_code": 403
+          },
+          "21": {
+            "location": "url",
+            "payload": ".%5c../..%5c",
+            "result": "19cf5376-0373-4219-9dd8-ed19451761c5",
+            "status_code": 403
+          },
+          "22": {
+            "location": "Parameter: url",
+            "payload": ".%5c../..%5c",
+            "result": "f9588354-19c5-4d36-b7b2-a4704feda3f8",
+            "status_code": 403
+          },
+          "23": {
+            "location": "url",
+            "payload": "/..%c0%9v../",
+            "result": "fab1ea79-249f-453e-bd4c-76912ffc1291",
+            "status_code": 403
+          },
+          "24": {
+            "location": "Parameter: url",
+            "payload": "/..%c0%9v../",
+            "result": "8d2df5bb-a40b-4990-a801-cba898e1ed65",
+            "status_code": 403
+          },
+          "25": {
+            "location": "url",
+            "payload": "/..%c0%af../",
+            "result": "16bf922a-6eb4-46ad-9abe-5a420b4fac7a",
+            "status_code": 403
+          },
+          "26": {
+            "location": "Parameter: url",
+            "payload": "/..%c0%af../",
+            "result": "99ebe63d-c1c5-41c7-8789-9ac17d827e85",
+            "status_code": 403
+          },
+          "27": {
+            "location": "url",
+            "payload": "/..%255c..%255c",
+            "result": "2241bfd4-bcc2-47ea-9589-0c3fcfe0383a",
+            "status_code": 403
+          },
+          "28": {
+            "location": "Parameter: url",
+            "payload": "/..%255c..%255c",
+            "result": "f1f81d3e-8b4c-4859-9242-9e082e76c74b",
+            "status_code": 403
+          },
+          "29": {
+            "location": "url",
+            "payload": "clean payload",
+            "result": null,
+            "status_code": 404
+          },
+          "30": {
+            "location": "Parameter: url",
+            "payload": "clean payload",
+            "result": null,
+            "status_code": 200
+          }
+        },
+        "Passed": {}
+      },
+      "Test Summary": {
+        "Failed": 30,
+        "Passed": 0
+      }
+    },
+    "Predictable Resource Location - URL": {
+      "Details": {
+        "Failed": {
+          "1": {
+            "location": "url",
+            "payload": "/apache/logs/error.log",
+            "result": "e8e5b562-8406-48fc-8581-2ffb07b42fc0",
+            "status_code": 403
+          },
+          "2": {
+            "location": "url",
+            "payload": "/apache/logs/access.log",
+            "result": "a3a2c55d-c0ec-43e7-bd43-c53b39917b78",
+            "status_code": 403
+          },
+          "3": {
+            "location": "url",
+            "payload": "/apache/logs/error.log",
+            "result": "1966c6e7-3600-4402-83a9-8acf92e953cb",
+            "status_code": 403
+          },
+          "4": {
+            "location": "url",
+            "payload": "/apache/logs/access.log",
+            "result": "8545932e-f9fd-4d6e-8eba-ce0ae863ace2",
+            "status_code": 403
+          },
+          "5": {
+            "location": "url",
+            "payload": "/apache/logs/error.log",
+            "result": "fd30c718-f4e7-4aaf-bd51-69b9791d61e2",
+            "status_code": 403
+          },
+          "6": {
+            "location": "url",
+            "payload": "/apache/logs/access.log",
+            "result": "adaab887-13f4-4667-b41b-ee1c0ff83835",
+            "status_code": 403
+          },
+          "7": {
+            "location": "url",
+            "payload": "/etc/httpd/logs/acces_log",
+            "result": "27235f88-0ff0-4158-81fa-d11e0c417b84",
+            "status_code": 403
+          },
+          "8": {
+            "location": "url",
+            "payload": "/etc/httpd/logs/acces.log",
+            "result": "da978141-928b-4bb9-8a5e-4dd38ab2753d",
+            "status_code": 403
+          },
+          "9": {
+            "location": "url",
+            "payload": "/etc/httpd/logs/error_log",
+            "result": "4bb7b79c-8d0a-4be9-b1d7-31cf4435bdfb",
+            "status_code": 403
+          },
+          "10": {
+            "location": "url",
+            "payload": "/cgi-bin/test-cgi?/*",
+            "result": "ea15ca58-c81f-4e24-bfe2-b52a1f16b490",
+            "status_code": 403
+          },
+          "11": {
+            "location": "url",
+            "payload": "/cgi-bin/test-cgi?*",
+            "result": "aa683d9a-4c61-4345-b4de-1cb8533b2c91",
+            "status_code": 403
+          },
+          "12": {
+            "location": "url",
+            "payload": "/%00/",
+            "result": null,
+            "status_code": 400
+          },
+          "13": {
+            "location": "url",
+            "payload": "/%2e/",
+            "result": null,
+            "status_code": 200
+          },
+          "14": {
+            "location": "url",
+            "payload": "/%2f/",
+            "result": null,
+            "status_code": 404
+          },
+          "15": {
+            "location": "url",
+            "payload": "/%5c/",
+            "result": null,
+            "status_code": 404
+          },
+          "16": {
+            "location": "url",
+            "payload": "/%3f.jsp",
+            "result": null,
+            "status_code": 404
+          },
+          "17": {
+            "location": "url",
+            "payload": "/?M=D",
+            "result": null,
+            "status_code": 200
+          },
+          "18": {
+            "location": "url",
+            "payload": "/?S=D",
+            "result": null,
+            "status_code": 200
+          },
+          "19": {
+            "location": "url",
+            "payload": "/test/",
+            "result": "ecda9388-d78a-47dd-9db7-57ab11568bf8",
+            "status_code": 403
+          },
+          "20": {
+            "location": "url",
+            "payload": "/tmp/",
+            "result": "5e7954a3-1e5c-4651-a2d0-e42fb861fb71",
+            "status_code": 403
+          },
+          "21": {
+            "location": "url",
+            "payload": "/admin/",
+            "result": "1a9cb93f-0a7f-4897-ac80-4ab205443319",
+            "status_code": 403
+          },
+          "22": {
+            "location": "url",
+            "payload": "/etc/httpd/logs/error.log",
+            "result": "e5171b8f-0e34-46c8-b251-6ebd5d662af0",
+            "status_code": 403
+          },
+          "23": {
+            "location": "url",
+            "payload": "/var/www/logs/access_log",
+            "result": "ca0d7236-3cd7-4f12-81a8-6ee99e477736",
+            "status_code": 403
+          },
+          "24": {
+            "location": "url",
+            "payload": "/var/www/logs/access.log",
+            "result": "41c14da0-d01a-4b45-b94c-f03b4cdba59e",
+            "status_code": 403
+          },
+          "25": {
+            "location": "url",
+            "payload": "/usr/local/apache/logs/access_log",
+            "result": "ee9c904c-9e86-4a39-b6a4-b54fbfe63d1c",
+            "status_code": 403
+          },
+          "26": {
+            "location": "url",
+            "payload": "/usr/local/apache/logs/access.log",
+            "result": "a462d4f6-1e37-45f6-930d-487a33379f6e",
+            "status_code": 403
+          },
+          "27": {
+            "location": "url",
+            "payload": "/var/log/apache/access_log",
+            "result": "b8828e1c-3d31-4006-b2b4-cbea1d6808ee",
+            "status_code": 403
+          },
+          "28": {
+            "location": "url",
+            "payload": "/var/log/apache2/access_log",
+            "result": "f5dcc778-a673-46b4-9edd-0896933e0d9b",
+            "status_code": 403
+          },
+          "29": {
+            "location": "url",
+            "payload": "/var/log/apache/access.log",
+            "result": "7ac3405d-535e-4885-b9e8-69e31d8ad8c2",
+            "status_code": 403
+          },
+          "30": {
+            "location": "url",
+            "payload": "/var/log/apache2/access.log",
+            "result": "b5ad0489-5c19-4713-80bd-2d9162ebae76",
+            "status_code": 403
+          },
+          "31": {
+            "location": "url",
+            "payload": "/var/log/access_log",
+            "result": "a3375288-6fe1-4102-88f8-7e6df193f1d7",
+            "status_code": 403
+          },
+          "32": {
+            "location": "url",
+            "payload": "/var/log/access.log",
+            "result": "bf6c72f2-1c0e-4db8-984d-98d31966645a",
+            "status_code": 403
+          },
+          "33": {
+            "location": "url",
+            "payload": "/var/www/logs/error_log",
+            "result": "c3f9c9f7-2b78-4aed-bcb3-4599112d1b8c",
+            "status_code": 403
+          },
+          "34": {
+            "location": "url",
+            "payload": "/var/www/logs/error.log",
+            "result": "bd6830e6-0689-4347-8ca4-cf4a6a03cf0d",
+            "status_code": 403
+          },
+          "35": {
+            "location": "url",
+            "payload": "/usr/local/apache/logs/error_log",
+            "result": "bc66797c-82b8-4782-a853-4c0fe7bddf9a",
+            "status_code": 403
+          },
+          "36": {
+            "location": "url",
+            "payload": "/usr/local/apache/logs/error.log",
+            "result": "b823f534-bd47-4f6b-b1fb-78e86e265f62",
+            "status_code": 403
+          },
+          "37": {
+            "location": "url",
+            "payload": "/var/log/apache/error_log",
+            "result": "02a04b72-fd9b-4038-8b1d-c0b02e7573e0",
+            "status_code": 403
+          },
+          "38": {
+            "location": "url",
+            "payload": "/var/log/apache2/error_log",
+            "result": "b8294283-2130-4ff8-a718-365b95d0a294",
+            "status_code": 403
+          },
+          "39": {
+            "location": "url",
+            "payload": "/var/log/apache/error.log",
+            "result": "21d77335-623e-4946-b89c-55098c116b0e",
+            "status_code": 403
+          },
+          "40": {
+            "location": "url",
+            "payload": "/var/log/apache2/error.log",
+            "result": "911cb946-c872-4b58-bbfb-ae66fd1510f4",
+            "status_code": 403
+          },
+          "41": {
+            "location": "url",
+            "payload": "/var/log/error_log",
+            "result": "c5c015a5-a5da-4f26-90c7-ade7ecb34b1d",
+            "status_code": 403
+          },
+          "42": {
+            "location": "url",
+            "payload": "/var/log/error.log",
+            "result": "c327e2d7-fc9f-42d5-8871-e2c6f5287f63",
+            "status_code": 403
+          }
+        },
+        "Passed": {}
+      },
+      "Test Summary": {
+        "Failed": 42,
+        "Passed": 0
+      }
+    }
+  },
+  "A03:2021 - Injection": {
+    "Category Summary": {
+      "Failed": 34,
+      "Passed": 39
+    },
+    "SQL Injections - Body": {
+      "Details": {
+        "Failed": {
+          "1": {
+            "location": "Body",
+            "payload": "<>\"'%;)(&+",
+            "result": null,
+            "status_code": 200
+          },
+          "2": {
+            "location": "Body",
+            "payload": "'",
+            "result": null,
+            "status_code": 200
+          },
+          "3": {
+            "location": "Body",
+            "payload": "1 or 1=1",
+            "result": null,
+            "status_code": 200
+          },
+          "4": {
+            "location": "Body",
+            "payload": "23 OR 1=1",
+            "result": null,
+            "status_code": 200
+          },
+          "5": {
+            "location": "Body",
+            "payload": "'||'6",
+            "result": null,
+            "status_code": 200
+          },
+          "6": {
+            "location": "Body",
+            "payload": "' and 1 in (select var from temp)--",
+            "result": null,
+            "status_code": 200
+          },
+          "7": {
+            "location": "Body",
+            "payload": "anything' OR 'x'='x",
+            "result": null,
+            "status_code": 200
+          },
+          "8": {
+            "location": "Body",
+            "payload": "\"a\"\" or 1=1--\"",
+            "result": null,
+            "status_code": 200
+          },
+          "9": {
+            "location": "Body",
+            "payload": "a' or 1=1--",
+            "result": null,
+            "status_code": 200
+          },
+          "10": {
+            "location": "Body",
+            "payload": "\"a\"\" or 3=3--\"",
+            "result": null,
+            "status_code": 200
+          },
+          "11": {
+            "location": "Body",
+            "payload": "a' or 3=3--",
+            "result": null,
+            "status_code": 200
+          },
+          "12": {
+            "location": "Body",
+            "payload": "a' or 'a' = 'a",
+            "result": null,
+            "status_code": 200
+          },
+          "13": {
+            "location": "Body",
+            "payload": "' having 1=1--",
+            "result": null,
+            "status_code": 200
+          },
+          "14": {
+            "location": "Body",
+            "payload": "hi or 1=1 --\"",
+            "result": null,
+            "status_code": 200
+          },
+          "15": {
+            "location": "Body",
+            "payload": "hi' or 1=1 --",
+            "result": null,
+            "status_code": 200
+          },
+          "16": {
+            "location": "Body",
+            "payload": "\"hi\"\") or (\"\"a\"\"=\"\"a\"",
+            "result": null,
+            "status_code": 200
+          },
+          "17": {
+            "location": "Body",
+            "payload": "hi' or 'a'='a",
+            "result": null,
+            "status_code": 200
+          },
+          "18": {
+            "location": "Body",
+            "payload": "hi') or ('a'='a",
+            "result": null,
+            "status_code": 200
+          },
+          "19": {
+            "location": "Body",
+            "payload": "'hi' or 'x'='x';",
+            "result": null,
+            "status_code": 200
+          },
+          "20": {
+            "location": "Body",
+            "payload": "*(|(mail=*))",
+            "result": null,
+            "status_code": 200
+          },
+          "21": {
+            "location": "Body",
+            "payload": "*(|(objectclass=*))",
+            "result": null,
+            "status_code": 200
+          },
+          "22": {
+            "location": "Body",
+            "payload": "' or ''='",
+            "result": null,
+            "status_code": 200
+          },
+          "23": {
+            "location": "Body",
+            "payload": "or 0=0 #\"",
+            "result": null,
+            "status_code": 200
+          },
+          "24": {
+            "location": "Body",
+            "payload": "' or 0=0 --",
+            "result": null,
+            "status_code": 200
+          },
+          "25": {
+            "location": "Body",
+            "payload": "' or 0=0 #",
+            "result": null,
+            "status_code": 200
+          },
+          "26": {
+            "location": "Body",
+            "payload": "or 0=0 --",
+            "result": null,
+            "status_code": 200
+          },
+          "27": {
+            "location": "Body",
+            "payload": "or 0=0 #",
+            "result": null,
+            "status_code": 200
+          },
+          "28": {
+            "location": "Body",
+            "payload": "; or '1'='1'",
+            "result": null,
+            "status_code": 200
+          },
+          "29": {
+            "location": "Body",
+            "payload": "' or '1'='1",
+            "result": null,
+            "status_code": 200
+          },
+          "30": {
+            "location": "Body",
+            "payload": "' or '1'='1'--",
+            "result": null,
+            "status_code": 200
+          },
+          "31": {
+            "location": "Body",
+            "payload": "' or 1=1",
+            "result": null,
+            "status_code": 200
+          },
+          "32": {
+            "location": "Body",
+            "payload": "' or 1=1 /*",
+            "result": null,
+            "status_code": 200
+          },
+          "33": {
+            "location": "Body",
+            "payload": "' or 1=1--",
+            "result": null,
+            "status_code": 200
+          },
+          "34": {
+            "location": "Body",
+            "payload": "' or 1=1--",
+            "result": null,
+            "status_code": 200
+          }
+        },
+        "Passed": {
+          "1": {
+            "location": "Body",
+            "payload": "1;SELECT%20*",
+            "result": "4ced2589-0095-4432-ac54-5abc5aba622f",
+            "status_code": 403
+          },
+          "2": {
+            "location": "Body",
+            "payload": "1 waitfor delay '0:0:10'--",
+            "result": "efa604ff-900b-4389-bcbc-40442c2123ce",
+            "status_code": 403
+          },
+          "3": {
+            "location": "Body",
+            "payload": "'%20or%20''='",
+            "result": "675fdba5-6dda-4670-a935-b6d920f86511",
+            "status_code": 403
+          },
+          "4": {
+            "location": "Body",
+            "payload": "'%20or%201=1",
+            "result": "a7dc536d-a191-4fb9-ae6c-baedd630c6bc",
+            "status_code": 403
+          },
+          "5": {
+            "location": "Body",
+            "payload": "')%20or%20('x'='x",
+            "result": "41ff4399-54c3-435f-9ddf-19007a68913a",
+            "status_code": 403
+          },
+          "6": {
+            "location": "Body",
+            "payload": "'%20or%20'x'='x",
+            "result": "10290657-170c-4aa9-a529-10b367262739",
+            "status_code": 403
+          },
+          "7": {
+            "location": "Body",
+            "payload": "%20or%20x=x",
+            "result": "f4d8a378-be3d-41fa-8694-8d05015179b0",
+            "status_code": 403
+          },
+          "8": {
+            "location": "Body",
+            "payload": "%20'sleep%2050'",
+            "result": "6de48fed-7c6b-4147-b147-8a3c323d0a97",
+            "status_code": 403
+          },
+          "9": {
+            "location": "Body",
+            "payload": "%20$(sleep%2050)",
+            "result": "91ad661d-1b4a-4f48-94f7-9838591a9ae4",
+            "status_code": 403
+          },
+          "10": {
+            "location": "Body",
+            "payload": "%27%20or%201=1",
+            "result": "d403e679-8e3f-4aaa-ab6b-525bc40d7c68",
+            "status_code": 403
+          },
+          "11": {
+            "location": "Body",
+            "payload": "%2A%28%7C%28mail%3D%2A%29%29",
+            "result": "7919fa5f-e8b3-49bf-98cb-2309bf313cf6",
+            "status_code": 403
+          },
+          "12": {
+            "location": "Body",
+            "payload": "%2A%28%7C%28objectclass%3D%2A%29%29",
+            "result": "59bdcde0-fcbd-4503-92b3-a225cfe75333",
+            "status_code": 403
+          },
+          "13": {
+            "location": "Body",
+            "payload": "%2A%7C",
+            "result": "ebcbd81c-9277-49a5-838a-7957d7928c32",
+            "status_code": 403
+          },
+          "14": {
+            "location": "Body",
+            "payload": "' and 1=( if((load_file(char(110,46,101,120,116))<>char(39,39)),1,0));",
+            "result": "4dec62cb-6059-4c7c-be95-cba95b007fe3",
+            "status_code": 403
+          },
+          "15": {
+            "location": "Body",
+            "payload": "&apos;%20OR",
+            "result": "e7f54840-73c0-433a-b462-fd7fde04a844",
+            "status_code": 403
+          },
+          "16": {
+            "location": "Body",
+            "payload": "'/**/or/**/1/**/=/**/1",
+            "result": "b8fe0424-402c-47fd-8771-e0403ee9a216",
+            "status_code": 403
+          },
+          "17": {
+            "location": "Body",
+            "payload": "|",
+            "result": null,
+            "status_code": 200
+          },
+          "18": {
+            "location": "Body",
+            "payload": "!",
+            "result": null,
+            "status_code": 200
+          },
+          "19": {
+            "location": "Body",
+            "payload": "?",
+            "result": null,
+            "status_code": 200
+          },
+          "20": {
+            "location": "Body",
+            "payload": "/",
+            "result": null,
+            "status_code": 200
+          },
+          "21": {
+            "location": "Body",
+            "payload": "//",
+            "result": null,
+            "status_code": 200
+          },
+          "22": {
+            "location": "Body",
+            "payload": "//*",
+            "result": null,
+            "status_code": 200
+          },
+          "23": {
+            "location": "Body",
+            "payload": "' --",
+            "result": null,
+            "status_code": 200
+          },
+          "24": {
+            "location": "Body",
+            "payload": "%26",
+            "result": null,
+            "status_code": 200
+          },
+          "25": {
+            "location": "Body",
+            "payload": "%28",
+            "result": null,
+            "status_code": 200
+          },
+          "26": {
+            "location": "Body",
+            "payload": "%29",
+            "result": null,
+            "status_code": 200
+          },
+          "27": {
+            "location": "Body",
+            "payload": "%21",
+            "result": null,
+            "status_code": 200
+          },
+          "28": {
+            "location": "Body",
+            "payload": "||6",
+            "result": null,
+            "status_code": 200
+          },
+          "29": {
+            "location": "Body",
+            "payload": "(||6)",
+            "result": null,
+            "status_code": 200
+          },
+          "30": {
+            "location": "Body",
+            "payload": "%7C",
+            "result": null,
+            "status_code": 200
+          },
+          "31": {
+            "location": "Body",
+            "payload": "a'",
+            "result": null,
+            "status_code": 200
+          },
+          "32": {
+            "location": "Body",
+            "payload": "' or 1/*",
+            "result": null,
+            "status_code": 200
+          },
+          "33": {
+            "location": "Body",
+            "payload": "insert",
+            "result": null,
+            "status_code": 200
+          },
+          "34": {
+            "location": "Body",
+            "payload": "like",
+            "result": null,
+            "status_code": 200
+          },
+          "35": {
+            "location": "Body",
+            "payload": "limit",
+            "result": null,
+            "status_code": 200
+          },
+          "36": {
+            "location": "Body",
+            "payload": "or",
+            "result": null,
+            "status_code": 200
+          },
+          "37": {
+            "location": "Body",
+            "payload": "hi or a=a",
+            "result": null,
+            "status_code": 200
+          },
+          "38": {
+            "location": "Body",
+            "payload": "admin' or '",
+            "result": null,
+            "status_code": 200
+          },
+          "39": {
+            "location": "Body",
+            "payload": "' or 1 --'",
+            "result": null,
+            "status_code": 200
+          }
+        }
+      },
+      "Test Summary": {
+        "Failed": 34,
+        "Passed": 39
+      }
+    }
+  }
+}

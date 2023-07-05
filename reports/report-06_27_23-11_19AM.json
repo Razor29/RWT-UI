@@ -1,0 +1,1376 @@
+{
+  "Injection": {
+    "Category Summary": {
+      "Failed": 131,
+      "Passed": 93
+    },
+    "SQL injection in GET Request": {
+      "Details": {
+        "Failed": {
+          "1": {
+            "location": "Parameter: id",
+            "payload": "hi\"\"\"\") or (\"\"\"\"a\"\"\"\"=\"\"\"\"a\"\"\"",
+            "result": null,
+            "status_code": 200
+          },
+          "2": {
+            "location": "Parameter: id",
+            "payload": "*(|(objectclass=*))",
+            "result": null,
+            "status_code": 200
+          },
+          "3": {
+            "location": "Parameter: id",
+            "payload": " or 0=0 #",
+            "result": null,
+            "status_code": 200
+          },
+          "4": {
+            "location": "Parameter: id",
+            "payload": ") or ('a'='a",
+            "result": null,
+            "status_code": 200
+          },
+          "5": {
+            "location": "Parameter: id",
+            "payload": "; exec xp_regread",
+            "result": null,
+            "status_code": 200
+          },
+          "6": {
+            "location": "Parameter: id",
+            "payload": "a\"\"\"\" or 3=3--\"\"\"",
+            "result": null,
+            "status_code": 200
+          },
+          "7": {
+            "location": "Parameter: id",
+            "payload": " or 0=0 --",
+            "result": null,
+            "status_code": 200
+          },
+          "8": {
+            "location": "Parameter: id",
+            "payload": " or 'a'='a",
+            "result": null,
+            "status_code": 200
+          },
+          "9": {
+            "location": "Parameter: id",
+            "payload": "hi or 1=1 --\"",
+            "result": null,
+            "status_code": 200
+          },
+          "10": {
+            "location": "Parameter: id",
+            "payload": "hi' or 'a'='a",
+            "result": null,
+            "status_code": 200
+          },
+          "11": {
+            "location": "Parameter: id",
+            "payload": "hi') or ('a'='a",
+            "result": null,
+            "status_code": 200
+          },
+          "12": {
+            "location": "Parameter: id",
+            "payload": " or 3=3",
+            "result": null,
+            "status_code": 200
+          },
+          "13": {
+            "location": "Parameter: id",
+            "payload": "1;(load_file(char(47,101,116,99,47,112,97,115, ...",
+            "result": null,
+            "status_code": 200
+          },
+          "14": {
+            "location": "Parameter: id",
+            "payload": "or 1=1",
+            "result": null,
+            "status_code": 200
+          },
+          "15": {
+            "location": "Parameter: id",
+            "payload": " and 1 in (select var from temp)--",
+            "result": null,
+            "status_code": 200
+          },
+          "16": {
+            "location": "Parameter: id",
+            "payload": " or '7659'='7659",
+            "result": null,
+            "status_code": 200
+          },
+          "17": {
+            "location": "Parameter: id",
+            "payload": " or 1=1 or ''='",
+            "result": null,
+            "status_code": 200
+          },
+          "18": {
+            "location": "Parameter: id",
+            "payload": "; exec master..xp_cmdshell 'ping 172.10.1.255'--",
+            "result": null,
+            "status_code": 200
+          },
+          "19": {
+            "location": "Parameter: id",
+            "payload": " or 'unusual' = 'unusual'",
+            "result": null,
+            "status_code": 200
+          },
+          "20": {
+            "location": "Parameter: id",
+            "payload": ") union select * from information_schema.tables;",
+            "result": null,
+            "status_code": 200
+          },
+          "21": {
+            "location": "Parameter: id",
+            "payload": "PRINT @@variable",
+            "result": null,
+            "status_code": 200
+          },
+          "22": {
+            "location": "Parameter: id",
+            "payload": "or isNULL(1/0) /*",
+            "result": null,
+            "status_code": 200
+          },
+          "23": {
+            "location": "Parameter: id",
+            "payload": " or \"\"a\"\"=\"\"a\"",
+            "result": null,
+            "status_code": 200
+          },
+          "24": {
+            "location": "Parameter: id",
+            "payload": " or 1=1--",
+            "result": null,
+            "status_code": 200
+          },
+          "25": {
+            "location": "Parameter: id",
+            "payload": " or (EXISTS)",
+            "result": null,
+            "status_code": 200
+          },
+          "26": {
+            "location": "Parameter: id",
+            "payload": "hi' or 'x'='x';",
+            "result": null,
+            "status_code": 200
+          },
+          "27": {
+            "location": "Parameter: id",
+            "payload": " or 'whatever' in ('whatever')",
+            "result": null,
+            "status_code": 200
+          },
+          "28": {
+            "location": "Parameter: id",
+            "payload": " select * from information_schema.tables--",
+            "result": null,
+            "status_code": 200
+          },
+          "29": {
+            "location": "Parameter: id",
+            "payload": "a' or 1=1--",
+            "result": null,
+            "status_code": 200
+          },
+          "30": {
+            "location": "Parameter: id",
+            "payload": "a' or 'a' = 'a",
+            "result": null,
+            "status_code": 200
+          },
+          "31": {
+            "location": "Parameter: id",
+            "payload": " or 2 between 1 and 3",
+            "result": null,
+            "status_code": 200
+          },
+          "32": {
+            "location": "Parameter: id",
+            "payload": " or '1'='1",
+            "result": null,
+            "status_code": 200
+          },
+          "33": {
+            "location": "Parameter: id",
+            "payload": "or 0=0 #\"",
+            "result": null,
+            "status_code": 200
+          },
+          "34": {
+            "location": "Parameter: id",
+            "payload": "\" or isNULL(1/0) /*",
+            "result": null,
+            "status_code": 200
+          },
+          "35": {
+            "location": "Parameter: id",
+            "payload": "\u00e2\u0080\u0098 or 1=1 --",
+            "result": null,
+            "status_code": 200
+          },
+          "36": {
+            "location": "Parameter: id",
+            "payload": " having 1=1--",
+            "result": null,
+            "status_code": 200
+          },
+          "37": {
+            "location": "Parameter: id",
+            "payload": " or username like char(37);",
+            "result": null,
+            "status_code": 200
+          },
+          "38": {
+            "location": "Parameter: id",
+            "payload": " or 1=1--\"",
+            "result": null,
+            "status_code": 200
+          },
+          "39": {
+            "location": "Parameter: id",
+            "payload": " or 'text' > 't'",
+            "result": null,
+            "status_code": 200
+          },
+          "40": {
+            "location": "Parameter: id",
+            "payload": "a' or 3=3--",
+            "result": null,
+            "status_code": 200
+          },
+          "41": {
+            "location": "Parameter: id",
+            "payload": " group by userid having 1=1--",
+            "result": null,
+            "status_code": 200
+          },
+          "42": {
+            "location": "Parameter: id",
+            "payload": " or ''='",
+            "result": null,
+            "status_code": 200
+          },
+          "43": {
+            "location": "Parameter: id",
+            "payload": "; exec master..xp_cmdshell",
+            "result": null,
+            "status_code": 200
+          },
+          "44": {
+            "location": "Parameter: id",
+            "payload": "hi' or 1=1 --",
+            "result": null,
+            "status_code": 200
+          },
+          "45": {
+            "location": "Parameter: id",
+            "payload": " or 'something' = 'some'+'thing'",
+            "result": null,
+            "status_code": 200
+          },
+          "46": {
+            "location": "Parameter: id",
+            "payload": "\u00c3\u00bd or 1=1 --",
+            "result": null,
+            "status_code": 200
+          },
+          "47": {
+            "location": "Parameter: id",
+            "payload": "0 or 1=1",
+            "result": null,
+            "status_code": 200
+          },
+          "48": {
+            "location": "Parameter: id",
+            "payload": "x' AND 1=(SELECT COUNT(*) FROM tabname); --",
+            "result": null,
+            "status_code": 200
+          },
+          "49": {
+            "location": "Parameter: id",
+            "payload": "; or '1'='1'",
+            "result": null,
+            "status_code": 200
+          },
+          "50": {
+            "location": "Parameter: id",
+            "payload": "1 or 1=1",
+            "result": null,
+            "status_code": 200
+          },
+          "51": {
+            "location": "Parameter: id",
+            "payload": "23 OR 1=1",
+            "result": null,
+            "status_code": 200
+          },
+          "52": {
+            "location": "Parameter: id",
+            "payload": "anything' OR 'x'='x",
+            "result": null,
+            "status_code": 200
+          },
+          "53": {
+            "location": "Parameter: id",
+            "payload": "or 0=0 --",
+            "result": null,
+            "status_code": 200
+          },
+          "54": {
+            "location": "Parameter: id",
+            "payload": "||'6",
+            "result": null,
+            "status_code": 200
+          }
+        },
+        "Passed": {
+          "1": {
+            "location": "Parameter: id",
+            "payload": "benchmark(10000000,MD5(1))#",
+            "result": "de543915-d6fd-4610-8aed-e6c48e725f4f",
+            "status_code": 403
+          },
+          "2": {
+            "location": "Parameter: id",
+            "payload": "\";waitfor delay '0:0:__TIME__'--",
+            "result": "7db4f353-b302-4df6-894e-385b7c463e63",
+            "status_code": 403
+          },
+          "3": {
+            "location": "Parameter: id",
+            "payload": "||(elt(-3+5,bin(15),ord(10),hex(char(45))))",
+            "result": "bdb43ea7-50ed-49d1-ad98-f6dc7dcf1056",
+            "status_code": 403
+          },
+          "4": {
+            "location": "Parameter: id",
+            "payload": "\" or sleep(__TIME__)#",
+            "result": "d2702913-997d-4155-b719-20d7b2098062",
+            "status_code": 403
+          },
+          "5": {
+            "location": "Parameter: id",
+            "payload": "pg_sleep(__TIME__)--",
+            "result": "2410f410-6f93-4d67-9a99-27dcee7f1732",
+            "status_code": 403
+          },
+          "6": {
+            "location": "Parameter: id",
+            "payload": "declare @q nvarchar (200) 0x730065006c00650063 ...",
+            "result": "ae2ae7a4-da5f-45cc-8b75-65e1993eeda8",
+            "status_code": 403
+          },
+          "7": {
+            "location": "Parameter: id",
+            "payload": "1) or sleep(__TIME__)#",
+            "result": "bc62b42a-75d9-4ebe-bcac-5e37a0671dcd",
+            "status_code": 403
+          },
+          "8": {
+            "location": "Parameter: id",
+            "payload": "1)) or benchmark(10000000,MD5(1))#",
+            "result": "d79c0cba-4a90-4c03-998e-cacfd12a465f",
+            "status_code": 403
+          },
+          "9": {
+            "location": "Parameter: id",
+            "payload": "\" or benchmark(10000000,MD5(1))#",
+            "result": "8e879cef-3045-4a49-99c5-98bc5bcc83e2",
+            "status_code": 403
+          },
+          "10": {
+            "location": "Parameter: id",
+            "payload": "1 waitfor delay '0:0:10'--",
+            "result": "0633e8d8-ec03-438a-aca5-7dadd8fce23f",
+            "status_code": 403
+          },
+          "11": {
+            "location": "Parameter: id",
+            "payload": " UNION ALL SELECT",
+            "result": "c743d2a5-f5f1-4a0b-a6c0-9d26ebafe0d1",
+            "status_code": 403
+          },
+          "12": {
+            "location": "Parameter: id",
+            "payload": ") or sleep(__TIME__)='",
+            "result": "42a46c53-63d5-4a97-af20-130e426cc32e",
+            "status_code": 403
+          },
+          "13": {
+            "location": "Parameter: id",
+            "payload": ")) or benchmark(10000000,MD5(1))#",
+            "result": "8efad4a9-5436-4d80-975e-eefb250630cd",
+            "status_code": 403
+          },
+          "14": {
+            "location": "Parameter: id",
+            "payload": "\")) or benchmark(10000000,MD5(1))#",
+            "result": "17bbd605-619b-441a-8de4-eb495c5518f2",
+            "status_code": 403
+          },
+          "15": {
+            "location": "Parameter: id",
+            "payload": "));waitfor delay '0:0:__TIME__'--",
+            "result": "5fe185b7-edb6-48bc-a657-2e18049680f9",
+            "status_code": 403
+          },
+          "16": {
+            "location": "Parameter: id",
+            "payload": "a' waitfor delay '0:0:10'--",
+            "result": "61e74285-f4aa-432c-8f99-bb8a7b9e7b51",
+            "status_code": 403
+          },
+          "17": {
+            "location": "Parameter: id",
+            "payload": "or%201=1",
+            "result": "2297db5c-07e6-4282-9650-3784a2ea2654",
+            "status_code": 403
+          },
+          "18": {
+            "location": "Parameter: id",
+            "payload": "1 or sleep(__TIME__)#",
+            "result": "71583270-2070-476e-9cff-c41936fccfd3",
+            "status_code": 403
+          },
+          "19": {
+            "location": "Parameter: id",
+            "payload": "declare @s varchar (200) select @s = 0x73656c6 ...",
+            "result": "61907509-3cae-4f58-b473-781cf78bfd75",
+            "status_code": 403
+          },
+          "20": {
+            "location": "Parameter: id",
+            "payload": " or pg_sleep(__TIME__)--\"",
+            "result": "5dcdfd7b-5f9b-4269-82d2-bc9c2e3d916f",
+            "status_code": 403
+          },
+          "21": {
+            "location": "Parameter: id",
+            "payload": "1) or benchmark(10000000,MD5(1))#",
+            "result": "569cc717-23cc-425b-aec8-4b77cf3988cf",
+            "status_code": 403
+          },
+          "22": {
+            "location": "Parameter: id",
+            "payload": "declare @s varchar(200) select @s = 0x77616974 ...",
+            "result": "fcb24c8c-91ff-4277-9329-8ed6bf0e993b",
+            "status_code": 403
+          },
+          "23": {
+            "location": "Parameter: id",
+            "payload": "\"));waitfor delay '0:0:__TIME__'--",
+            "result": "f9cfc295-1a0e-4e08-ba62-5048b6cf7ebe",
+            "status_code": 403
+          },
+          "24": {
+            "location": "Parameter: id",
+            "payload": "or%201=1 --",
+            "result": "adb51e13-78bd-4157-9eff-89a88e5861c9",
+            "status_code": 403
+          },
+          "25": {
+            "location": "Parameter: id",
+            "payload": "%2A%28%7C%28objectclass%3D%2A%29%29",
+            "result": "931f1cf2-51d4-4ff4-aded-9f1497a10431",
+            "status_code": 403
+          },
+          "26": {
+            "location": "Parameter: id",
+            "payload": " and 1=( if((load_file(char(110,46,101,120,11 ...",
+            "result": "30396e7b-8b01-4926-a0e3-b8d6477a7477",
+            "status_code": 403
+          },
+          "27": {
+            "location": "Parameter: id",
+            "payload": "%20'sleep%2050'",
+            "result": "170b03d1-6c10-48ac-8469-79f538c77292",
+            "status_code": 403
+          },
+          "28": {
+            "location": "Parameter: id",
+            "payload": "1)) or pg_sleep(__TIME__)--",
+            "result": "bed6d81c-ebf8-4731-9bc8-c64508c708ac",
+            "status_code": 403
+          },
+          "29": {
+            "location": "Parameter: id",
+            "payload": "/**/or/**/1/**/=/**/1",
+            "result": "6fd9ef50-6bc9-4365-974f-5234500f1696",
+            "status_code": 403
+          },
+          "30": {
+            "location": "Parameter: id",
+            "payload": " union all select @@version--",
+            "result": "df39d293-6cc6-4e26-bbfc-d586f2530c74",
+            "status_code": 403
+          },
+          "31": {
+            "location": "Parameter: id",
+            "payload": "t'exec master..xp_cmdshell 'nslookup www.googl ...",
+            "result": "f52e6ef0-2e38-4a06-b605-34525512086f",
+            "status_code": 403
+          },
+          "32": {
+            "location": "Parameter: id",
+            "payload": "%20$(sleep%2050)",
+            "result": "e2654cb0-efca-4656-9ab4-954ab4679f89",
+            "status_code": 403
+          },
+          "33": {
+            "location": "Parameter: id",
+            "payload": "1 or benchmark(10000000,MD5(1))#",
+            "result": "27538916-5f2e-4325-aa92-8105a96ad165",
+            "status_code": 403
+          },
+          "34": {
+            "location": "Parameter: id",
+            "payload": "%20or%20''='",
+            "result": "5f182ec4-3c47-4325-9210-ccec5ccfeaad",
+            "status_code": 403
+          },
+          "35": {
+            "location": "Parameter: id",
+            "payload": " or pg_sleep(__TIME__)--",
+            "result": "289d0dc8-823e-4139-8af5-be709deb386b",
+            "status_code": 403
+          },
+          "36": {
+            "location": "Parameter: id",
+            "payload": ") or sleep(__TIME__)=",
+            "result": "0d793015-d4b9-449c-a5ac-d1becd2bc377",
+            "status_code": 403
+          },
+          "37": {
+            "location": "Parameter: id",
+            "payload": "; begin declare @var varchar(8000) set @var=' ...",
+            "result": "4b812e87-c44a-42a1-8024-c38b78285b1c",
+            "status_code": 403
+          },
+          "38": {
+            "location": "Parameter: id",
+            "payload": " union select 1,load_file('/etc/passwd'),1,1,1;",
+            "result": "d79a86ab-4eb2-41fe-8d53-742d9255eb87",
+            "status_code": 403
+          },
+          "39": {
+            "location": "Parameter: id",
+            "payload": "exec(@s)",
+            "result": "aea6115b-0c54-4161-8390-0394e56fad61",
+            "status_code": 403
+          },
+          "40": {
+            "location": "Parameter: id",
+            "payload": ") or pg_sleep(__TIME__)--",
+            "result": "462a5f80-2d1d-417a-bd63-9cab2735dfe9",
+            "status_code": 403
+          },
+          "41": {
+            "location": "Parameter: id",
+            "payload": " or sleep(__TIME__)#",
+            "result": "e88ce00c-ce33-4a1d-b0bd-d8bccefd6f7f",
+            "status_code": 403
+          },
+          "42": {
+            "location": "Parameter: id",
+            "payload": "declare @s varchar(22) select @s =",
+            "result": "74f8452d-a247-480e-aa47-7366c8372ae8",
+            "status_code": 403
+          },
+          "43": {
+            "location": "Parameter: id",
+            "payload": " or sleep(__TIME__)='",
+            "result": "79f81658-38d8-41d1-bbfd-49f11987212d",
+            "status_code": 403
+          },
+          "44": {
+            "location": "Parameter: id",
+            "payload": "declare @s varchar (8000) select @s = 0x73656c ...",
+            "result": "c4e1dbac-3d92-4cf1-815f-59c51b7bd474",
+            "status_code": 403
+          },
+          "45": {
+            "location": "Parameter: id",
+            "payload": "char%4039%41%2b%40SELECT",
+            "result": "79dfc34a-9f1c-443b-98a2-f55bdc9edf4f",
+            "status_code": 403
+          },
+          "46": {
+            "location": "Parameter: id",
+            "payload": ") or benchmark(10000000,MD5(1))#",
+            "result": "f969be10-670b-45d5-b82b-483e78b8dd71",
+            "status_code": 403
+          },
+          "47": {
+            "location": "Parameter: id",
+            "payload": ";waitfor delay '0:0:__TIME__'--",
+            "result": "1ea9dfc5-0457-404f-9844-8dea2e17b5e6",
+            "status_code": 403
+          },
+          "48": {
+            "location": "Parameter: id",
+            "payload": " or benchmark(10000000,MD5(1))#",
+            "result": "5886c4dd-905a-44d2-842b-c2a777e7c506",
+            "status_code": 403
+          },
+          "49": {
+            "location": "Parameter: id",
+            "payload": "\");waitfor delay '0:0:__TIME__'--",
+            "result": "af4f92e9-b799-4673-8fde-59d513acedc9",
+            "status_code": 403
+          },
+          "50": {
+            "location": "Parameter: id",
+            "payload": "%20or%20x=x",
+            "result": "c33c1ff7-7855-4216-aebc-85fcff8c97d5",
+            "status_code": 403
+          },
+          "51": {
+            "location": "Parameter: id",
+            "payload": ")) or sleep(__TIME__)=\"\"\"",
+            "result": "6f5b1b35-3a1e-4524-8cd5-0ec601636aee",
+            "status_code": 403
+          },
+          "52": {
+            "location": "Parameter: id",
+            "payload": "\") or pg_sleep(__TIME__)--",
+            "result": "a4eaab99-77de-404b-900b-4ed54eac000c",
+            "status_code": 403
+          },
+          "53": {
+            "location": "Parameter: id",
+            "payload": "%20or%20'x'='x",
+            "result": "5b9f7c4c-3366-4a3f-ac37-15d218ec3878",
+            "status_code": 403
+          },
+          "54": {
+            "location": "Parameter: id",
+            "payload": "1 or pg_sleep(__TIME__)--",
+            "result": "ae970bb2-c20f-49f0-8194-07434539edf2",
+            "status_code": 403
+          },
+          "55": {
+            "location": "Parameter: id",
+            "payload": "uni/**/on sel/**/ect",
+            "result": "b85e1756-b64f-4a74-983b-b18b85530e86",
+            "status_code": 403
+          },
+          "56": {
+            "location": "Parameter: id",
+            "payload": "%27%20or%201=1",
+            "result": "bebbcc1b-3992-4429-9c2c-109c0a044aa2",
+            "status_code": 403
+          },
+          "57": {
+            "location": "Parameter: id",
+            "payload": ")) or pg_sleep(__TIME__)--",
+            "result": "5a570bcd-4901-4337-b375-c3daf389843e",
+            "status_code": 403
+          },
+          "58": {
+            "location": "Parameter: id",
+            "payload": "%7C",
+            "result": "c7a4a732-6d0c-4b48-a7df-647772d13bfd",
+            "status_code": 403
+          },
+          "59": {
+            "location": "Parameter: id",
+            "payload": "&apos;%20OR",
+            "result": "3909d4aa-8851-467d-9f5d-51640de58b1c",
+            "status_code": 403
+          },
+          "60": {
+            "location": "Parameter: id",
+            "payload": "declare @q nvarchar (200) select @q = 0x770061 ...",
+            "result": "ae44d61b-315f-4da0-b786-e101cfe1aebc",
+            "status_code": 403
+          },
+          "61": {
+            "location": "Parameter: id",
+            "payload": "; exec ('sel' + 'ect us' + 'er')",
+            "result": "7831cac7-460c-4e13-912e-fcb02b09f26a",
+            "status_code": 403
+          },
+          "62": {
+            "location": "Parameter: id",
+            "payload": "declare @q nvarchar (4000) select @q =",
+            "result": "7f1651d9-e608-448a-9976-f7326049d5c7",
+            "status_code": 403
+          }
+        }
+      },
+      "Test Summary": {
+        "Failed": 54,
+        "Passed": 62
+      }
+    },
+    "SQL injection in User Agent": {
+      "Details": {
+        "Failed": {
+          "1": {
+            "location": "Header: User-Agent",
+            "payload": "benchmark(10000000,MD5(1))#",
+            "result": null,
+            "status_code": 200
+          },
+          "2": {
+            "location": "Header: User-Agent",
+            "payload": "||(elt(-3+5,bin(15),ord(10),hex(char(45))))",
+            "result": null,
+            "status_code": 200
+          },
+          "3": {
+            "location": "Header: User-Agent",
+            "payload": "hi\"\"\"\") or (\"\"\"\"a\"\"\"\"=\"\"\"\"a\"\"\"",
+            "result": null,
+            "status_code": 200
+          },
+          "4": {
+            "location": "Header: User-Agent",
+            "payload": "*(|(objectclass=*))",
+            "result": null,
+            "status_code": 200
+          },
+          "5": {
+            "location": "Header: User-Agent",
+            "payload": "declare @q nvarchar (200) 0x730065006c00650063 ...",
+            "result": null,
+            "status_code": 200
+          },
+          "6": {
+            "location": "Header: User-Agent",
+            "payload": " or 0=0 #",
+            "result": null,
+            "status_code": 200
+          },
+          "7": {
+            "location": "Header: User-Agent",
+            "payload": ") or ('a'='a",
+            "result": null,
+            "status_code": 200
+          },
+          "8": {
+            "location": "Header: User-Agent",
+            "payload": "; exec xp_regread",
+            "result": null,
+            "status_code": 200
+          },
+          "9": {
+            "location": "Header: User-Agent",
+            "payload": "1)) or benchmark(10000000,MD5(1))#",
+            "result": null,
+            "status_code": 200
+          },
+          "10": {
+            "location": "Header: User-Agent",
+            "payload": "a\"\"\"\" or 3=3--\"\"\"",
+            "result": null,
+            "status_code": 200
+          },
+          "11": {
+            "location": "Header: User-Agent",
+            "payload": "\" or benchmark(10000000,MD5(1))#",
+            "result": null,
+            "status_code": 200
+          },
+          "12": {
+            "location": "Header: User-Agent",
+            "payload": " or 0=0 --",
+            "result": null,
+            "status_code": 200
+          },
+          "13": {
+            "location": "Header: User-Agent",
+            "payload": " or 'a'='a",
+            "result": null,
+            "status_code": 200
+          },
+          "14": {
+            "location": "Header: User-Agent",
+            "payload": "hi or 1=1 --\"",
+            "result": null,
+            "status_code": 200
+          },
+          "15": {
+            "location": "Header: User-Agent",
+            "payload": ")) or benchmark(10000000,MD5(1))#",
+            "result": null,
+            "status_code": 200
+          },
+          "16": {
+            "location": "Header: User-Agent",
+            "payload": "hi' or 'a'='a",
+            "result": null,
+            "status_code": 200
+          },
+          "17": {
+            "location": "Header: User-Agent",
+            "payload": "\")) or benchmark(10000000,MD5(1))#",
+            "result": null,
+            "status_code": 200
+          },
+          "18": {
+            "location": "Header: User-Agent",
+            "payload": "hi') or ('a'='a",
+            "result": null,
+            "status_code": 200
+          },
+          "19": {
+            "location": "Header: User-Agent",
+            "payload": " or 3=3",
+            "result": null,
+            "status_code": 200
+          },
+          "20": {
+            "location": "Header: User-Agent",
+            "payload": "1;(load_file(char(47,101,116,99,47,112,97,115, ...",
+            "result": null,
+            "status_code": 200
+          },
+          "21": {
+            "location": "Header: User-Agent",
+            "payload": "or%201=1",
+            "result": null,
+            "status_code": 200
+          },
+          "22": {
+            "location": "Header: User-Agent",
+            "payload": "or 1=1",
+            "result": null,
+            "status_code": 200
+          },
+          "23": {
+            "location": "Header: User-Agent",
+            "payload": " or '7659'='7659",
+            "result": null,
+            "status_code": 200
+          },
+          "24": {
+            "location": "Header: User-Agent",
+            "payload": " or 1=1 or ''='",
+            "result": null,
+            "status_code": 200
+          },
+          "25": {
+            "location": "Header: User-Agent",
+            "payload": "declare @s varchar (200) select @s = 0x73656c6 ...",
+            "result": null,
+            "status_code": 200
+          },
+          "26": {
+            "location": "Header: User-Agent",
+            "payload": "; exec master..xp_cmdshell 'ping 172.10.1.255'--",
+            "result": null,
+            "status_code": 200
+          },
+          "27": {
+            "location": "Header: User-Agent",
+            "payload": " or 'unusual' = 'unusual'",
+            "result": null,
+            "status_code": 200
+          },
+          "28": {
+            "location": "Header: User-Agent",
+            "payload": "1) or benchmark(10000000,MD5(1))#",
+            "result": null,
+            "status_code": 200
+          },
+          "29": {
+            "location": "Header: User-Agent",
+            "payload": "declare @s varchar(200) select @s = 0x77616974 ...",
+            "result": null,
+            "status_code": 200
+          },
+          "30": {
+            "location": "Header: User-Agent",
+            "payload": "or%201=1 --",
+            "result": null,
+            "status_code": 200
+          },
+          "31": {
+            "location": "Header: User-Agent",
+            "payload": "PRINT @@variable",
+            "result": null,
+            "status_code": 200
+          },
+          "32": {
+            "location": "Header: User-Agent",
+            "payload": "or isNULL(1/0) /*",
+            "result": null,
+            "status_code": 200
+          },
+          "33": {
+            "location": "Header: User-Agent",
+            "payload": " or \"\"a\"\"=\"\"a\"",
+            "result": null,
+            "status_code": 200
+          },
+          "34": {
+            "location": "Header: User-Agent",
+            "payload": " or 1=1--",
+            "result": null,
+            "status_code": 200
+          },
+          "35": {
+            "location": "Header: User-Agent",
+            "payload": " and 1=( if((load_file(char(110,46,101,120,11 ...",
+            "result": null,
+            "status_code": 200
+          },
+          "36": {
+            "location": "Header: User-Agent",
+            "payload": " or (EXISTS)",
+            "result": null,
+            "status_code": 200
+          },
+          "37": {
+            "location": "Header: User-Agent",
+            "payload": "1 or benchmark(10000000,MD5(1))#",
+            "result": null,
+            "status_code": 200
+          },
+          "38": {
+            "location": "Header: User-Agent",
+            "payload": "%20or%20''='",
+            "result": null,
+            "status_code": 200
+          },
+          "39": {
+            "location": "Header: User-Agent",
+            "payload": "hi' or 'x'='x';",
+            "result": null,
+            "status_code": 200
+          },
+          "40": {
+            "location": "Header: User-Agent",
+            "payload": " or 'whatever' in ('whatever')",
+            "result": null,
+            "status_code": 200
+          },
+          "41": {
+            "location": "Header: User-Agent",
+            "payload": "; begin declare @var varchar(8000) set @var=' ...",
+            "result": null,
+            "status_code": 200
+          },
+          "42": {
+            "location": "Header: User-Agent",
+            "payload": "exec(@s)",
+            "result": null,
+            "status_code": 200
+          },
+          "43": {
+            "location": "Header: User-Agent",
+            "payload": " select * from information_schema.tables--",
+            "result": null,
+            "status_code": 200
+          },
+          "44": {
+            "location": "Header: User-Agent",
+            "payload": "a' or 1=1--",
+            "result": null,
+            "status_code": 200
+          },
+          "45": {
+            "location": "Header: User-Agent",
+            "payload": "a' or 'a' = 'a",
+            "result": null,
+            "status_code": 200
+          },
+          "46": {
+            "location": "Header: User-Agent",
+            "payload": "declare @s varchar(22) select @s =",
+            "result": null,
+            "status_code": 200
+          },
+          "47": {
+            "location": "Header: User-Agent",
+            "payload": " or 2 between 1 and 3",
+            "result": null,
+            "status_code": 200
+          },
+          "48": {
+            "location": "Header: User-Agent",
+            "payload": " or '1'='1",
+            "result": null,
+            "status_code": 200
+          },
+          "49": {
+            "location": "Header: User-Agent",
+            "payload": "or 0=0 #\"",
+            "result": null,
+            "status_code": 200
+          },
+          "50": {
+            "location": "Header: User-Agent",
+            "payload": "\" or isNULL(1/0) /*",
+            "result": null,
+            "status_code": 200
+          },
+          "51": {
+            "location": "Header: User-Agent",
+            "payload": "declare @s varchar (8000) select @s = 0x73656c ...",
+            "result": null,
+            "status_code": 200
+          },
+          "52": {
+            "location": "Header: User-Agent",
+            "payload": "\u00e2\u0080\u0098 or 1=1 --",
+            "result": null,
+            "status_code": 200
+          },
+          "53": {
+            "location": "Header: User-Agent",
+            "payload": " having 1=1--",
+            "result": null,
+            "status_code": 200
+          },
+          "54": {
+            "location": "Header: User-Agent",
+            "payload": ") or benchmark(10000000,MD5(1))#",
+            "result": null,
+            "status_code": 200
+          },
+          "55": {
+            "location": "Header: User-Agent",
+            "payload": " or username like char(37);",
+            "result": null,
+            "status_code": 200
+          },
+          "56": {
+            "location": "Header: User-Agent",
+            "payload": " or 1=1--\"",
+            "result": null,
+            "status_code": 200
+          },
+          "57": {
+            "location": "Header: User-Agent",
+            "payload": " or 'text' > 't'",
+            "result": null,
+            "status_code": 200
+          },
+          "58": {
+            "location": "Header: User-Agent",
+            "payload": " or benchmark(10000000,MD5(1))#",
+            "result": null,
+            "status_code": 200
+          },
+          "59": {
+            "location": "Header: User-Agent",
+            "payload": "a' or 3=3--",
+            "result": null,
+            "status_code": 200
+          },
+          "60": {
+            "location": "Header: User-Agent",
+            "payload": " group by userid having 1=1--",
+            "result": null,
+            "status_code": 200
+          },
+          "61": {
+            "location": "Header: User-Agent",
+            "payload": " or ''='",
+            "result": null,
+            "status_code": 200
+          },
+          "62": {
+            "location": "Header: User-Agent",
+            "payload": "; exec master..xp_cmdshell",
+            "result": null,
+            "status_code": 200
+          },
+          "63": {
+            "location": "Header: User-Agent",
+            "payload": "hi' or 1=1 --",
+            "result": null,
+            "status_code": 200
+          },
+          "64": {
+            "location": "Header: User-Agent",
+            "payload": "%20or%20'x'='x",
+            "result": null,
+            "status_code": 200
+          },
+          "65": {
+            "location": "Header: User-Agent",
+            "payload": " or 'something' = 'some'+'thing'",
+            "result": null,
+            "status_code": 200
+          },
+          "66": {
+            "location": "Header: User-Agent",
+            "payload": "\u00c3\u00bd or 1=1 --",
+            "result": null,
+            "status_code": 200
+          },
+          "67": {
+            "location": "Header: User-Agent",
+            "payload": "0 or 1=1",
+            "result": null,
+            "status_code": 200
+          },
+          "68": {
+            "location": "Header: User-Agent",
+            "payload": "%27%20or%201=1",
+            "result": null,
+            "status_code": 200
+          },
+          "69": {
+            "location": "Header: User-Agent",
+            "payload": "; or '1'='1'",
+            "result": null,
+            "status_code": 200
+          },
+          "70": {
+            "location": "Header: User-Agent",
+            "payload": "declare @q nvarchar (200) select @q = 0x770061 ...",
+            "result": null,
+            "status_code": 200
+          },
+          "71": {
+            "location": "Header: User-Agent",
+            "payload": "1 or 1=1",
+            "result": null,
+            "status_code": 200
+          },
+          "72": {
+            "location": "Header: User-Agent",
+            "payload": "; exec ('sel' + 'ect us' + 'er')",
+            "result": null,
+            "status_code": 200
+          },
+          "73": {
+            "location": "Header: User-Agent",
+            "payload": "23 OR 1=1",
+            "result": null,
+            "status_code": 200
+          },
+          "74": {
+            "location": "Header: User-Agent",
+            "payload": "anything' OR 'x'='x",
+            "result": null,
+            "status_code": 200
+          },
+          "75": {
+            "location": "Header: User-Agent",
+            "payload": "declare @q nvarchar (4000) select @q =",
+            "result": null,
+            "status_code": 200
+          },
+          "76": {
+            "location": "Header: User-Agent",
+            "payload": "or 0=0 --",
+            "result": null,
+            "status_code": 200
+          },
+          "77": {
+            "location": "Header: User-Agent",
+            "payload": "||'6",
+            "result": null,
+            "status_code": 200
+          }
+        },
+        "Passed": {
+          "1": {
+            "location": "Header: User-Agent",
+            "payload": "\";waitfor delay '0:0:__TIME__'--",
+            "result": "fad1f4c6-62af-448a-aecc-05d1b46dbbbc",
+            "status_code": 403
+          },
+          "2": {
+            "location": "Header: User-Agent",
+            "payload": "\" or sleep(__TIME__)#",
+            "result": "9c7924ff-a32e-4fe8-ae95-f2cb2986f66e",
+            "status_code": 403
+          },
+          "3": {
+            "location": "Header: User-Agent",
+            "payload": "pg_sleep(__TIME__)--",
+            "result": "eea91829-3b8e-497f-8ee5-c5722ef733cf",
+            "status_code": 403
+          },
+          "4": {
+            "location": "Header: User-Agent",
+            "payload": "1) or sleep(__TIME__)#",
+            "result": "989010c7-c87f-4700-8fde-6f2566e97f9a",
+            "status_code": 403
+          },
+          "5": {
+            "location": "Header: User-Agent",
+            "payload": "1 waitfor delay '0:0:10'--",
+            "result": "642017dc-6453-4553-8791-fb187de9a85d",
+            "status_code": 403
+          },
+          "6": {
+            "location": "Header: User-Agent",
+            "payload": ") or sleep(__TIME__)='",
+            "result": "72696908-17bd-4642-ac5c-038ae6e58eae",
+            "status_code": 403
+          },
+          "7": {
+            "location": "Header: User-Agent",
+            "payload": "));waitfor delay '0:0:__TIME__'--",
+            "result": "5216e509-d99e-4fa1-9539-7d36aa197ed9",
+            "status_code": 403
+          },
+          "8": {
+            "location": "Header: User-Agent",
+            "payload": "a' waitfor delay '0:0:10'--",
+            "result": "08c1f6b5-7a2f-4421-830a-513cc9533670",
+            "status_code": 403
+          },
+          "9": {
+            "location": "Header: User-Agent",
+            "payload": "1 or sleep(__TIME__)#",
+            "result": "bf5d9042-2a92-4111-8b46-bea3ef871801",
+            "status_code": 403
+          },
+          "10": {
+            "location": "Header: User-Agent",
+            "payload": " and 1 in (select var from temp)--",
+            "result": "aa03924e-15c8-4567-bcd3-4d1664ae1695",
+            "status_code": 403
+          },
+          "11": {
+            "location": "Header: User-Agent",
+            "payload": " or pg_sleep(__TIME__)--\"",
+            "result": "f699b7d1-2c51-455c-b07c-3cb161a54e46",
+            "status_code": 403
+          },
+          "12": {
+            "location": "Header: User-Agent",
+            "payload": "\"));waitfor delay '0:0:__TIME__'--",
+            "result": "85db42bc-a1fa-468f-8bc0-2bd3083ace5f",
+            "status_code": 403
+          },
+          "13": {
+            "location": "Header: User-Agent",
+            "payload": ") union select * from information_schema.tables;",
+            "result": "4d942cf6-56cf-4a57-a0d2-e9e1efb2a2ce",
+            "status_code": 403
+          },
+          "14": {
+            "location": "Header: User-Agent",
+            "payload": "1)) or pg_sleep(__TIME__)--",
+            "result": "842196a3-5784-41cf-b0c7-4bb6dbead2ee",
+            "status_code": 403
+          },
+          "15": {
+            "location": "Header: User-Agent",
+            "payload": "/**/or/**/1/**/=/**/1",
+            "result": "b11cb2d5-0f06-4039-b16f-82e9b87124ff",
+            "status_code": 403
+          },
+          "16": {
+            "location": "Header: User-Agent",
+            "payload": " union all select @@version--",
+            "result": "20672241-5af2-4456-ab81-590080ad3e67",
+            "status_code": 403
+          },
+          "17": {
+            "location": "Header: User-Agent",
+            "payload": "t'exec master..xp_cmdshell 'nslookup www.googl ...",
+            "result": "b6f2ddfa-732d-4fdc-81e8-1210b3e73641",
+            "status_code": 403
+          },
+          "18": {
+            "location": "Header: User-Agent",
+            "payload": " or pg_sleep(__TIME__)--",
+            "result": "8c5c1b29-0965-4fe4-959b-4760f3bc1343",
+            "status_code": 403
+          },
+          "19": {
+            "location": "Header: User-Agent",
+            "payload": ") or sleep(__TIME__)=",
+            "result": "f4048654-fca0-4746-88b5-a2d7b7ef34bd",
+            "status_code": 403
+          },
+          "20": {
+            "location": "Header: User-Agent",
+            "payload": " union select 1,load_file('/etc/passwd'),1,1,1;",
+            "result": "fbfc172b-398a-4817-83bd-478a3962193a",
+            "status_code": 403
+          },
+          "21": {
+            "location": "Header: User-Agent",
+            "payload": ") or pg_sleep(__TIME__)--",
+            "result": "3cb5bb01-48d4-42c3-b578-57ddf4fe4fb4",
+            "status_code": 403
+          },
+          "22": {
+            "location": "Header: User-Agent",
+            "payload": " or sleep(__TIME__)#",
+            "result": "521e16f2-703f-4690-a10d-930d0d1001c2",
+            "status_code": 403
+          },
+          "23": {
+            "location": "Header: User-Agent",
+            "payload": " or sleep(__TIME__)='",
+            "result": "90e58792-d146-4d4e-97a7-8120c2319be5",
+            "status_code": 403
+          },
+          "24": {
+            "location": "Header: User-Agent",
+            "payload": ";waitfor delay '0:0:__TIME__'--",
+            "result": "26fddbcc-e55f-4351-b704-3abe926bf894",
+            "status_code": 403
+          },
+          "25": {
+            "location": "Header: User-Agent",
+            "payload": "\");waitfor delay '0:0:__TIME__'--",
+            "result": "6540dacf-0d7c-490e-aff0-b695a49d3d58",
+            "status_code": 403
+          },
+          "26": {
+            "location": "Header: User-Agent",
+            "payload": ")) or sleep(__TIME__)=\"\"\"",
+            "result": "24037039-88b4-4c07-8269-1d26aa92e43d",
+            "status_code": 403
+          },
+          "27": {
+            "location": "Header: User-Agent",
+            "payload": "\") or pg_sleep(__TIME__)--",
+            "result": "65b5efae-cdc4-4657-86bb-0d67e84b39e0",
+            "status_code": 403
+          },
+          "28": {
+            "location": "Header: User-Agent",
+            "payload": "1 or pg_sleep(__TIME__)--",
+            "result": "440a67dc-c873-40c7-9647-36e751e66526",
+            "status_code": 403
+          },
+          "29": {
+            "location": "Header: User-Agent",
+            "payload": "uni/**/on sel/**/ect",
+            "result": "798e030a-d7f1-4c23-bb2c-9c2078b62724",
+            "status_code": 403
+          },
+          "30": {
+            "location": "Header: User-Agent",
+            "payload": ")) or pg_sleep(__TIME__)--",
+            "result": "0560fe71-2b2e-4a7f-9e62-af0bb5f8174f",
+            "status_code": 403
+          },
+          "31": {
+            "location": "Header: User-Agent",
+            "payload": "x' AND 1=(SELECT COUNT(*) FROM tabname); --",
+            "result": "7c29f9ec-81d8-4cf2-927b-5c06d0dd24d4",
+            "status_code": 403
+          }
+        }
+      },
+      "Test Summary": {
+        "Failed": 77,
+        "Passed": 31
+      }
+    }
+  }
+}

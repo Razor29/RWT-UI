@@ -343,14 +343,14 @@ document.getElementById('export-json').addEventListener('click', async function(
 });
 
 
-document.getElementById('export-excel').addEventListener('click', function(event) {
+document.getElementById('export-csv').addEventListener('click', function(event) {
   event.preventDefault();
-  // Handle Excel export
+  // Handle csv export
 });
 
-document.getElementById('export-pdf').addEventListener('click', function(event) {
-  event.preventDefault();
-  // Handle PDF export
-});
+//document.getElementById('export-pdf').addEventListener('click', function(event) {
+//  event.preventDefault();
+//  // Handle PDF export
+//});
 
 
