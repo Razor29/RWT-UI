@@ -1,5 +1,5 @@
 import json
-
+import csv
 class TestReport:
     def __init__(self, file_path):
         with open(file_path, 'r') as json_file:
@@ -80,5 +80,53 @@ class TestReport:
             }
         else:
             return None
+
+    def export_to_csv(self, csv_file_path, filename):
+        test_date, test_time = self._parse_filename(filename)
+
+        row = {
+            "Category": '', "Test": '', "Location": '',
+            "Payload": '', "Result": '', "Status Code": '',
+            "Test Date": test_date, "Test Time": test_time
+        }
+
+        with open(csv_file_path, 'w', newline='', encoding='utf-8') as csvfile:
+            fieldnames = ["Category", "Test", "Location", "Payload", "Result", "Status Code", "Test Date", "Test Time"]
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+            writer.writeheader()
+            for category, tests in self.report.items():
+                for test_name, test_data in tests.items():
+                    if test_name != 'Category Summary':
+                        for result_type, results in test_data['Details'].items():
+                            for result in results.values():
+                                row.update({
+                                    "Category": category,
+                                    "Test": test_name,
+                                    "Location": result.get('location', ''),
+                                    "Payload": result.get('payload', ''),
+                                    "Result": result_type,
+                                    "Status Code": result.get('status_code', '')
+                                })
+                                writer.writerow(row)
+                                row.update({
+                                    "Category": '', "Test": '', "Location": '',
+                                    "Payload": '', "Result": '', "Status Code": '',
+                                    "Test Date": '', "Test Time": ''
+                                })
+
+    def _parse_filename(self, filename):
+        print(filename)
+        filename = filename.replace("report-", "").replace(".json", "")
+        print(filename)
+        date_part, time_part = filename.split("-")
+
+        month, day, year = date_part.split("_")
+        date = f'{month}/{day}/{year}'
+
+        hour, minute = time_part[:-4], time_part[-4:-2]
+        time = f'{hour}:{minute} {"AM" if "AM" in time_part else "PM"}'
+
+        return date, time
 
 

@@ -1,5 +1,5 @@
 import os
-from flask import Blueprint, Flask, render_template, redirect, url_for, request, jsonify, send_file
+from flask import Blueprint, Flask, render_template, redirect, url_for, request, jsonify, send_file, make_response
 from os import path
 from TestReport import TestReport
 
@@ -101,3 +101,34 @@ def get_report_json(filename):
         return jsonify({"error": "Report file does not exist"}), 404
 
     return send_file(report_file, mimetype='application/json', as_attachment=True)
+
+
+@results_page.route('/api/report-csv/<filename>', methods=['GET'])
+def get_report_csv(filename):
+    # Ensure filename does not contain path characters
+    if '/' in filename or '\\' in filename:
+        return jsonify({"error": "Invalid filename"}), 400
+
+    json_report_file = os.path.join(__folder__, 'reports', filename)
+    if not os.path.isfile(json_report_file):
+        return jsonify({"error": "Report file does not exist"}), 404
+
+    # Generate a csv version of the report
+    csv_filename = filename.replace('.json', '.csv')
+    csv_report_file = os.path.join(__folder__, 'reports', csv_filename)
+
+    report = TestReport(json_report_file)
+    report.export_to_csv(csv_report_file, filename)
+
+    # If the CSV report file was successfully created
+    if os.path.isfile(csv_report_file):
+        with open(csv_report_file, 'r', encoding='utf-8') as f:
+            csv_content = f.read()
+        os.remove(csv_report_file)  # Optionally remove the file after it is read
+
+        response = make_response(csv_content)
+        response.headers['Content-Disposition'] = f'attachment; filename={csv_filename}'
+        response.headers['Content-type'] = 'text/csv'
+        return response
+
+    return jsonify({"error": "Error generating CSV file"}), 500

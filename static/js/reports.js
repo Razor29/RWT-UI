@@ -343,10 +343,36 @@ document.getElementById('export-json').addEventListener('click', async function(
 });
 
 
-document.getElementById('export-csv').addEventListener('click', function(event) {
+document.getElementById('export-csv').addEventListener('click', async function(event) {
   event.preventDefault();
-  // Handle csv export
+
+  // Get the selected report file
+  const reportFile = document.getElementById('report-file-select').value;
+  console.log(reportFile)
+  // Fetch the CSV data from the server
+  const response = await fetch(`/api/report-csv/${reportFile}`);
+  if (!response.ok) {
+    console.error('Failed to fetch CSV report');
+    return;
+  }
+  const data = await response.blob();
+
+  // Create a link to download the blob
+  const url = URL.createObjectURL(data);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `${reportFile.replace('.json', '.csv')}`;
+
+  // Append the link to the body (this is required for Firefox)
+  document.body.appendChild(link);
+
+  // Start the download
+  link.click();
+
+  // Clean up: remove the link after the download starts
+  setTimeout(() => document.body.removeChild(link), 100);
 });
+
 
 //document.getElementById('export-pdf').addEventListener('click', function(event) {
 //  event.preventDefault();
